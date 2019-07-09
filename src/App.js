@@ -3,6 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  fetch("http://localhost:3000/", {
+      method: "GET",
+    }
+    )
+    .then(response => console.log('Working!'))
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -21,6 +29,8 @@ function App() {
       </header>
     </div>
   );
+
+    
 }
 
 export default App;
