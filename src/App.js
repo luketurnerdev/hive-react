@@ -1,27 +1,31 @@
-import React from 'react';
+import React,{Component} from 'react';
+import { BrowserRouter, Route } from "react-router-dom";
+// import HomePage from './Components/pages/HomePage'
+import DbEvents from './Components/events/DbEvents'
 import './App.css';
-import Events from './Components/Events';
-import Test from './Components/Test';
-import Eventsinput from './Components/Eventsinput';
-import HomePage from './Components/pages/HomePage'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-       < HomePage />
-       <h1>WELCOME TO THE HIVE</h1>
-      <li>
-        <Eventsinput/>
-        <Events/>
-        <Test />
-      </li>
-      </header>
-    </div>
-    
-  );
+class App extends Component {
+  render() {
+      return (
+        <div>
+              <BrowserRouter>
+                  <div>
+                      {/* <Route exact path="/" component={HomePage} />
+                      <Route exact path="/login" component={Login} />
+                      <Route exact path="/requestaccess" component={RequestAccess} />
+                      <Route exact path="/dashboard" component={Dashboard} /> */}
+                      <Route exact path="/events" component={DbEvents} />
+
+
+
+                  
+                  
+                  </div>
+              </BrowserRouter>
+          </div>
+      );
+  }
 }
-
 
 
 
