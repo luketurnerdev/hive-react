@@ -17,11 +17,11 @@ export class Test extends Component {
     }
 
     render() {
-        
+        console.log(this.state.users)
     const {users} = this.state
     
         return (
-        <ul>{users.map((user)=> ( <li key={user.id}>{user.name}</li>))}</ul>
+        <ul>{users.map((user)=> ( <li key={user.id}>{user.first_name}</li>))}</ul>
         )
     
                 
