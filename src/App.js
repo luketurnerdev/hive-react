@@ -1,36 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import HomePage from './Components/pages/HomePage'
+// import DbEvents from './Components/events/DbEvents'\
+// import StudentsEvents from "./Components/events/StudentsEvents";
+import CAEvents from "./Components/events/CAEvents";
+import SingleEvent from './Components/events/SingleEvent';
 
 function App() {
+ return (
+   <div className="App">
+     <header className="App-header">
+      < HomePage />
+      <h1>WELCOME TO THE HIVE</h1>
+      {/* < StudentsEvents/> */}
+      < CAEvents/>
+      {/* < SingleEvent /> */}
+     </header>
+   </div>
 
-  fetch("http://localhost:3000/", {
-      method: "GET",
-    }
-    )
-    .then(response => console.log('Working!'))
-
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome to the Hive!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-
-    
+ );
 }
+
+
+
+
 
 export default App;
