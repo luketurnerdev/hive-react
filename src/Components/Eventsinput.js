@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
-// import react-bootstrap for sending requests to API
+// import react-bootstrap 
 import Button from 'react-bootstrap/Button';
 
 // Events Component
