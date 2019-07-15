@@ -20,7 +20,7 @@ class TodayEvents extends Component {
         const {data} = eventsResp;
         console.log(data);
         const usersData = usersData.data;
-        // state today's date in ISO 8601 (as in Meetup API)
+        // state today's date in ISO 8601 (as in Meetup API) without time
         let today = new Date();
         let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         // this.getDate();

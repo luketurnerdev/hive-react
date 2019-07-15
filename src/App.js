@@ -6,6 +6,8 @@ import Dashboard from './Components/pages/Dashboard'
 import Reviews from './Components/pages/Reviews'
 import Profile from './Components/profiles/Profile'
 import AverageRates from './Components/events/AverageRates'
+import StudentComments from './Components/events/StudentComments'
+import Reviews from './Components/events/Reviews'
 
 import NavigationBAr from './Components/NavigationBar';
 
@@ -28,10 +30,12 @@ class App extends Component {
                       {/* react-routes-dom package takes :id from us and puts it into props.match.params */}
                       <Route exact path="/events/:id" component={SingleEvent} />
                       <Route exact path="/events/:id" component={AverageRates} />
-                      <Route exact path="/events/:id/attendees" component={Attendees} />                      
-                      <Route exact path="/reviews" component={Reviews} />
+                      <Route exact path="/events/:id" component={StudentComments} />
+                      <Route exact path="/events/:id" component={Reviews} />
+                      <Route exact path="/events/:id/attendees" component={Attendees} />
+                      <Route exact path="/events/:id/comments" component={StudentComments} />
+                      {/* <Route exact path="/reviews" component={Reviews} /> */}
                       <Route exact path="/profile" component={Profile} />
-
                   </div>
 
                   </Switch>

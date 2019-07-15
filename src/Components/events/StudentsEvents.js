@@ -29,7 +29,7 @@ class StudentsEvents extends Component {
                 }
             }
             // we change the state according to our previous code
-           this.setState({events:studentsEvents});
+           this.setState({events: studentsEvents});
           
         })
         .catch(error => {

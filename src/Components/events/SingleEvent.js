@@ -46,7 +46,7 @@ export class SingleEvent extends Component {
             <div>                            
                 <Link to={`/events/${id}`}>{event.name}</Link>
                 <p>{event.local_date}</p>
-                <Link to={`/events/${id}/attendees`}>Attendees</Link>             
+                <Link to={`/events/${id}/attendees`}>Attendees</Link>                
             </div>
         )
     }
