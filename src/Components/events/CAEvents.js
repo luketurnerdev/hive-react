@@ -1,16 +1,19 @@
 
 import React, {Component} from 'react';
+import { Link } from "react-router-dom";
 // import axios for sending requests to API
 import axios from 'axios';
 
 class CAEvents extends Component {
     state = {
-        events: []
+        events: [],
+        ids: []
     };
 
     // just after rendering the Events, call to the API
     componentDidMount() {
     let studentsEvents = [];
+    let studentsEventsId = [];
     axios
     // request call to the db
         .get('http://localhost:3000/events')
@@ -26,10 +29,11 @@ class CAEvents extends Component {
                 if (data[i].ca_recommended === true) {
                     // mark it as student event (event a student is attending)
                     studentsEvents.push(data[i]);
+                    studentsEventsId.push(data[i].id);
                 }
             }
             // we change the state according to our previous code
-           this.setState({events:studentsEvents});
+           this.setState({events:studentsEvents, ids:studentsEventsId});
           
         })
         .catch(error => {
@@ -39,9 +43,27 @@ class CAEvents extends Component {
   
   render() {
     console.log(this.state.events)
-    const {events} = this.state
+    const {events, ids} = this.state
     return( 
-      <div><h1>{events.map((event)=>(<div onClick={this.selectedEvent} key={event.id} >{event.name}</div>))}</h1></div>
+                    <div>
+                        <ul>
+                            {events.map((item, index) => {
+                                return (
+                                    // <div>
+                                        <li key={item}>
+                                            <div>
+                                                <Link to={`/events/${ids[index]}`}>{item.name}</Link>
+                                                <p>{item.local_date}</p>
+                                                <Link to={`/events/${ids[index]}/attendees`}>Attendees</Link>
+                                            </div>                                
+                                        
+                                        </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+            //     </BrowserRouter>
+            // </div>
     )
 }
 

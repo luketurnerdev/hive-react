@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import React, { Component } from 'react'
-
-export class Profile extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
-}
-
-export default Profile
-=======
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
@@ -69,4 +54,3 @@ state={
 }
 
 export default Profile;
->>>>>>> afdcdf826c07442f83ddb2d23df233485cf478a0

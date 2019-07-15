@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom";
 import axios from "axios"
 
 export class SingleEvent extends Component {
@@ -25,7 +26,7 @@ export class SingleEvent extends Component {
     componentDidMount() {
     axios
     // request call to the db
-        .get('http://localhost:3000/events/3')
+        .get(`http://localhost:3000/events/${this.props.match.params.id}`)
         .then(resp => {
             // destructure data from response
             const {data} = resp;
@@ -39,9 +40,14 @@ export class SingleEvent extends Component {
     };
   
   render() {
-        const {id} = this.state.event
+    const {event} = this.state;    
+    const {id} = this.state.event;
         return( 
-        <div><h1>{id}</h1></div>
+            <div>                            
+                <Link to={`/events/${id}`}>{event.name}</Link>
+                <p>{event.local_date}</p>
+                <Link to={`/events/${id}/attendees`}>Attendees</Link>             
+            </div>
         )
     }
 }

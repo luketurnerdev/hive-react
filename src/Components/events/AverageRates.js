@@ -6,7 +6,7 @@ class AverageRates extends Component {
   // set state
   state = {
     // the average of each rating's scores (food, drinks, talk, vibe)
-    averageScores = {}
+    averageScores: {}
   }
 
   componentDidMount(){
@@ -17,7 +17,7 @@ class AverageRates extends Component {
     let eventVibe= [];
     // two request calls (one for event info, one for ratings)
     axios.all([
-      axios.get('http://localhost:3000/events/1'),
+      axios.get(`http://localhost:3000/events/${this.props.match.params.id}`),
       axios.get('http://localhost:3000/ratings')
     ])
     .then(axios.spread((eventResp, ratingsResp) => {
@@ -30,7 +30,7 @@ class AverageRates extends Component {
       // for every rating
         for (let x = 0; x < ratingsLength; x++) {
           // if the ratings belong to the specific event
-          if (ratingsData[x].event === data) {
+          if (data.id === ratingsData[x].event.id) {
             eventFood.push(ratingsData[x].score.food);
             eventDrinks.push(ratingsData[x].score.drinks);
             eventTalk.push(ratingsData[x].score.talk);
@@ -63,7 +63,7 @@ class AverageRates extends Component {
          };
         // calculate averages
          let foodAverage = (foodTotal/foodLength);
-         let drinksAverage = ( drinksTotal/drinksLength);
+         let drinksAverage = (drinksTotal/drinksLength);
          let talkAverage = (talkTotal/talkLength);
          let vibeAverage = (vibeTotal/vibeLength);
          // set the average object
@@ -77,19 +77,20 @@ class AverageRates extends Component {
          this.setState({
           averageScores: eventAverageScores
           });
-      })
+      }))
     .catch(error => {
       console.log(error);
-  }
-    ))};
+  })};
 
   render(){
     const {food, drinks, talk, vibe} = this.state.averageScores;
     return(
-      <div>{food}</div>
-      <div>{drinks}</div>
-      <div>{talk}</div>
-      <div>{vibe}</div>
+      <div>
+        <div>{food}</div>
+        <div>{drinks}</div>
+        <div>{talk}</div>
+        <div>{vibe}</div>
+      </div>
     )
   }
 };
