@@ -4,6 +4,7 @@ import HomePage from './Components/pages/HomePage'
 import DbEvents from './Components/pages/DbEvents'
 import Dashboard from './Components/pages/Dashboard'
 import Reviews from './Components/pages/Reviews'
+import Profile from './Components/profiles/Profile'
 
 import NavigationBAr from './Components/NavigationBar';
 
@@ -22,7 +23,8 @@ class App extends Component {
                       <Route exact path="/dashboard" component={Dashboard} />
                       <Route exact path="/events" component={DbEvents} />
                       <Route exact path="/reviews" component={Reviews} />
-                    
+                      <Route exact path="/profile" component={Profile} />
+
                   </div>
                   </Switch>
               </Router>
