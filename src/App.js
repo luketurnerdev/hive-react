@@ -9,6 +9,8 @@ import Profile from './Components/profiles/Profile'
 import NavigationBAr from './Components/NavigationBar';
 
 import './App.css';
+import Profile from './Components/profiles/Profile'
+import Attendees from './Components/events/Attendees'
 
 class App extends Component {
   render() {
@@ -26,11 +28,13 @@ class App extends Component {
                       <Route exact path="/profile" component={Profile} />
 
                   </div>
+
                   </Switch>
               </Router>
      
       </div>
           
+
       );
   }
 }
