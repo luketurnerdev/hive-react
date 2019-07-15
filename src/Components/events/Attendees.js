@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
 
-class Attendees extends Components {
+class Attendees extends Component {
 // define the state
   state = {
-    users = []
+    users: []
   };
 
 
@@ -27,16 +27,20 @@ class Attendees extends Components {
       console.log(error);
   })}
 
+  
+
   render(){
     const {users} = this.state;
+    // console.log(users);
 
     return(
       <div>
         <h1>
-          {users.map((user)=>(
+          {/* {users.map((user)=>(
             <div key={user.id} >
             {user.first_name}
-            </div>))}
+            </div>))} */}
+            {users}
         </h1>
       </div>
     )
