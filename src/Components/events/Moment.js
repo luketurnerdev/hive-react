@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
-// import moment from 'moment'
+import moment from 'moment'
  
-// const localizer = momentLocalizer(moment)
+const localizer = momentLocalizer(moment)
  
 // const MyCalendar = props => (
 //   <div>
@@ -50,7 +50,7 @@ class MyCalendar extends Component {
         return(
           <div>
                 <Calendar
-        // localizer={localizer}
+        localizer={localizer}
         events={events}
         startAccessor="start"
         endAccessor="end"
