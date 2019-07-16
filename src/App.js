@@ -1,19 +1,28 @@
 import React,{Component} from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import HomePage from './Components/pages/HomePage'
-import DbEvents from './Components/pages/DbEvents'
-import Dashboard from './Components/pages/Dashboard'
-import Reviews from './Components/pages/Reviews'
+import HomePage from './pages/HomePage'
+import DbEvents from './pages/DbEvents'
+import Dashboard from './pages/Dashboard'
+import Reviews from './pages/Reviews'
 import Profile from './Components/profiles/Profile'
+
 import AverageRates from './Components/events/AverageRates'
 import StudentComments from './Components/events/StudentComments'
 import MyCalendar from './Components/events/Moment'
 
+
+import Attendees from './Components/events/Attendees'
+
 import NavigationBAr from './Components/NavigationBar';
+import LoginPage from './pages/LoginPage'
+import RequestAccess from './pages/RequestAccess'
 
 import './App.css';
-import Attendees from './Components/events/Attendees'
+
 import SingleEvent from './Components/events/SingleEvent';
+
+
+
 
 class App extends Component {
   render() {
@@ -37,6 +46,10 @@ class App extends Component {
                       <Route exact path="/events/:id/comments" component={StudentComments} />
                       {/* <Route exact path="/reviews" component={Reviews} /> */}
                       <Route exact path="/profile" component={Profile} />
+                      <Route exact path="/login" component={LoginPage} />
+                      <Route exact path="/request_access" component={RequestAccess} />
+
+
                   </div>
 
                   </Switch>
