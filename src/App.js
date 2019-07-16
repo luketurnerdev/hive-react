@@ -7,7 +7,7 @@ import Reviews from './Components/pages/Reviews'
 import Profile from './Components/profiles/Profile'
 import AverageRates from './Components/events/AverageRates'
 import StudentComments from './Components/events/StudentComments'
-import Reviews from './Components/events/Reviews'
+import MyCalendar from './Components/events/Moment'
 
 import NavigationBAr from './Components/NavigationBar';
 
@@ -26,6 +26,7 @@ class App extends Component {
                   <div>
                       <Route exact path="/" component={HomePage} />
                       <Route exact path="/dashboard" component={Dashboard} />
+                      <Route exact path="/dashboard" component={MyCalendar} />
                       <Route exact path="/events" component={DbEvents} />
                       {/* react-routes-dom package takes :id from us and puts it into props.match.params */}
                       <Route exact path="/events/:id" component={SingleEvent} />
