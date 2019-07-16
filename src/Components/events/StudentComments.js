@@ -22,38 +22,39 @@ class StudentComments extends Component {
           const {data} = eventsResp;
           console.log(data);
           const ratingsData = ratingsResp.data;
-            // set length of each loop
-            let eventsLength = data.length;
+            // set length of loop
+            let ratingsLength = data.length;
             console.log(data);
             console.log(ratingsData);
             // let ratingsLength = ratingsData.length
             // for loop through all the events
-            // we need a loop that searchws for event property of each rating
-            for (let i = 0; i < ratingsData; i++) {
+            // we need a loop that searches for event property of each rating
+            for (let i = 0; i < ratingsLength; i++) {
               // in case the event the rating (where the comment comes from) is the same as the one targeted by the user
               if (ratingsData[i].event === data) {
                 // push it inside theComments array
-                eventRatings.push(ratingsData)
+                eventRatings.push(ratingsData[i].event)
               }
             }
+            console.log(eventRatings);
           this.setState({comments:eventRatings});
         
-      })
+      }))
           .catch(error => {
               console.log(error);
-          }))};
+          })};
           
   render() {
     const {ratings} = this.state;
     const {id, comment} = ratings;
-    const {name, avatar} = ratings.user.name;
+    console.log(ratings);
 
     return(
       <div>
          {ratings.map((rating)=>(
             <div key={id} >
-            {name}
-            {avatar}
+            {ratings.user.name}
+            {ratings.user.avatar}
             {comment}
             </div>))}
       </div>

@@ -39,9 +39,9 @@ class App extends Component {
                       <Route exact path="/events" component={DbEvents} />
                       {/* react-routes-dom package takes :id from us and puts it into props.match.params */}
                       <Route exact path="/events/:id" component={SingleEvent} />
-                      <Route exact path="/events/:id" component={AverageRates} />
-                      <Route exact path="/events/:id" component={StudentComments} />
-                      <Route exact path="/events/:id" component={Reviews} />
+                      {/* <Route exact path="/events/:id" component={AverageRates} /> */}
+                      {/* <Route exact path="/events/:id" component={StudentComments} /> */}
+                      {/* <Route exact path="/events/:id" component={Reviews} /> */}
                       <Route exact path="/events/:id/attendees" component={Attendees} />
                       <Route exact path="/events/:id/comments" component={StudentComments} />
                       {/* <Route exact path="/reviews" component={Reviews} /> */}

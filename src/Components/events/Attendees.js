@@ -20,7 +20,7 @@ class Attendees extends Component {
       const {data} = resp;
       console.log(data);
       // we push the hive_attendees of the event into eventAttendees
-      eventAttendees.push(data.hive_attendees);
+      eventAttendees = data.hive_attendees;
       this.setState({users:eventAttendees});
     })
     .catch(error => {
@@ -30,17 +30,18 @@ class Attendees extends Component {
   
 
   render(){
+    console.log(this.state.users);
     const {users} = this.state;
     // console.log(users);
 
     return(
       <div>
         <h1>
-          {/* {users.map((user)=>(
+          {users.map((user)=>(
             <div key={user.id} >
             {user.first_name}
-            </div>))} */}
-            {users}
+            </div>))}
+            {/* {users[0].first_name} */}
         </h1>
       </div>
     )
