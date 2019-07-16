@@ -15,6 +15,8 @@ import MyProfile from './pages/MyProfile'
 import './App.css';
 
 import SingleEvent from './Components/events/SingleEvent';
+import Profile from './Components/profiles/Profile';
+import Statistic from './Components/profiles/Statistic';
 
 
 
@@ -39,6 +41,7 @@ class App extends Component {
                       <Route exact path="/my_reviews" component={MyReviews} />
                       <Route exact path="/all_suggestions" component={AllSuggestions} />
                       <Route exact path="/myprofile" component={MyProfile} />
+                      <Route exact path="/users/:id" component={Statistic} />
 
                   </div>
 
