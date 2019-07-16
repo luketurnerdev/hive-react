@@ -11,7 +11,7 @@ const Wrapper = styled.section`
   padding: 2em;
   background: white;
   margin:2em;
-`;l
+  `;
 export class MyReviews extends Component {
     render() {
         return (
