@@ -28,11 +28,6 @@ class Statistic extends Component {
       // declare variables for events and ratings data
       const eventsData = eventsResp.data;
       const ratingsData = ratingsResp.data;
-      console.log(data);
-      console.log(eventsData);
-      console.log(ratingsData);
-      console.log(eventsData[0].hive_attendees);
-      console.log(eventsData[0].hive_attendees.includes(data));
       // which events has the user attended so far
       // calculate the length of the events data
       let eventsLength = eventsData.length;
@@ -41,11 +36,6 @@ class Statistic extends Component {
       let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
       // for attended events, we need passed events (date of the event less than today's) and the user to be included in the event's hive_attendees
       for (let i = 0; i < eventsLength; i++) {
-        console.log(eventsData[i]);
-        console.log(eventsData[i].local_date)
-        console.log(date)
-        console.log(eventsData[i].local_date < date)
-        console.log(eventsData[i].hive_attendees.includes(data.id))
         if ((eventsData[i].local_date < date) && (eventsData[i].hive_attendees.includes(data.id))) {
           attended.push(eventsData[i])
         }
@@ -53,13 +43,19 @@ class Statistic extends Component {
       console.log(attended);
       // for suggested events, we need to check which events's suggested_by property includes the user id.
       for (let y = 0; y < eventsLength; y++) {
-        if (eventsData[y].suggested.suggested_by.includes[data.id]) {
+        console.log(eventsData)
+        console.log(eventsData[y])
+        console.log(eventsData[y].suggested)
+        console.log(eventsData[y].suggested.suggested_by)
+        console.log(eventsData[y].suggested.suggested_by.includes(data))
+        console.log(eventsData[y].suggested.suggested_by.includes(data.id))
+        if (eventsData[y].suggested.suggested_by.includes(data.id)) {
           // we push into the suggested events the message of the
           suggested.push(eventsData[y]);
           // suggested.push(eventsData[i].suggested.message[message.findIndex(data.id)])
         }
       }
-      // console.log(suggested);
+      console.log(suggested);
       // for number of comments, we just need the comments of the ratings which user is the user
       // calculate length of ratingsData
       let ratingsLength = ratingsData.length;
@@ -83,16 +79,23 @@ class Statistic extends Component {
     return(
 
       <div>
-        {numberComments}
-        {suggested}
+         <h3>Events attended</h3>
         {attended.map((item)=>(
             <div key={item.id} >
-            {item.id}
             <p>Event name:{item.name}</p>
             </div>
-    ))
-  }
-  </div>
+          ))
+        }
+         <h3>Events suggested</h3>
+        {/* {suggested.map((item)=>(
+          <div key={item.id} >
+          <p>Event name:{item.name}</p>
+          </div>
+        ))
+        } */}
+          <h3>Number of comments</h3>
+        {numberComments}
+      </div>
   )
   }
 };
