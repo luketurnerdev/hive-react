@@ -17,8 +17,9 @@ class AverageRates extends Component {
     let eventTalk = [];
     let eventVibe= [];
     // two request calls (one for event info, one for ratings)
+    console.log(this.props);
     axios.all([
-      axios.get(`http://localhost:3000/events/${this.props.match.params.id}`),
+      axios.get(`http://localhost:3000/events/${this.props.id}`),
       axios.get('http://localhost:3000/ratings')
     ])
     .then(axios.spread((eventResp, ratingsResp) => {
