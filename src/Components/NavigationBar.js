@@ -34,7 +34,12 @@ export const NavigationBar = () => (
           </Nav.Item>
           <Nav.Item>
             <Nav.Link>
-              <Link to="/reviews">Reviews</Link>
+              <Link to="/my_reviews">My Reviews</Link>
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link>
+              <Link to="/all_suggestions">All Suggestions</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -42,6 +47,12 @@ export const NavigationBar = () => (
               <Link to="/profile">Profile</Link>
             </Nav.Link>
           </Nav.Item>
+          <Nav.Item>
+            <Nav.Link>
+              <Link to="/login">Log In</Link>
+            </Nav.Link>
+          </Nav.Item>
+
         </Nav>
       </Navbar.Collapse>
     </Navbar>

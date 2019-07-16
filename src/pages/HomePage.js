@@ -1,3 +1,5 @@
+// will return FAQ and the basic instruction of the platfomr
+// not Signed in.
 import React from 'react';
 import logo from './honeycomb-logo.svg';
 

@@ -1,3 +1,5 @@
+//will render all the events 
+//( Signed in as STUDENT/ADMIN)
 import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container'
 import CAEvents from '../Components/events/CAEvents'
@@ -5,10 +7,11 @@ import StudentsEvents from '../Components/events/StudentsEvents.js'
 import NotDbEvents from '../Components/events/NotDbEvents'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-
 import styled from 'styled-components';
+import Moment from '../Components/events/Moment'
 
-// Create a Title component for an <h3> tag 
+
+// START Title component for an <h3> tag 
 const Title = styled.h3`
   font-size: 1.5em;
   text-align: center;
@@ -21,6 +24,7 @@ const Wrapper = styled.section`
   background: papayawhip;
   margin:2em;
 `;
+// Style a Calendar component with a <section> tag
 const Calendar = styled.section`
   padding: 5em;
   background: papayawhip;
@@ -38,7 +42,7 @@ export class Dashboard extends Component {
                     <Col>
                     <Calendar>
                         <Title>
-                        Calendar
+                       CALENDAR
                         </Title>
                     </Calendar>
                     </Col>
@@ -63,6 +67,7 @@ export class Dashboard extends Component {
                 </Row>  
 
                 <Row>
+                    {/* <NON DB MEETUP LIST */}
                     <Wrapper>
                         <Title>
                         <NotDbEvents/>

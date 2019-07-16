@@ -1,3 +1,4 @@
+// scores and comments by users for each events
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';

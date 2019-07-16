@@ -1,3 +1,5 @@
+// return all the events saved in database 
+// ( Signed in as STUDENT/ADMIN)
 import React, { Component } from 'react'
 import CAEvents from '../Components/events/CAEvents'
 import StudentsEvents from '../Components/events/StudentsEvents.js'
@@ -6,6 +8,14 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import styled from 'styled-components';
+
+// Style a Wrapper component with a <section> tag
+const Wrapper = styled.section`
+  padding: 2em;
+  background: white;
+  margin:2em;
+`;
 
 export class DbEvents extends Component {
     state = { location: " "}
@@ -22,9 +32,11 @@ export class DbEvents extends Component {
         // Click the Dropdown Button and save to the object location. Render the selected components.
             <div>
                 <Container>
+                <Wrapper>
                     <Row>
+                        
                     <Col><h1>Events</h1></Col>
-                        {/*<FILTER DROPDOWN START> */}
+                        {/*<FILTER DROPDOWN BUTTON START> */}
                         <DropdownButton variant="secondary" title="Filter" onClick={this.onSubmit}>
                         <Dropdown.Item as="button" value="caEvents" >CoderAcademyEvents</Dropdown.Item>
                         <Dropdown.Item as="button" value="studentEvents" >StudentsEvents</Dropdown.Item>
@@ -41,7 +53,9 @@ export class DbEvents extends Component {
                         <div><h1>CoderAcedemy EVENT</h1><CAEvents/></div>:
                         null}
                         {/* </FILTER DROPDOWN END> */}
+                       
                     </Row>
+                </Wrapper>
                 </Container>
             </div>
           
