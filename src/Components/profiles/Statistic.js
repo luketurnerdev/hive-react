@@ -6,8 +6,8 @@ import axios from 'axios';
 class Statistic extends Component {
   state = {
     attended: [],
-    suggestedEvents: [],
-    approvedEvents: [],
+    suggested: [],
+    approved: [],
     numberComments: 0
   }
 
@@ -50,12 +50,19 @@ class Statistic extends Component {
         console.log(eventsData[y].suggested.suggested_by.includes(data))
         console.log(eventsData[y].suggested.suggested_by.includes(data.id))
         if (eventsData[y].suggested.suggested_by.includes(data.id)) {
-          // we push into the suggested events the message of the
+          // we push into the suggested events the message of
           suggested.push(eventsData[y]);
           // suggested.push(eventsData[i].suggested.message[message.findIndex(data.id)])
         }
       }
-      console.log(suggested);
+      // for approved events, we need to check which of the events suggested by the user have been approved by CA.
+      // calculate the length of the suggested events data
+      let suggestedLength = suggested.length;
+      for (let w = 0; w < suggestedLength; w++) {
+        if (suggested[w].suggested.suggested_by.includes(data.id) && suggested[w].ca_recommended === true) {
+          approved.push(eventsData[w]);
+        }
+      }
       // for number of comments, we just need the comments of the ratings which user is the user
       // calculate length of ratingsData
       let ratingsLength = ratingsData.length;
@@ -67,14 +74,15 @@ class Statistic extends Component {
       console.log(numberComments);
       console.log(attended);
       console.log(suggested);
+      console.log(approved);
 
       // update the state
-      this.setState({attended, numberComments});
+      this.setState({attended, numberComments, suggested, approved});
     }))
   }
 
   render() {
-    const {attended, numberComments, suggested} = this.state;
+    const {attended, numberComments, suggested, approved} = this.state;
 
     return(
 
@@ -87,12 +95,19 @@ class Statistic extends Component {
           ))
         }
          <h3>Events suggested</h3>
-        {/* {suggested.map((item)=>(
+        {suggested.map((item)=>(
           <div key={item.id} >
           <p>Event name:{item.name}</p>
           </div>
         ))
-        } */}
+        }
+         <h3>Events approved</h3>
+        {approved.map((item)=>(
+          <div key={item.id} >
+          <p>Event name:{item.name}</p>
+          </div>
+        ))
+        }
           <h3>Number of comments</h3>
         {numberComments}
       </div>
