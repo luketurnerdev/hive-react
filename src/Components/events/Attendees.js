@@ -14,7 +14,7 @@ class Attendees extends Component {
   let eventAttendees = [];
   // make the request call 
   axios
-    .get('http://localhost:3000/events/1')
+    .get(`http://localhost:3000/events/${this.props.match.params.id}`)
     .then(resp => {
       // destructure data from response
       const {data} = resp;
