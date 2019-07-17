@@ -18,6 +18,8 @@ import SingleEvent from './Components/events/SingleEvent';
 import Profile from './Components/profiles/Profile';
 import Statistic from './Components/profiles/Statistic';
 import Suggestions from './Components/events/Suggestions';
+import Reviews from './Components/events/Reviews';
+import Attendees from './Components/events/Attendees';
 
 
 
@@ -42,7 +44,8 @@ class App extends Component {
                       <Route exact path="/my_reviews" component={MyReviews} />
                       <Route exact path="/all_suggestions" component={AllSuggestions} />
                       <Route exact path="/myprofile" component={MyProfile} />
-                      <Route exact path="/users" component={Suggestions} />
+                      <Route exact path="/events/:id" component={SingleEvent} />
+                      <Route exact path="/events/:id/attendees" component={Attendees} />
 
                   </div>
 
