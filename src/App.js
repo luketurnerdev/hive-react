@@ -18,9 +18,6 @@ import 'mdbreact/dist/css/mdb.css';
 import './App.css';
 
 
-
-
-
 class App extends Component {
   render() {
       return (
@@ -41,6 +38,7 @@ class App extends Component {
                       <Route exact path="/my_reviews" component={MyReviews} />
                       <Route exact path="/all_suggestions" component={AllSuggestions} />
                       <Route exact path="/myprofile" component={MyProfile} />
+               
 
                  
 

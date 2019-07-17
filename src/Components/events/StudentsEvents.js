@@ -42,6 +42,7 @@ class StudentsEvents extends Component {
            this.setState({events: studentsEvents});
           
         })
+        // just to try
         .catch(error => {
             console.log(error);
         });  
