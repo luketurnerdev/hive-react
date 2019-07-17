@@ -32,7 +32,7 @@ class AverageRates extends Component {
       // for every rating
         for (let x = 0; x < ratingsLength; x++) {
           // if the ratings belong to the specific event
-          if (data.id === ratingsData[x].event.id) {
+          if (data.id === ratingsData[x].event) {
             eventFood.push(ratingsData[x].score.food);
             eventDrinks.push(ratingsData[x].score.drinks);
             eventTalk.push(ratingsData[x].score.talk);
