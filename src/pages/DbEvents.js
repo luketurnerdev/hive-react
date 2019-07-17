@@ -3,12 +3,9 @@
 import React, { Component } from 'react'
 import CAEvents from '../Components/events/CAEvents'
 import StudentsEvents from '../Components/events/StudentsEvents.js'
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import {Col,Row,Container,Dropdown,DropdownButton}  from 'react-bootstrap';
 import styled from 'styled-components';
+
 
 // Style a Wrapper component with a <section> tag
 const Wrapper = styled.section`
@@ -33,8 +30,7 @@ export class DbEvents extends Component {
             <div>
                 <Container>
                 <Wrapper>
-                    <Row>
-                        
+                    <Row>  
                     <Col><h1>Events</h1></Col>
                         {/*<FILTER DROPDOWN BUTTON START> */}
                         <DropdownButton variant="secondary" title="Filter" onClick={this.onSubmit}>

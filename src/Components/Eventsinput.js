@@ -34,21 +34,21 @@ name:" "
     }
 
 // render the form 
-render(){
-  return( 
-      <div>
-    <form onSubmit={this.handleSubmit}>
-        <label>
-            Event Name:  
-        </label>
-        <input type="text" name="name" onChange={this.handleChange}/>
-        <Button variant="primary" type="submit">Add</Button>
-        <Button variant="flat" size="xxl">skdjd</Button>
-    </form>
-    </div>
-    )
+    render(){
+    return( 
+        <div>
+        <form onSubmit={this.handleSubmit}>
+            <label>
+                Event Name:  
+            </label>
+            <input type="text" name="name" onChange={this.handleChange}/>
+            <Button variant="primary" type="submit">Add</Button>
+            <Button variant="flat" size="xxl">skdjd</Button>
+        </form>
+        </div>
+        )
 
-}
+    }
 
 };
 

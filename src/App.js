@@ -12,9 +12,11 @@ import MyReviews from './pages/MyReviews'
 import AllSuggestions from './pages/AllSuggestions'
 import MyProfile from './pages/MyProfile'
 
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
 import './App.css';
 
-import SingleEvent from './Components/events/SingleEvent';
 
 
 
@@ -27,7 +29,7 @@ class App extends Component {
               <Router>
                 <NavigationBAr/>
                 <Switch>
-                  <div>
+                 
                       <Route exact path="/" component={HomePage} />
                       <Route exact path="/login" component={LoginPage} />
                       <Route exact path="/request_access" component={RequestAccess} />
@@ -40,7 +42,7 @@ class App extends Component {
                       <Route exact path="/all_suggestions" component={AllSuggestions} />
                       <Route exact path="/myprofile" component={MyProfile} />
 
-                  </div>
+                 
 
                   </Switch>
               </Router>

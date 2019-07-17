@@ -1,56 +1,51 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,NavLink } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 import styled from 'styled-components';
+
 
 const Styles = styled.div`
   .navbar {
     background-color: #e8e4d1;
+    font-weight: bold;
   }
   a, .navbar-brand, .navbar-nav .nav-link {
-    color: #bbb;
+    color:#626570;
     &:hover {
       color: white;
     }
   }
+  .navbar.navbar-light .navbar-nav .nav-item .nav-link {
+    color: #626570;
+    transition: 0.35s;
+  }
+  
 `;
 
 export const NavigationBar = () => (
   <Styles>
     <Navbar expand="lg">
-      <Navbar.Brand href="/">The Hive</Navbar.Brand>
+      <Navbar.Brand as={Link} to='/'>The Hive</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           <Nav.Item>
-            <Nav.Link>
-              <Link to="/Dashboard">Home</Link>
-            </Nav.Link>
+            <Nav.Link  as={NavLink} to="/Dashboard">Home</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link>
-              <Link to="/events">Events</Link>
-            </Nav.Link>
+            <Nav.Link as={NavLink} to="/events">Events</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link>
-              <Link to="/my_reviews">My Reviews</Link>
-            </Nav.Link>
+            <Nav.Link as={NavLink}to="/my_reviews">My Reviews</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link>
-              <Link to="/all_suggestions">All Suggestions</Link>
-            </Nav.Link>
+            <Nav.Link as={NavLink}to="/all_suggestions">All Suggestions</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link>
-              <Link to="/profile">Profile</Link>
-            </Nav.Link>
+            <Nav.Link as={NavLink}to="/profile">Profile</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link>
-              <Link to="/login">Log In</Link>
-            </Nav.Link>
+            <Nav.Link as={NavLink}to="/login">Log In</Nav.Link>
           </Nav.Item>
 
         </Nav>
@@ -58,5 +53,4 @@ export const NavigationBar = () => (
     </Navbar>
   </Styles >
 )
-
 export default NavigationBar;
