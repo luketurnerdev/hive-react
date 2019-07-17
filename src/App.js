@@ -13,10 +13,11 @@ import AllSuggestions from './pages/AllSuggestions'
 import MyProfile from './pages/MyProfile'
 
 import './App.css';
-
+// Just for testing (-Juanma)
 import SingleEvent from './Components/events/SingleEvent';
 import Profile from './Components/profiles/Profile';
 import Statistic from './Components/profiles/Statistic';
+import Suggestions from './Components/events/Suggestions';
 
 
 
@@ -41,7 +42,7 @@ class App extends Component {
                       <Route exact path="/my_reviews" component={MyReviews} />
                       <Route exact path="/all_suggestions" component={AllSuggestions} />
                       <Route exact path="/myprofile" component={MyProfile} />
-                      <Route exact path="/users/:id" component={Statistic} />
+                      <Route exact path="/users" component={Suggestions} />
 
                   </div>
 
