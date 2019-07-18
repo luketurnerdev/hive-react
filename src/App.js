@@ -12,16 +12,10 @@ import MyReviews from './pages/MyReviews'
 import AllSuggestions from './pages/AllSuggestions'
 import MyProfile from './pages/MyProfile'
 
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
 import './App.css';
-// Just for testing (-Juanma)
-import SingleEvent from './Components/events/SingleEvent';
-import Profile from './Components/profiles/Profile';
-import Statistic from './Components/profiles/Statistic';
-import Suggestions from './Components/events/Suggestions';
-import Reviews from './Components/events/Reviews';
-import Attendees from './Components/events/Attendees';
-import EditRating from './Components/events/EditRating';
-
 
 
 
@@ -33,7 +27,7 @@ class App extends Component {
               <Router>
                 <NavigationBAr/>
                 <Switch>
-                  <div>
+                 
                       <Route exact path="/" component={HomePage} />
                       <Route exact path="/login" component={LoginPage} />
                       <Route exact path="/request_access" component={RequestAccess} />
@@ -46,10 +40,10 @@ class App extends Component {
                       <Route exact path="/my_reviews" component={MyReviews} />
                       <Route exact path="/all_suggestions" component={AllSuggestions} />
                       <Route exact path="/myprofile" component={MyProfile} />
-                      <Route exact path="/events/:id" component={SingleEvent} />
                       <Route exact path="/events/:id/attendees" component={Attendees} />
 
-                  </div>
+
+                 
 
                   </Switch>
               </Router>
