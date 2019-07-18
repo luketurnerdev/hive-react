@@ -16,8 +16,8 @@ class CAEvents extends Component {
 // START GET API 
     // just after rendering the Events, call to the API
     componentDidMount() {
-    let studentsEvents = [];
-    let studentsEventsId = [];
+    let CAEvents = [];
+    let CAEventsId = [];
     axios
     // request call to the db
         .get('http://localhost:3000/events')
@@ -31,13 +31,13 @@ class CAEvents extends Component {
             for (let i = 0; i < eventsLength; i++) {
                 // Ony if the event has been recommended by CA
                 if (data[i].ca_recommended === true) {
-                    // mark it as student event (event a student is attending)
-                    studentsEvents.push(data[i]);
-                    studentsEventsId.push(data[i].id);
+                    // mark it as CA event (event recommended by CA)
+                    CAEvents.push(data[i]);
+                    CAEventsId.push(data[i].id);
                 }
             }
             // we change the state according to our previous code
-           this.setState({events:studentsEvents, ids:studentsEventsId});
+           this.setState({events:CAEvents, ids:CAEventsId});
           
         })
         .catch(error => {

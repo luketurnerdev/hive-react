@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
 import EditRating from './EditRating';
+import StarRatingComponent from 'react-star-rating-component';
+
 
 
 class Reviews extends Component {
@@ -76,24 +78,62 @@ class Reviews extends Component {
         return (<EditRating rating={this}/>);
     };
 
+    onStarClick(nextValue, prevValue, name) {
+        this.setState({nextValue})
+    }
+
     render(){
         const {reviews} = this.state;
         return(
             <div>
+            <h3>Individual rates</h3>
                 {reviews.map((review)=>(
             <div key={review.id} >
             {review.name}
             {review.avatar}
-            {review.comment}
-            {review.score.food}
+            {/* {review.score.food}
             {review.score.drinks}
             {review.score.talk}
-            {review.score.vibe}
-            {/* <EditRating /> */}
+            {review.score.vibe} */}
+            {/* Use StarRating Component for the star styling */}
+            Food:
+            <StarRatingComponent 
+                name="food"
+                starCount={5}
+                value={review.score.food}
+                // onStarClick={this.onStarClick.bind(this)}
+                editing={false}
+                />
+            Drinks:
+            <StarRatingComponent 
+                name="drinks"
+                starCount={5}
+                value={review.score.drinks}
+                // onStarClick={this.onStarClick.bind(this)}
+                editing={false}
+                />
+            Talk:
+            <StarRatingComponent 
+                name="talk"
+                starCount={5}
+                value={review.score.talk}
+                // onStarClick={this.onStarClick.bind(this)}
+                editing={false}
+                />
+            Vibe:
+            <StarRatingComponent 
+                name="vibe"
+                starCount={5}
+                value={review.score.vibe}
+                // onStarClick={this.onStarClick.bind(this)}
+                editing={false}
+                />
+            {review.comment}
             <button onClick={this.goToEdit} id={review}>Edit Review</button>
             </div>))}
             {/* button for editing the rating */}
             {/* in the button we call a CreateReview component in which we pass the whole review as props */}
+            
             </div>
         )
     }
