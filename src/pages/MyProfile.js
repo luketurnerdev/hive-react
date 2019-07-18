@@ -1,3 +1,5 @@
+// Show the profile of the user
+
 import React, { Component } from 'react'
 import Profile from '../Components/profiles/Profile'
 // import Statistic from '../Components/profiles/Statistic';

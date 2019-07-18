@@ -1,4 +1,4 @@
-// Will return all the list of student's access request
+// Will return all the list of student's access request 
 // SIGNED IN as ADMIN
 import React, { Component } from 'react'
 

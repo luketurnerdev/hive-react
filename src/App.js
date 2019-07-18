@@ -4,7 +4,7 @@ import NavigationBAr from './Components/NavigationBar';
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RequestAccess from './pages/RequestAccess'
-import StudentRequest from './pages/StudentRequest'
+import UsersRequest from './pages/UsersRequest'
 import Dashboard from './pages/Dashboard'
 import DbEvents from './pages/DbEvents'
 import Event_id from './pages/Event_id'
@@ -30,22 +30,17 @@ class App extends Component {
                 <Switch>
                  
                       <Route exact path="/" component={HomePage} />
-                      <Route exact path="/login" component={LoginPage} />
-                      <Route exact path="/request_access" component={RequestAccess} />
-                      <Route exact path="/student_request" component={StudentRequest} />
+                      <Route exact path="/account_requests" component={RequestAccess} />
                       <Route exact path="/dashboard" component={Dashboard} />
+                      <Route exact path="/auth/register" component={LoginPage} />
                       <Route exact path="/events" component={DbEvents} />
-                      {/* react-routes-dom package takes :id from us and puts it into props.match.params */}
+                      <Route exact path="/events/suggestions" component={AllSuggestions} />
                       <Route exact path="/events/:id" component={Event_id} />
-                      <Route exact path="/events/:id/editratings" component={EditRating} />
-                      <Route exact path="/my_reviews" component={MyReviews} />
-                      <Route exact path="/profile" component={MyProfile} />
-                      <Route exact path="/all_suggestions" component={AllSuggestions} />
-                      <Route exact path="/events/:id/attendees" component={Attendees} />
-              
-
-
-                 
+                      {/* TBD FOR THE PAGE -GROUP/:ID */}
+                      <Route exact path="/events/:group/:id" component={Event_id} />
+                      <Route exact path="/users/request" component={UsersRequest} />
+                      <Route exact path="/:id" component={MyProfile} />
+                      <Route exact path="/reviews" component={MyReviews} />
 
                   </Switch>
               </Router>
