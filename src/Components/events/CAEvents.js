@@ -48,6 +48,7 @@ class CAEvents extends Component {
 
 // START PUT API 
     handleChange = event => {
+        console.log(event.target)
         this.setState({ suggested: event.target.value });
       }
     
@@ -97,7 +98,6 @@ class CAEvents extends Component {
                                                 <footer className="blockquote-footer">
                                                <Link to={`/events/${ids[index]}/attendees`}>Attendees</Link> 
                                                 </footer>
-                                              
                                                 {
                                                     ((item.student_suggeted===true) && (item.ca_recommended === false))?
                                                     <di><h2>TEST</h2>
