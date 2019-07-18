@@ -21,9 +21,9 @@ class CAEvents extends Component {
     axios
     // request call to the db
         .get('http://localhost:3000/events')
-        .then(resp => {
+        .then(res => {
             // destructure data from response
-            const {data} = resp;
+            const {data} = res;
             console.log(data)
             // set length of loop
             let eventsLength = data.length;
@@ -77,10 +77,7 @@ class CAEvents extends Component {
         return( 
         
                     <div>
-                        
-                       
-                      
-                       
+
                             {events.map((item, index) => {
                                 console.log(item.student_suggested)
                                 return (

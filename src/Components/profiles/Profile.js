@@ -2,9 +2,10 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import {Col,Row,Container,Button,Card,Nav}  from 'react-bootstrap';
 
 class Profile extends Component {
-//   <<Profile>>
+//<<Profile>>
 // RENDERED : ProfilePage
 // meetup_uid: Number,
 // email: String,
@@ -22,15 +23,15 @@ state={
   componentDidMount(){
     axios
       .get('http://localhost:3000/users/1')
-      .then(resp => {
-          console.log(resp.data)
-          const {data} = resp;
+      .then(res => {
+          console.log(res.data)
+          const {data} = res;
           // modify the state according to the data in the API's response
         this.setState({user:data})
         
       })
-      .catch(error => {
-          console.log(error);
+      .catch(err => {
+          console.log(err);
       });  
     
   };
@@ -40,13 +41,21 @@ state={
     const {user} = this.state
     return( 
       <div>
-        <h1>{user.meetup_uid}</h1>
+         <h2>PROFILE</h2>
+        <Card border="light" style={{ width: '18rem' }}>
+          <Card.Img variant="top" href={user.avatar} />
+          <Card.Body>
+            <Card.Title>{user.meetup_uid}</Card.Title>
+            <Card.Text>{user.created_at}</Card.Text>
+          </Card.Body>
+        </Card>
+
         <p>{user.email}</p>
         <p>{user.first_name}</p>
         <p>{user.last_name}</p>
-        <p>{user.city}</p>
-        <img href={user.avatar} />
-        <p>{user.created_at}</p>
+      
+        <p></p>
+       
       </div>
    );
 

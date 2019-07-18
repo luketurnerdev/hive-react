@@ -51,7 +51,7 @@ class StudentsEvents extends Component {
     // START PUT API     
       handleSubmit = (item,boolean) => {
         item.ca_recommended=boolean 
-        axios.put(`http://localhost:3000/events/${item.id}`, item)
+        axios.put(`http://localhost:3000/events/${item._id}`, item)
         .then(() => {
              this.getUpdatedEvents()
           })
@@ -71,17 +71,17 @@ class StudentsEvents extends Component {
                     {events.map((item) => {
                         return (
                             
-                            <div key={item.id}>
+                            <div key={item._id}>
                                 
                                 <Card border="light" >
                                     <Card.Body>
-                                    <Card.Header> <Link to={`/events/${item.id}`}>{item.name}</Link></Card.Header>
+                                    <Card.Header> <Link to={`/events/${item._id}`}>{item.name}</Link></Card.Header>
                                     <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                                     <Nav.Item> 
                                     <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
                                     </Nav.Item>
                                     <footer className="blockquote-footer">
-                                    <Link to={`/events/${item.id}/attendees`}>Attendees</Link> 
+                                    <Link to={`/events/${item._id}/attendees`}>Attendees</Link> 
                                     </footer>
                                     </Card.Body>
                                 </Card>

@@ -5,10 +5,9 @@ import CAEvents from '../Components/events/CAEvents';
 import StudentsEvents from '../Components/events/StudentsEvents.js';
 import NotDbEvents from '../Components/events/NotDbEvents';
 import {Col,Row,Container}  from 'react-bootstrap';
-import { MDBContainer, MDBScrollbar } from "mdbreact";
-
+// import { MDBContainer, MDBScrollbar } from "mdbreact";
 import styled from 'styled-components';
-import Media from 'react-bootstrap/Media'
+
 
 
 
@@ -35,9 +34,7 @@ const Calendar = styled.section`
 
 export class Dashboard extends Component {
     
-    render() {
-        
-           
+    render() {  
         return (
             <div>
                 <Container>
@@ -49,32 +46,33 @@ export class Dashboard extends Component {
                             </Title>
                         </Calendar>
                     </Col>   
+
                     {/* <ADMIN'S SUGGESTION LIST */}
                     <Col>
                     <Wrapper>
-                            <h5>Coder Academy List</h5>
-                           <CAEvents/>
-                       
-                        </Wrapper>
-                    
+                        <h5>Coder Academy List</h5>
+                        <CAEvents/>
+                    </Wrapper>
+                    {/* <END> */}
+
                     {/* <STUDENTS'S SUGGESTION LIST */}
-                        <Wrapper>
-                            <h5>Students List</h5>
-                            <StudentsEvents/>
-                        </Wrapper>
+                    <Wrapper>
+                        <h5>Students List</h5>
+                        <StudentsEvents/>
+                    </Wrapper>
+                    {/* <END> */}
 
                     </Col> 
                     </Row>
-               
+
                     {/* <NON DB MEETUP LIST */}
                     <Wrapper>
                         <Title>
                         <NotDbEvents/>
-                    
                         </Title>
                     </Wrapper>
-                   
-            
+                    {/* <END> */}
+                    
             </Container>
         </div>
         )
