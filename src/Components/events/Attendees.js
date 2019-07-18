@@ -8,38 +8,53 @@ class Attendees extends Component {
     users: []
   };
 
-
   componentDidMount(){
-  // declare a variable for eventAttendees
-  let eventAttendees = [];
-  // make the request call 
-  axios
-    .get(`http://localhost:3000/events/${this.props.match.params.id}`)
-    .then(resp => {
+  // declare a variable for ids of eventAttendees
+  let eventAttendeesIds = [];
+  // declare a variable for data of eventAttendees
+  let users = [];
+  // make the request calls
+  axios.all([
+    axios.get(`http://localhost:3000/events/${this.props.match.params.id}`),
+    axios.get('http://localhost:3000/users/')
+  ])
+  .then(axios.spread((eventResp, usersResp) => {
       // destructure data from response
-      const {data} = resp;
-      console.log(data);
-      // we push the hive_attendees of the event into eventAttendees
-      eventAttendees = data.hive_attendees;
-      this.setState({users:eventAttendees});
-    })
+      const {data} = eventResp;
+      // we cannot have to variables named data so no more destructure is possible
+      const usersData = usersResp.data;
+      // eventAttendeesId equal to the array of ids of each hive_attendee of the event
+      eventAttendeesIds = data.hive_attendees;
+      // calculate length of loops
+      let usersLength = usersData.length;
+      let idsLength = eventAttendeesIds.length;
+      for (let i = 0; i < usersLength; i++) {
+        for (let x = 0; x < idsLength; x++) {
+          if(usersData[i].id === eventAttendeesIds[x]){
+            users.push({name: usersData[i].name, avatar: usersData[i].avatar, id: eventAttendeesIds[x]})
+          }
+        }
+      }
+      this.setState({users});
+      console.log(users);
+    }))
     .catch(error => {
       console.log(error);
-  })}
+    })}
 
   
 
   render(){
     console.log(this.state.users);
     const {users} = this.state;
-    // console.log(users);
 
     return(
       <div>
         <h1>
           {users.map((user)=>(
             <div key={user.id} >
-            {user.first_name}
+            {user.avatar}
+            {user.name}
             </div>))}
             {/* {users[0].first_name} */}
         </h1>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios"
 import Reviews from './Reviews';
 import AverageRates from './AverageRates'
+import StarReview from './StarReview'
 
 export class SingleEvent extends Component {
     state = {
@@ -40,7 +41,7 @@ export class SingleEvent extends Component {
                 <AverageRates id={id}/> :
                 null}             
                 {event?
-                <Reviews id={id}/>:
+                <StarReview id={id}/>:
                 null}   
             </div>
         )

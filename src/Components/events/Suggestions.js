@@ -3,59 +3,79 @@ import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
 
-class StudentComments extends Component {
+class Suggestions extends Component {
 
   state = {
-    ratings: []
+        usersAndMessages: []
   };
 
 
   componentDidMount() {
-    // declare a new variable for studentsComments
-    let eventRatings = [];
+    // an array for suggesting users
+    let users = [];
+    // an array for suggesting users' ids
+    let users_ids = [];
+    // an array of suggestion messages
+    let messages = [];
     // we need two request calls to the db (one for events, one for users)
       axios.all([
-        axios.get(`http://localhost:3000/events/${this.props.match.params.id}`),
-        axios.get('http://localhost:3000/ratings')
+        // axios.get(`http://localhost:3000/events/${this.props.match.params.id}`),
+        axios.get('http://localhost:3000/events/'),
+        axios.get('http://localhost:3000/users')
       ])
-      .then(axios.spread((eventsResp, ratingsResp) => {
+      .then(axios.spread((eventsResp, usersResp) => {
           // destructure data from response
-          const {data} = eventsResp;
+          let {data} = eventsResp;
           console.log(data);
-          const ratingsData = ratingsResp.data;
-            // set length of each loop
-            let eventsLength = data.length;
-            console.log(data);
-            console.log(ratingsData);
-            // let ratingsLength = ratingsData.length
-            // for loop through all the events
-            // we need a loop that searchws for event property of each rating
-            for (let i = 0; i < ratingsData; i++) {
-              // in case the event the rating (where the comment comes from) is the same as the one targeted by the user
-              if (ratingsData[i].event === data) {
-                // push it inside theComments array
-                eventRatings.push(ratingsData)
-              }
-            }
-          this.setState({comments:eventRatings});
-        
-      })
+          let usersData = usersResp.data;
+           // we need three pieces of data: user name, user avatar and suggestion message.
+           // to get the suggestion message, we need to loop through events and get the suggested.message property
+           // to get user name and user avatar, we need to get the user id first from suggested.suggested_by
+           // then we need to find that user id in usersData and get from the latter the name and the avatar
+           let eventsLength = data.length;
+           for (let i = 0; i < eventsLength; i++) {
+             if(data[i].suggested.suggested_by.length > 0) {
+              messages.push(data[i].suggested.message);
+              // now we have a messages array containing an array of messages for each suggested event..
+              users_ids.push(data[i].suggested.suggested_by);
+              // now we have a users_id array containing an array of the ids of the users who suggested each suggested event
+              // [[1,2],[2,3],[1]]
+              // [["hi", "hello"], ["hi", "Hola"], ["Bye"]];
+             }
+           }
+           console.log(users_ids);
+           // then we need to find the users' name and avatar from the users_ids array.
+           let usersIdsLength = users_ids.length;
+           let usersLength = usersData.length;
+           // we loop through users_ids
+           for (let x = 0; x < usersIdsLength; x++) {
+             // and we continue looping, through each item of users_ids
+             for (let z = 0; z < users_ids[x].length; z++) {
+               // and keep looping inside the usersData to find each id
+               for (let y = 0; y < usersLength; y++) {
+                 if(usersData[y].id === users_ids[x][z]) {
+                   users.push({name: usersData[y].name, avatar: usersData[y].avatar, message: messages[x][z]});
+                   // now we have an array containing an object for each name, avatar and message of the user with the id we had at users_ids' array
+                   // [{name: "Juan", avatar: "image", message: "hi"}, {name: "Lorenzo", avatar: "image2", message: "hello"}, {name: "Lorenzo", avatar: "image2", message: "hello"}, etc]
+                 }
+               }
+             }
+           }
+           this.setState({usersAndMessages: users});
+          }))
           .catch(error => {
               console.log(error);
-          }))};
+          })};
           
   render() {
-    const {ratings} = this.state;
-    const {id, comment} = ratings;
-    const {name, avatar} = ratings.user.name;
-
+    const {usersAndMessages} = this.state;
     return(
       <div>
-         {ratings.map((rating)=>(
-            <div key={id} >
-            {name}
-            {avatar}
-            {comment}
+         {usersAndMessages.map((item)=>(
+            <div key={item.id} >
+            {item.name}
+            {item.avatar}
+            {item.message}
             </div>))}
       </div>
     )
@@ -63,4 +83,4 @@ class StudentComments extends Component {
 }
 
 
-export default StudentComments;
+export default Suggestions;
