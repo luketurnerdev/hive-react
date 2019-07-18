@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import StarRatingComponent from 'react-star-rating-component';
 
 class AverageRates extends Component {
   // set state
@@ -88,10 +89,39 @@ class AverageRates extends Component {
     const {food, drinks, talk, vibe} = this.state.averageScores;
     return(
       <div>
-        <div>{food}</div>
-        <div>{drinks}</div>
-        <div>{talk}</div>
-        <div>{vibe}</div>
+        <h3>Average rates</h3>
+        Food:
+        <StarRatingComponent 
+                name="food"
+                starCount={5}
+                value={food}
+                // onStarClick={this.onStarClick.bind(this)}
+                editing={false}
+                />
+        Drinks:
+        <StarRatingComponent 
+                name="food"
+                starCount={5}
+                value={drinks}
+                // onStarClick={this.onStarClick.bind(this)}
+                editing={false}
+                />
+        Talk:
+        <StarRatingComponent 
+                name="food"
+                starCount={5}
+                value={talk}
+                // onStarClick={this.onStarClick.bind(this)}
+                editing={false}
+                />
+        Vibe:
+        <StarRatingComponent 
+                name="food"
+                starCount={5}
+                value={vibe}
+                // onStarClick={this.onStarClick.bind(this)}
+                editing={false}
+                />
       </div>
     )
   }
