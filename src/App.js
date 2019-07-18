@@ -11,7 +11,8 @@ import Event_id from './pages/Event_id'
 import MyReviews from './pages/MyReviews'
 import AllSuggestions from './pages/AllSuggestions'
 import MyProfile from './pages/MyProfile'
-
+import EditRating from './Components/events/EditRating'
+import Attendees from './Components/events/Attendees'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -38,9 +39,10 @@ class App extends Component {
                       <Route exact path="/events/:id" component={Event_id} />
                       <Route exact path="/events/:id/editratings" component={EditRating} />
                       <Route exact path="/my_reviews" component={MyReviews} />
-                      <Route exact path="/all_suggestions" component={AllSuggestions} />
                       <Route exact path="/profile" component={MyProfile} />
+                      <Route exact path="/all_suggestions" component={AllSuggestions} />
                       <Route exact path="/events/:id/attendees" component={Attendees} />
+              
 
 
                  
