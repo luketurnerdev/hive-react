@@ -5,8 +5,9 @@ import CAEvents from '../Components/events/CAEvents';
 import StudentsEvents from '../Components/events/StudentsEvents.js';
 import NotDbEvents from '../Components/events/NotDbEvents';
 import {Col,Row,Container}  from 'react-bootstrap';
-// import { MDBContainer, MDBScrollbar } from "mdbreact";
+import { MDBContainer, MDBScrollbar } from "mdbreact";
 import styled from 'styled-components';
+import Moment from './../Components/events/Moment'
 
 
 
@@ -42,7 +43,7 @@ export class Dashboard extends Component {
                     <Col>
                         <Calendar>
                             <Title>
-                            CALENDAR
+                            <Moment />
                             </Title>
                         </Calendar>
                     </Col>   

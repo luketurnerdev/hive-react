@@ -20,42 +20,48 @@ class MyCalendar extends Component {
       ]
   }
 
-  componentDidMount(){
-    // declare a variable for calendar events
-    let events = [];
-    axios.all([
-      axios.get(`http://localhost:3000/users/${this.props.match.params.id}`),
-      axios.get('http://localhost:3000/events')
-    ])
-    .then(axios.spread((userResp, eventsResp) => {
-      // destructure data of user
-      const {data} = userResp;
-      // declare a variable for eventsData
-      const eventsData = eventsResp.data;
-      // we need to find those events the user is attending
-      // calculate the length of the loop
-      let eventsLength = eventsData.length;
-      // loop through all the events
-      for (let i = 0; i < eventsLength; i++) {
-        if (eventsData[i].hive_attendees.includes[data]) {
-          events.push({title: eventsData[i].name, start: (eventsData[i].local_date + '' + eventsData[i].local_time), end: (eventsData[i].local_date.add(1, "days"))});
-        }
-      }
-      console.log(events);
-      this.setState({events});
-    }));
-  };
+  // componentDidMount(){
+  //   // declare a variable for calendar events
+  //   let events = [];
+  //   axios.all([
+  //     axios.get(`http://localhost:3000/users/1`),
+  //     axios.get('http://localhost:3000/events')
+  //   ])
+  //   .then(axios.spread((userResp, eventsResp) => {
+  //     // destructure data of user
+  //     const {data} = userResp;
+  //     // declare a variable for eventsData
+  //     const eventsData = eventsResp.data;
+  //     // we need to find those events the user is attending
+  //     // calculate the length of the loop
+  //     let eventsLength = eventsData.length;
+  //     // loop through all the events
+  //     for (let i = 0; i < eventsLength; i++) {
+  //       if (eventsData[i].hive_attendees.includes[data]) {
+  //         events.push({title: eventsData[i].name, start: (eventsData[i].local_date + '' + eventsData[i].local_time), end: (eventsData[i].local_date.add(1, "days"))});
+  //       }
+  //     }
+  //     console.log(events);
+  //     this.setState({events});
+  //   }));
+  // };
     render(){
       const {events} = this.state;
         return(
-          <div>
-                <Calendar
+          <div style={{ width: 700, heigth: 500 }}>
+                {/* <Calendar
         localizer={localizer}
         events={events}
         startAccessor="start"
         endAccessor="end"
-      />
-          </div>
+      /> */}
+    <Calendar heigth={500} width={500}
+      localizer={localizer}
+      events={events}
+      startAccessor="start"
+      endAccessor="end"
+    />
+      </div>
           
         );
     };
