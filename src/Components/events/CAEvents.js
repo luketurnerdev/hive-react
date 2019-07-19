@@ -20,7 +20,7 @@ class CAEvents extends Component {
     let CAEventsId = [];
     axios
     // request call to the db
-        .get('http://localhost:3000/events')
+        .get('/events')
         .then(res => {
             // destructure data from response
             const {data} = res;
@@ -29,11 +29,13 @@ class CAEvents extends Component {
             let eventsLength = data.length;
             // for loop through all the events
             for (let i = 0; i < eventsLength; i++) {
+                console.log(data[i]);
                 // Ony if the event has been recommended by CA
                 if (data[i].ca_recommended === true) {
                     // mark it as CA event (event recommended by CA)
+                    console.log(data[i])
                     CAEvents.push(data[i]);
-                    CAEventsId.push(data[i].id);
+                    CAEventsId.push(data[i]._id);
                 }
             }
             // we change the state according to our previous code
@@ -77,7 +79,7 @@ class CAEvents extends Component {
         return( 
             <div>
                     {events.map((item, index) => {
-                        console.log(item.student_suggested)
+                        console.log(ids)
                         return (
                             
                                 <div key={item.id}>

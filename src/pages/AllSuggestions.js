@@ -13,7 +13,7 @@ export class Reviews extends Component {
     componentDidMount() {
 
         axios
-            .get(`http://localhost:3000/events/suggestions`)
+            .get(`events/suggestions`)
             .then(res => {
                 const events = res.data;
             this.setState({ events });

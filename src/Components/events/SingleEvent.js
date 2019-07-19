@@ -12,6 +12,8 @@ export class SingleEvent extends Component {
 
     // just after rendering the event, call to the API
     componentDidMount() {
+        console.log(this.props)
+
     axios
     // request call to the db
         .get(`http://localhost:3000/events/${this.props.match.params.id}`)
