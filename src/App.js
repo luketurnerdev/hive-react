@@ -17,6 +17,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import './App.css';
+import SingleEvent from './Components/events/SingleEvent';
 
 
 
@@ -36,7 +37,7 @@ class App extends Component {
                      
                       <Route exact path="/events" component={DbEvents} />
                       <Route exact path="/events/suggestions" component={AllSuggestions} />
-                      <Route exact path="/events/:id" component={Event_id} />
+                      <Route exact path="/events/:id" component={SingleEvent} />
                       {/* TBD FOR THE PAGE -GROUP/:ID */}
                       <Route exact path="/events/:group/:id" component={Event_id} />
                       <Route exact path="/users/request" component={RequestAccess} />
