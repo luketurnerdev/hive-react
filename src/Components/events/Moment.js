@@ -24,8 +24,8 @@ class MyCalendar extends Component {
     // declare a variable for calendar events
     let events = [];
     axios.all([
-      axios.get(`http://localhost:3000/users/${this.props.match.params.id}`),
-      axios.get('http://localhost:3000/events')
+      axios.get(`/users/${this.props.match.params.id}`),
+      axios.get('/events')
     ])
     .then(axios.spread((userResp, eventsResp) => {
       // destructure data of user

@@ -17,9 +17,9 @@ class Reviews extends Component {
         // declare variable for all rankings
         let reviews = [];
         axios.all([
-            axios.get(`http://localhost:3000/events/${this.props.id}`),
-            axios.get('http://localhost:3000/ratings'),
-            axios.get('http://localhost:3000/users')
+            axios.get(`/events/${this.props.id}`),
+            axios.get('/ratings'),
+            axios.get('/users')
           ])
           .then(axios.spread((eventsResp, ratingsResp, usersResp) => {
               // destructure data of eventsResp
@@ -88,7 +88,7 @@ class Reviews extends Component {
             <div>
             <h3>Individual rates</h3>
                 {reviews.map((review)=>(
-            <div key={review.id} >
+            <div key={review._id} >
             {review.name}
             {review.avatar}
             {/* {review.score.food}
@@ -100,7 +100,7 @@ class Reviews extends Component {
             <StarRatingComponent 
                 name="food"
                 starCount={5}
-                value={review.score.food}
+                value={review.rating.food}
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
@@ -108,7 +108,7 @@ class Reviews extends Component {
             <StarRatingComponent 
                 name="drinks"
                 starCount={5}
-                value={review.score.drinks}
+                value={review.rating.drinks}
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
@@ -116,7 +116,7 @@ class Reviews extends Component {
             <StarRatingComponent 
                 name="talk"
                 starCount={5}
-                value={review.score.talk}
+                value={review.rating.talk}
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
@@ -124,7 +124,7 @@ class Reviews extends Component {
             <StarRatingComponent 
                 name="vibe"
                 starCount={5}
-                value={review.score.vibe}
+                value={review.rating.vibe}
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />

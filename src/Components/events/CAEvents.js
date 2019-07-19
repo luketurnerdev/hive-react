@@ -61,7 +61,7 @@ class CAEvents extends Component {
           suggested: this.state.suggested
         };
       
-        axios.put(`http://localhost:3000/events/${this.state.id}`, {stu:event_value})
+        axios.put(`/events/${this.state.id}`, {stu:event_value})
           .then(res => {
             console.log(res);
             console.log(res.data);

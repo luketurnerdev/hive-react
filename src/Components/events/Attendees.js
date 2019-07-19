@@ -16,8 +16,8 @@ class Attendees extends Component {
   let users = [];
   // make the request calls
   axios.all([
-    axios.get(`http://localhost:3000/events/${this.props.match.params.id}`),
-    axios.get('http://localhost:3000/users/')
+    axios.get(`/events/${this.props.match.params.id}`),
+    axios.get('/users/')
   ])
   .then(axios.spread((eventResp, usersResp) => {
       // destructure data from response

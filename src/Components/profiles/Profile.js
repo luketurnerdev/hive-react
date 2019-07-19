@@ -23,7 +23,7 @@ state={
 // just after rendering the user's info, call to the API
   componentDidMount(){
     axios
-      .get('http://localhost:3000/users/show')
+      .get('/users/show')
      
       .then(res => {
           console.log(res.data)
