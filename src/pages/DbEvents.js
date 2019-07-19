@@ -1,5 +1,6 @@
-// return all the events saved in database 
+// Output: all events saved in database 
 // ( Signed in as STUDENT/ADMIN)
+
 import React, { Component } from 'react'
 import CAEvents from '../Components/events/CAEvents'
 import StudentsEvents from '../Components/events/StudentsEvents.js'

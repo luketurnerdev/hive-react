@@ -1,5 +1,6 @@
-// PAGE Where will render all of my reviews 
+// Output: all reviews ( review of single users)
 // ( Signed in as STUDENTS)
+
 import React, { Component } from 'react'
 // import Reviews from '../Components/events/Reviews'
 import Container from 'react-bootstrap/Container'

@@ -20,7 +20,7 @@ class CAEvents extends Component {
     let CAEventsId = [];
     axios
     // request call to the db
-        .get('http://localhost:3000/events')
+        .get('/events')
         .then(res => {
             // destructure data from response
             const {data} = res;
@@ -29,11 +29,13 @@ class CAEvents extends Component {
             let eventsLength = data.length;
             // for loop through all the events
             for (let i = 0; i < eventsLength; i++) {
+                console.log(data[i]);
                 // Ony if the event has been recommended by CA
                 if (data[i].ca_recommended === true) {
                     // mark it as CA event (event recommended by CA)
+                    console.log(data[i])
                     CAEvents.push(data[i]);
-                    CAEventsId.push(data[i].id);
+                    CAEventsId.push(data[i]._id);
                 }
             }
             // we change the state according to our previous code
@@ -75,47 +77,45 @@ class CAEvents extends Component {
         console.log(this.state.suggested)
         const {events, ids} = this.state
         return( 
-        
-                    <div>
+            <div>
+                    {events.map((item, index) => {
+                        console.log(ids)
+                        return (
+                            
+                                <div key={item.id}>
+                                    
+                                        <Card border="light" >
+                                        <Card.Body>
+                                        <Card.Header> <Link to={`/events/${ids[index]}`}>{item.name}</Link></Card.Header>
+                                        <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
+                                        <Nav.Item> 
+                                        <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
+                                        <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
+                                        </Nav.Item>
+                                        <footer className="blockquote-footer">
+                                        <Link to={`/events/${ids[index]}/attendees`}>Attendees</Link> 
+                                        </footer>
+                                        {
+                                            ((item.student_suggeted===true) && (item.ca_recommended === false))?
+                                            <di><h2>TEST</h2>
+                                                <Button variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
+                                            </di>: null
+                                        }
+                                            </Card.Body>
+                                        </Card>
+                    
+                                        
+                                        
 
-                            {events.map((item, index) => {
-                                console.log(item.student_suggested)
-                                return (
-                                  
-                                        <div key={item.id}>
-                                          
-                                                <Card border="light" >
-                                                <Card.Body>
-                                                <Card.Header> <Link to={`/events/${ids[index]}`}>{item.name}</Link></Card.Header>
-                                                <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
-                                                <Nav.Item> 
-                                                <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                                <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                                </Nav.Item>
-                                                <footer className="blockquote-footer">
-                                               <Link to={`/events/${ids[index]}/attendees`}>Attendees</Link> 
-                                                </footer>
-                                                {
-                                                    ((item.student_suggeted===true) && (item.ca_recommended === false))?
-                                                    <di><h2>TEST</h2>
-                                                        <Button variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                                    </di>: null
-                                                }
-                                                   </Card.Body>
-                                                </Card>
-                         
-                                              
-                                                
-
-                                                                        
-                                        </div>
-                                )
-                            })}
-                       
-                        
-                        
-                       
-                    </div>
+                                                                
+                                </div>
+                        )
+                    })}
+                
+                
+                
+                
+            </div>
           
     )
 }

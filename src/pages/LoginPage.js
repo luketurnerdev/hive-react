@@ -9,7 +9,7 @@ class HomePage extends Component {
                 <h1>Welcome To The Hive!</h1>
                 <div>
                     
-                    <Link to="/https://secure.meetup.com/login/">
+                    <Link to="/auth/meetup">
                         <button>Login</button>
                     </Link>
                     <Link to="/request_access">
