@@ -1,4 +1,4 @@
-//will render all the events 
+//Output: all events 
 //( Signed in as STUDENT/ADMIN)
 import React, { Component } from 'react';
 import CAEvents from '../Components/events/CAEvents';

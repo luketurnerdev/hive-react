@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavigationBAr from './Components/NavigationBar';
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
+import AccountRequests from './pages/AccountRequests'
 import RequestAccess from './pages/RequestAccess'
-import UsersRequest from './pages/UsersRequest'
 import Dashboard from './pages/Dashboard'
 import DbEvents from './pages/DbEvents'
 import Event_id from './pages/Event_id'
@@ -30,15 +30,16 @@ class App extends Component {
                 <Switch>
                  
                       <Route exact path="/" component={HomePage} />
-                      <Route exact path="/account_requests" component={RequestAccess} />
-                      <Route exact path="/dashboard" component={Dashboard} />
                       <Route exact path="/auth/register" component={LoginPage} />
+                      <Route exact path="/account_requests" component={AccountRequests} />
+                      <Route exact path="/dashboard" component={Dashboard} />
+                     
                       <Route exact path="/events" component={DbEvents} />
                       <Route exact path="/events/suggestions" component={AllSuggestions} />
                       <Route exact path="/events/:id" component={Event_id} />
                       {/* TBD FOR THE PAGE -GROUP/:ID */}
                       <Route exact path="/events/:group/:id" component={Event_id} />
-                      <Route exact path="/users/request" component={UsersRequest} />
+                      <Route exact path="/users/request" component={RequestAccess} />
                       <Route exact path="/:id" component={MyProfile} />
                       <Route exact path="/reviews" component={MyReviews} />
 

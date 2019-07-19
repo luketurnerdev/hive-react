@@ -39,7 +39,7 @@ export const NavigationBar = () => (
             <Nav.Link as={NavLink}to="/my_reviews">My Reviews</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={NavLink}to="/all_suggestions">All Suggestions</Nav.Link>
+            <Nav.Link as={NavLink}to="/events/suggestions">All Suggestions</Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link as={NavLink}to="/profile">Profile</Nav.Link>
