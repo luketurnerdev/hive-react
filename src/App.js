@@ -13,6 +13,8 @@ import AllSuggestions from './pages/AllSuggestions'
 import MyProfile from './pages/MyProfile'
 import EditRating from './Components/events/EditRating'
 import Attendees from './Components/events/Attendees'
+// import MyCalendar from './Components/events/CalendarTest'
+import MyCalendar from './Components/events/Moment'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -34,7 +36,6 @@ class App extends Component {
                       <Route exact path="/auth/register" component={LoginPage} />
                       <Route exact path="/account_requests" component={AccountRequests} />
                       <Route exact path="/dashboard" component={Dashboard} />
-                     
                       <Route exact path="/events" component={DbEvents} />
                       <Route exact path="/events/suggestions" component={AllSuggestions} />
                       <Route exact path="/events/:id" component={SingleEvent} />
@@ -43,6 +44,7 @@ class App extends Component {
                       <Route exact path="/users/request" component={RequestAccess} />
                       <Route exact path="/:id" component={MyProfile} />
                       <Route exact path="/reviews" component={MyReviews} />
+
 
                   </Switch>
               </Router>
