@@ -18,7 +18,7 @@ export class Delete extends Component {
     handleSubmit = event => {
     event.preventDefault();
 
-    axios.delete(`http://localhost:3000/events/${this.state.name}`)
+    axios.delete(`/events/${this.state.name}`)
         .then(res => {
         console.log(res);
         console.log(res.data);

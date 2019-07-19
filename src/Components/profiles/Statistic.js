@@ -18,9 +18,9 @@ class Statistic extends Component {
     let numberComments = 0;
 
     axios.all([
-      axios.get(`http://localhost:3000/users/${this.props.match.params.id}`),
-      axios.get('http://localhost:3000/events/'),
-      axios.get('http://localhost:3000/ratings')
+      axios.get(`/users/${this.props.match.params.id}`),
+      axios.get('/events/'),
+      axios.get('/ratings')
     ])
     .then(axios.spread((userResp, eventsResp, ratingsResp) => {
       // destructure data from response of user

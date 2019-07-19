@@ -21,7 +21,7 @@ class StudentsEvents extends Component {
     
     axios
     // request call to the db
-        .get('http://localhost:3000/events')
+        .get('/events')
         .then(resp => {
             // destructure data from response
             const {data} = resp;
@@ -51,7 +51,7 @@ class StudentsEvents extends Component {
     // START PUT API     
       handleSubmit = (item,boolean) => {
         item.ca_recommended=boolean 
-        axios.put(`http://localhost:3000/events/${item._id}`, item)
+        axios.put(`/events/${item._id}`, item)
         .then(() => {
              this.getUpdatedEvents()
           })
