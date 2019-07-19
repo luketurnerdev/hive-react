@@ -1,4 +1,4 @@
-// Show the profile of the user
+// Output: The profile of the single user
 
 import React, { Component } from 'react'
 import Profile from '../Components/profiles/Profile'
@@ -6,6 +6,7 @@ import Profile from '../Components/profiles/Profile'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
+
 
 export class MyProfile extends Component {
     render() {

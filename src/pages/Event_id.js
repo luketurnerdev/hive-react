@@ -1,3 +1,4 @@
+// Output: A single event
 import React, { Component } from 'react'
 
 export class SingleEvent extends Component {

@@ -70,7 +70,6 @@ class StudentsEvents extends Component {
                 <div>
                     {events.map((item) => {
                         return (
-                            
                             <div key={item._id}>
                                 
                                 <Card border="light" >
