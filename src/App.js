@@ -13,6 +13,8 @@ import AllSuggestions from './pages/AllSuggestions'
 import MyProfile from './pages/MyProfile'
 import EditRating from './Components/events/EditRating'
 import Attendees from './Components/events/Attendees'
+// import MyCalendar from './Components/events/CalendarTest'
+import MyCalendar from './Components/events/Moment'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -34,7 +36,7 @@ class App extends Component {
                       <Route exact path="/request_access" component={RequestAccess} />
                       <Route exact path="/student_request" component={StudentRequest} />
                       <Route exact path="/dashboard" component={Dashboard} />
-                      <Route exact path="/events" component={DbEvents} />
+                      <Route exact path="/events" component={MyCalendar} />
                       {/* react-routes-dom package takes :id from us and puts it into props.match.params */}
                       <Route exact path="/events/:id" component={Event_id} />
                       <Route exact path="/events/:id/editratings" component={EditRating} />
