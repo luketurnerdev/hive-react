@@ -38,7 +38,7 @@ class App extends Component {
                       <Route exact path="/dashboard" component={Dashboard} />
                       <Route exact path="/events" component={DbEvents} />
                       {/* testing route for calendar */}
-                      <Route exact path="/events" component={MyCalendar} />
+                      <Route exact path="/calendar" component={MyCalendar} />
                       {/* react-routes-dom package takes :id from us and puts it into props.match.params */}
                       <Route exact path="/events/:id" component={Event_id} />
                       <Route exact path="/events/:id/editratings" component={EditRating} />
