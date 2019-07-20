@@ -14,7 +14,7 @@ export class MyProfile extends Component {
                 <Container>
                     <Row>
                         <Col>
-                          <Profile/> 
+                          {/* <Profile/>  */}
                         </Col>
                     </Row>
                 </Container>
