@@ -23,14 +23,12 @@ export class Reviews extends Component {
     };
 
     componentDidMount() {
-
         axios
             .get(`suggestions`)
             .then(res => {
                 const events = res.data;
-            this.setState({ events });
-               
-             })
+            this.setState({ events });  
+            })
     }
 
     render() {
@@ -42,24 +40,27 @@ export class Reviews extends Component {
                 <Container>
                     <Wrapper>
                         <Col><Alert><h2>Suggestios</h2></Alert></Col>
-                        <Alert variant= "light">
-                            <EventsTitle>Students list</EventsTitle>
-                            <hr />
-                        {events.map(item => 
-                            <Card border="light" >
-                                <Card.Body>
-                                    <Card.Text> <Link to={`/events/${item._id}`}>{item.name}</Link></Card.Text>
-                                    <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
-                                    <Nav.Item> 
-                                        <Button size="sm" variant="info" >Save</Button>
-                                        <Button size="sm" variant="primary" >Delete</Button>
-                                    </Nav.Item>
+                            <Alert variant= "light">
+                                <EventsTitle>Students list</EventsTitle>
+                                <hr />
+                                {events.map(item => 
+                                <Card border="light" >
+                                    <Card.Body>
+                                        <Card.Text> <Link to={`/events/${item._id}`}>{item.name}</Link></Card.Text>
+                                        <Row>
+                                            <Col>
+                                                <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
+                                            </Col>
+                                            <Col>
+                                                <Button size="sm" variant="info" >Save</Button>
+                                                <Button size="sm" variant="primary" >Delete</Button>
+                                            </Col>
+                                        </Row>   
                                     <footer className="blockquote-footer">
                                         <Link to={`/events/${item._id}/attendees`}>Attendees</Link> 
                                     </footer>
                                 </Card.Body>
                             </Card>
-                       
                             )}
                         </Alert>   
                     </Wrapper>

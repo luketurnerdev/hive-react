@@ -4,47 +4,86 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
-
-import {Form,Col,Row,Container,Button}  from 'react-bootstrap';
+import {Card,Alert,Col,Row,Container,Button,Image}  from 'react-bootstrap';
 import styled from 'styled-components';
+
+const Wrapper = styled.section`
+  padding: 2em;
+  background: white;
+  margin:2em;
+`;
 
 class AccountRequests extends Component {
     state = {
-        persons: []
+        users: []
     };
-
     componentDidMount() {
-
         axios
             .get(`/account_requests`)
             .then(res => {
-                const persons = res.data;
-            // this.setState({ persons });
-            // console.log(persons)
-                console.log(persons);
+                const users = res.data;
+            this.setState({ users });
+           
+                console.log(users);
              })
       }
 
     render() {
+        const {users} = this.state 
+        console.log(users)
         return (
-            
             <div>
-                <h1>USERS</h1>
-                <div>
-                    <ul>
-                        {/* {this.state.persons.map(person => {person.name})} */}
-                    </ul>
-                    {/* <Link to="/auth/meetup"> */}
-                        <button>Save</button>
-                    {/* </Link> */}
-                    {/* <Link to="/request_access"> */}
-                        <button>Delete</button>
-                    {/* </Link> */}
-                </div>
+                <Container>
+                    <Wrapper>
+
+                        <Col><Alert><h2>Confirm Account </h2></Alert></Col>
+                      
+                        {users.map(user => 
+                            <Card border="light" >
+                                <Card.Body>
+                                <Row>  
+                                    <Col>
+                                    {/* <Image roundedCircle>{user.photo}</Image> */}
+                                    <Card.Text> <Link to={`/events/${user._id}`}>{user.name}</Link></Card.Text>
+                                    <Card.Text className="mb-2 text-muted"><small>{user.created_at}</small></Card.Text>
+                                    <Card.Text><small>{user.email}</small></Card.Text>
+                                    <footer className="blockquote-footer">
+                                    <Card.Text><small>{user.city}</small></Card.Text>
+                                    </footer>
+                                    </Col>
+                                    <Col>
+                                        <Button size="sm" variant="info" ><Link to={`/users/:id`}>Save</Link></Button>
+                                        <Button size="sm" variant="primary" >Delete</Button>
+                                    </Col>
+                                </Row>
+                                </Card.Body>
+                            </Card>
+                       
+                            )}
+                          
+                    </Wrapper>
+                </Container>
             </div>
+        
         );
     }
 }
 
 
 export default AccountRequests;
+
+
+{/* <div>
+<h1>USERS</h1>
+<div>
+    <ul>
+        {/* {this.state.persons.map(person => {person.name})} */}
+    // </ul>
+    {/* <Link to="/auth/meetup"> */}
+        // <button>Save</button>
+    {/* </Link> */}
+    {/* <Link to="/request_access"> */}
+        // <button>Delete</button>
+    {/* </Link> */}
+// </div>
+// </div> */}

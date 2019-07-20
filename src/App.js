@@ -10,7 +10,7 @@ import DbEvents from './pages/DbEvents'
 import Event_id from './pages/Event_id'
 import MyReviews from './pages/MyReviews'
 import AllSuggestions from './pages/AllSuggestions'
-import MyProfile from './pages/MyProfile'
+import Profile from './Components/profiles/Profile'
 // import MyCalendar from './Components/events/Moment'
 
 import './App.css';
@@ -37,7 +37,7 @@ class App extends Component {
                       {/* TBD FOR THE PAGE -GROUP/:ID */}
                       <Route exact path="/events/:group/:id" component={Event_id} />
                       <Route exact path="/users/request" component={RequestAccess} />
-                      <Route exact path="/:id" component={MyProfile} />
+                      <Route exact path="/users/:_id" component={Profile} />
                       <Route exact path="/reviews" component={MyReviews} />
 
 

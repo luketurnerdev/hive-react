@@ -43,7 +43,7 @@ export const NavigationBar = () => (
             <Nav.Link as={NavLink}to="/events/suggestions">All Suggestions</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={NavLink}to="/profile">Profile</Nav.Link>
+            <Nav.Link as={NavLink}to="/users/:_id">Profile</Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link as={NavLink}to="/auth/register">Log In</Nav.Link>
