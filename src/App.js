@@ -11,13 +11,8 @@ import Event_id from './pages/Event_id'
 import MyReviews from './pages/MyReviews'
 import AllSuggestions from './pages/AllSuggestions'
 import MyProfile from './pages/MyProfile'
-import EditRating from './Components/events/EditRating'
-import Attendees from './Components/events/Attendees'
-// import MyCalendar from './Components/events/CalendarTest'
-import MyCalendar from './Components/events/Moment'
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'bootstrap-css-only/css/bootstrap.min.css';
-import 'mdbreact/dist/css/mdb.css';
+// import MyCalendar from './Components/events/Moment'
+
 import './App.css';
 import SingleEvent from './Components/events/SingleEvent';
 

@@ -6,8 +6,9 @@ import styled from 'styled-components';
 
 const Styles = styled.div`
   .navbar {
-    background-color: #e8e4d1;
+    background-color: white;
     font-weight: bold;
+    margin:0 0 1em 0;
   }
   a, .navbar-brand, .navbar-nav .nav-link {
     color:#626570;
@@ -45,7 +46,7 @@ export const NavigationBar = () => (
             <Nav.Link as={NavLink}to="/profile">Profile</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={NavLink}to="/login">Log In</Nav.Link>
+            <Nav.Link as={NavLink}to="/auth/register">Log In</Nav.Link>
           </Nav.Item>
 
         </Nav>

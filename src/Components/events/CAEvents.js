@@ -2,9 +2,6 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import {Col,Row,Container,Button,Card,Nav}  from 'react-bootstrap';
-
-
-// import axios for sending requests to API
 import axios from 'axios';
 
 class CAEvents extends Component {
@@ -72,7 +69,7 @@ class CAEvents extends Component {
       
 // END PUT API      
 
-// RESPONSE
+// START RESPONSE
     render() {
         console.log(this.state.suggested)
         const {events, ids} = this.state
@@ -80,46 +77,38 @@ class CAEvents extends Component {
             <div>
                     {events.map((item, index) => {
                         console.log(ids)
-                        return (
-                            
-                                <div key={item.id}>
-                                    
-                                        <Card border="light" >
-                                        <Card.Body>
-                                        <Card.Header> <Link to={`/events/${ids[index]}`}>{item.name}</Link></Card.Header>
-                                        <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
-                                        <Nav.Item> 
-                                        <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                        <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                        </Nav.Item>
+                        return (   
+                            <div key={item.id}>
+                                <Card border="light">
+                                    <Card.Body>
+                                        <Card.Text> <Link to={`/events/${item._id}`}>{item.name}</Link></Card.Text>
+                                        <Row>
+                                            <Col>
+                                                <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
+                                            </Col>
+                                            <Col>
+                                                <Button size="sm" variant="info" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
+                                                <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
+                                            </Col>
+                                        </Row>
                                         <footer className="blockquote-footer">
-                                        <Link to={`/events/${ids[index]}/attendees`}>Attendees</Link> 
+                                            <Link to={`/events/${ids[index]}/attendees`}>Attendees</Link> 
                                         </footer>
-                                        {
-                                            ((item.student_suggeted===true) && (item.ca_recommended === false))?
-                                            <di><h2>TEST</h2>
-                                                <Button variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                            </di>: null
-                                        }
-                                            </Card.Body>
-                                        </Card>
-                    
-                                        
-                                        
-
-                                                                
+                                    {
+                                        ((item.student_suggeted===true) && (item.ca_recommended === false))?
+                                        <di><h2>TEST</h2>
+                                            <Button variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
+                                        </di>: null
+                                    }
+                                        </Card.Body>
+                                    </Card>                               
                                 </div>
                         )
-                    })}
-                
-                
-                
-                
-            </div>
-          
-    )
-}
-
+                    })}  
+            </div> 
+        )
+    }
+// END RESPONSE    
 }
 
 export default CAEvents;

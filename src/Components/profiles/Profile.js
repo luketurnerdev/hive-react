@@ -43,7 +43,7 @@ state={
     return( 
       <div>
         { user.map(user => <li>{user.name}</li>)}
-         <h2>PROFILE</h2>
+        
         <Card border="light" style={{ width: '18rem' }}>
           <Card.Img variant="top" href={user.photo} />
           <Card.Body>
