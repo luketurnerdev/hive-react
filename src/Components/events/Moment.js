@@ -81,7 +81,7 @@ class MyCalendar extends Component {
       events={events}
       startAccessor="start"
       endAccessor="end"
-      // give only agenda and month views, beause week and day give errors
+      // given only agenda and month views, beause week and day give errors
       views= {['agenda', 'month']}
       onDoubleClickEvent={this.openModal}
       // onDoubleClickEvent={this.openModal}

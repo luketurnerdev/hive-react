@@ -21,23 +21,23 @@ class AverageRates extends Component {
     console.log(this.props);
     axios.all([
       axios.get(`http://localhost:3000/events/${this.props.id}`),
-      axios.get('http://localhost:3000/ratings')
+      axios.get('http://localhost:3000/reviews')
     ])
-    .then(axios.spread((eventResp, ratingsResp) => {
+    .then(axios.spread((eventResp, reviewsResp) => {
       // destructure events data
       const {data} =  eventResp;
       // declare a variable for ratings data (IMPOSSIBLE TO DESTRUCTURE DATA AGAIN);
-      const ratingsData = ratingsResp.data;
+      const reviewsData = reviewsResp.data;
       // calculate length for loop
-      let ratingsLength = ratingsData.length;
+      let reviewsLength = reviewsData.length;
       // for every rating
-        for (let x = 0; x < ratingsLength; x++) {
+        for (let x = 0; x < reviewsLength; x++) {
           // if the ratings belong to the specific event
-          if (data.id === ratingsData[x].event) {
-            eventFood.push(ratingsData[x].score.food);
-            eventDrinks.push(ratingsData[x].score.drinks);
-            eventTalk.push(ratingsData[x].score.talk);
-            eventVibe.push(ratingsData[x].score.vibe);
+          if (data.id === reviewsData[x].event) {
+            eventFood.push(reviewsData[x].rating.food);
+            eventDrinks.push(reviewsData[x].rating.drinks);
+            eventTalk.push(reviewsData[x].rating.talk);
+            eventVibe.push(reviewsData[x].rating.vibe);
           }
         }
         // declare variables for total
@@ -70,7 +70,7 @@ class AverageRates extends Component {
          let talkAverage = (talkTotal/talkLength);
          let vibeAverage = (vibeTotal/vibeLength);
          // set the average object
-         let eventAverageScores = {
+         let eventAverageRatings = {
            food: foodAverage,
            drinks: drinksAverage,
            talk: talkAverage,
@@ -78,7 +78,7 @@ class AverageRates extends Component {
          };
          // change state
          this.setState({
-          averageScores: eventAverageScores
+          averageRatings: eventAverageRatings
           });
       }))
     .catch(error => {
@@ -86,7 +86,7 @@ class AverageRates extends Component {
   })};
 
   render(){
-    const {food, drinks, talk, vibe} = this.state.averageScores;
+    const {food, drinks, talk, vibe} = this.state.averageRatings;
     return(
       <div>
         <h3>Average rates</h3>

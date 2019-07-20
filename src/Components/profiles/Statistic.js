@@ -20,14 +20,14 @@ class Statistic extends Component {
     axios.all([
       axios.get(`http://localhost:3000/users/${this.props.match.params.id}`),
       axios.get('http://localhost:3000/events/'),
-      axios.get('http://localhost:3000/ratings')
+      axios.get('http://localhost:3000/reviews')
     ])
-    .then(axios.spread((userResp, eventsResp, ratingsResp) => {
+    .then(axios.spread((userResp, eventsResp, reviewsResp) => {
       // destructure data from response of user
       const {data} = userResp;
       // declare variables for events and ratings data
       const eventsData = eventsResp.data;
-      const ratingsData = ratingsResp.data;
+      const reviewsData = reviewsResp.data;
       // which events has the user attended so far
       // calculate the length of the events data
       let eventsLength = eventsData.length;
@@ -65,9 +65,9 @@ class Statistic extends Component {
       }
       // for number of comments, we just need the comments of the ratings which user is the user
       // calculate length of ratingsData
-      let ratingsLength = ratingsData.length;
-      for (let x = 0; x < ratingsLength; x++) {
-        if (ratingsData[x].user.id === data.id) {
+      let reviewsLength = reviewsData.length;
+      for (let x = 0; x < reviewsLength; x++) {
+        if (reviewsData[x].user.id === data.id) {
           numberComments += 1;
         }
       }
