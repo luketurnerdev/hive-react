@@ -68,9 +68,8 @@ class CAEventsBox extends Component {
                               <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                             </Col>
                             <Col>
-                              <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Suggest</Button>
                               <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Attend</Button>
-                              {/* <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Delete</Button> */}
+                              <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Delete</Button>
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">

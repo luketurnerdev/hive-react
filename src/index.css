@@ -14,6 +14,11 @@ code {
 }
 
 div{
-  color: #495057;
+  color: #034081;
   font-weight: bold;
 }
+
+@media (min-width: 1200px){
+.container {
+    max-width: 2000px;
+}}

@@ -38,7 +38,7 @@ export class DbEvents extends Component {
             <Container>
                 <Wrapper>
                     <Row>  
-                        <Col><Alert><h2>Events</h2></Alert></Col>
+                        <Col><Alert><h1>Events</h1></Alert></Col>
                         <DropdownButton variant="light" title="Filter" onClick={this.onSubmit}>
                         <Dropdown.Item as="button" value="caEvents" >CoderAcademy List</Dropdown.Item>
                         <Dropdown.Item as="button" value="studentEvents" >Students List</Dropdown.Item>

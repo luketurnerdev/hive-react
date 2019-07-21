@@ -46,17 +46,19 @@ class StudentsEvents extends Component {
         });  
     }
 
-    // START PUT API     
-      handleSubmit = (item,boolean) => {
-        item.ca_recommended=boolean 
-        axios.put(`/events/${item._id}`, item)
-        .then(() => {
-             this.getUpdatedEvents()
-          })
-          .catch(err => console.log(err));
-      }
-      
-    // END PUT API      
+// START PUT API     
+// click ATTEND and the boolean false should update to true 
+
+    handleSubmit = (item,boolean) => {
+    item.ca_recommended=boolean 
+    axios.put(`/events/${item._id}`, item)
+    .then(() => {
+            this.getUpdatedEvents()
+        })
+        .catch(err => console.log(err));
+    }
+    
+// END PUT API      
   
  
     // RESPONSE

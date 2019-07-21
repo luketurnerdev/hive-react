@@ -34,6 +34,11 @@ const Calendar = styled.section`
     margin: 3em;
 `;
 
+const SeeMore = styled.section`
+display: flex;
+align-content: flex-end;
+justify-content: flex-end;`
+
 export class Dashboard extends Component {
     
     render() {  
@@ -54,8 +59,10 @@ export class Dashboard extends Component {
                     <Wrapper>
                         <Container>
                             <Row>
-                                <Col><Alert>Coder Academy List</Alert></Col>
+                                <Col><Alert><h1>Coder Academy List</h1></Alert></Col>
+                                <SeeMore>
                                 <Col><Link to="/events"><Badge size="sm" variant="outline-secondary" >See more</Badge></Link></Col>
+                                </SeeMore>
                             </Row>
                             <CAEventsBox/>
                         </Container>
@@ -66,8 +73,10 @@ export class Dashboard extends Component {
                     <Wrapper>
                         <Container>
                             <Row>
-                                <Col><Alert>Students List</Alert></Col>
+                                <Col><Alert><h1>Students List</h1></Alert></Col>
+                                <SeeMore>
                                 <Col><Link to="/events"><Badge size="sm" variant="outline-secondary" >See more</Badge></Link></Col>
+                                </SeeMore>
                             </Row>
                             <StudentsEvents/>
                         </Container>

@@ -46,6 +46,8 @@ class CAEvents extends Component {
 // END GET API 
 
 // START PUT API 
+//  if is student_suggested,click SAVE and the boolean false should update to true 
+
     handleChange = event => {
         console.log(event.target)
         this.setState({ suggested: event.target.value });
@@ -62,7 +64,6 @@ class CAEvents extends Component {
           .then(res => {
             console.log(res);
             console.log(res.data);
-           {/* HOW TO CHANGE THE value!!!! if is student_suggested and not ca_recommended,click SAVE and the boolean false should update to true AND how to put this to different component*/}
           })
           .catch(err => console.log(err));
       }
@@ -87,8 +88,8 @@ class CAEvents extends Component {
                                                 <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                                             </Col>
                                             <Col>
-                                                <Button size="sm" variant="info" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                                <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
+                                                <Button size="sm" variant="info" value={item.student_suggested} onClick={this.handleChange}>Attend</Button>
+                                                <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Delete</Button>
                                             </Col>
                                         </Row>
                                         <footer className="blockquote-footer">
