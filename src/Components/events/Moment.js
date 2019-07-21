@@ -5,7 +5,6 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 // we import modal for the pop-up functionality
 import Modal from 'react-modal';
-import TodayEvents from './TodayEvents'
 import Info from "./Info";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
@@ -52,7 +51,7 @@ class MyCalendar extends Component {
         if (eventsData[i].hive_attendees.includes(data.id)) {
           console.log(eventsData[i]);
           console.log((eventsData[i].local_date))
-          events.push({title: eventsData[i].name, start: new Date(`${eventsData[i].local_date}`), end: eventsData[i].local_date, desc: eventsData[i].description});
+          events.push({title: eventsData[i].name, start: new Date(`${eventsData[i].local_date}T${eventsData[i].local_time}`), end: new Date(`${eventsData[i].local_date}T${eventsData[i].local_time}`), desc: eventsData[i].description, time: eventsData[i].local_time, date: eventsData[i].local_date, photo: eventsData[i].photo_link});
         }
       }
       console.log(events);
@@ -93,14 +92,12 @@ class MyCalendar extends Component {
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
-          // start={local_date}
         >
           
           <div height="600">
             <Info event={this.state.event} />
             <button onClick={this.closeModal}>close</button>
           </div>
-          <div>{}</div>
         </Modal>
 
   
