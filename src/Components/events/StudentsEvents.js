@@ -30,9 +30,9 @@ class StudentsEvents extends Component {
             let eventsLength = data.length;
             // for loop through all the events
             for (let i = 0; i < eventsLength; i++) {
-                // Ony if hivers are attending to the event, and this event hasn't been recommended by CA yet
+                // Ony if hivers are attending to the event, or have suggested it, and this event hasn't been recommended by CA yet
            
-                if ((data[i].hive_attendees.length > 0) && (data[i].ca_recommended === false)) {
+                if (((data[i].hive_attendees.length > 0) || (data[i].suggested.is_suggested)) && (data[i].ca_recommended === false)) {
                     // mark it as student event (event a student is attending)
                     console.log(data[i])
                     studentsEvents.push(data[i]);

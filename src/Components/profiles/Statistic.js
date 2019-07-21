@@ -41,15 +41,9 @@ class Statistic extends Component {
         }
       }
       console.log(attended);
-      // for suggested events, we need to check which events's suggested_by property includes the user id.
+      // for suggested events, we need to check which events's suggested_by property matches the user id.
       for (let y = 0; y < eventsLength; y++) {
-        // console.log(eventsData)
-        // console.log(eventsData[y])
-        // console.log(eventsData[y].suggested)
-        // console.log(eventsData[y].suggested.suggested_by)
-        // console.log(eventsData[y].suggested.suggested_by.includes(data))
-        // console.log(eventsData[y].suggested.suggested_by.includes(data.id))
-        if (eventsData[y].suggested.suggested_by.includes(data.id)) {
+        if (eventsData[y].suggested.suggested_by === data.id) {
           // we push into the suggested events the message of
           suggested.push(eventsData[y]);
           // suggested.push(eventsData[i].suggested.message[message.findIndex(data.id)])
@@ -59,7 +53,7 @@ class Statistic extends Component {
       // calculate the length of the suggested events data
       let suggestedLength = suggested.length;
       for (let w = 0; w < suggestedLength; w++) {
-        if (suggested[w].suggested.suggested_by.includes(data.id) && suggested[w].ca_recommended === true) {
+        if (suggested[w].ca_recommended === true) {
           approved.push(eventsData[w]);
         }
       }
