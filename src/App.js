@@ -4,17 +4,16 @@ import NavigationBAr from './Components/NavigationBar';
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import AccountRequests from './pages/AccountRequests'
-import RequestAccess from './pages/RequestAccess'
+import RequestAccess from './pages/UserRequest'
 import Dashboard from './pages/Dashboard'
 import DbEvents from './pages/DbEvents'
-import Event_id from './pages/Event_id'
 import MyReviews from './pages/MyReviews'
 import AllSuggestions from './pages/AllSuggestions'
 import Profile from './Components/profiles/Profile'
 // import MyCalendar from './Components/events/Moment'
 
 import './App.css';
-import SingleEvent from './Components/events/SingleEvent';
+import SingleEvent from './pages/SingleEvent';
 
 
 
@@ -35,7 +34,7 @@ class App extends Component {
                       <Route exact path="/events/suggestions" component={AllSuggestions} />
                       <Route exact path="/events/:id" component={SingleEvent} />
                       {/* TBD FOR THE PAGE -GROUP/:ID */}
-                      <Route exact path="/events/:group/:id" component={Event_id} />
+                      {/* <Route exact path="/events/:group/:id" component={Event_id} /> */}
                       <Route exact path="/users/request" component={RequestAccess} />
                       <Route exact path="/users/:_id" component={Profile} />
                       <Route exact path="/reviews" component={MyReviews} />

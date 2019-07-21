@@ -17,8 +17,6 @@ class StudentsEvents extends Component {
 
     getUpdatedEvents = () => { 
     let studentsEvents = [];
-
-    
     axios
     // request call to the db
         .get('/events')

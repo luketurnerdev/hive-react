@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const WrapperLogin = styled.section`
   padding: 2em;
   background: white;
-  margin:2em;
+  margin:6em;
   display:flex;
   align-items:center
 `;
@@ -17,19 +17,19 @@ class HomePage extends Component {
         return (
             <div>
                 <Container>
-                  
-                    <WrapperLogin>
-                    <Col>
-                  <Alert><h2>Welcome To The Hive!</h2></Alert>
+            
+                <WrapperLogin>
+                <Col>
+                 <h1>Welcome To The Hive!</h1>
                
-                <div>
-                    <Link to="/auth/meetup">
-                       <Button size="sm" variant="primary">Login</Button>
-                    </Link>
-                    <Link to="/request_access">
-                       <Button size="sm" variant="link">RequestAccess</Button>
-                    </Link>
-                </div>
+                    <div>
+                        <Link to="/auth/meetup">
+                        <Button size="sm" variant="primary">Login</Button>
+                        </Link>
+                        <Link to="/request_access">
+                        <Button size="sm" variant="link">RequestAccess</Button>
+                        </Link>
+                    </div>
                 </Col>
                 </WrapperLogin>
                
