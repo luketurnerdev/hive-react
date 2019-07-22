@@ -26,6 +26,7 @@ class CAEventsBox extends Component {
   };
 
   componentDidMount() {
+    let hive_attendees = [];
     let cAEvents = [];
     let cAEventsId = [];
     let array = [];
@@ -37,7 +38,12 @@ class CAEventsBox extends Component {
     //   const {data} = res;
       axios.all([
         axios.get('/events'),
-        axios.get('/users/5d2ec30722fd90520548a9d6')
+        axios.get('/users/5d2ec30722fd90520548a9d6'),
+        axios({
+          url: '/events/',
+          method: 'get',
+          data: hive_attendees
+        })
       ])
       .then(axios.spread((eventsResp, usersResp) => {
       const {data} = eventsResp;
