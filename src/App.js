@@ -38,6 +38,7 @@ class App extends Component {
                       <Route exact path="/users/request" component={RequestAccess} />
                       <Route exact path="/users/:_id" component={Profile} />
                       <Route exact path="/reviews" component={MyReviews} />
+                      <Route exact path="/events/calendar" component={MyCalendar} />
 
 
                   </Switch>

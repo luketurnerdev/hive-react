@@ -22,12 +22,12 @@ class Statistic extends Component {
       axios.get('/events/'),
       axios.get('/ratings')
     ])
-    .then(axios.spread((userResp, eventsResp, ratingsResp) => {
+    .then(axios.spread((userResp, eventsResp, reviewsResp) => {
       // destructure data from response of user
       const {data} = userResp;
       // declare variables for events and ratings data
       const eventsData = eventsResp.data;
-      const ratingsData = ratingsResp.data;
+      const reviewsData = reviewsResp.data;
       // which events has the user attended so far
       // calculate the length of the events data
       let eventsLength = eventsData.length;
@@ -41,15 +41,9 @@ class Statistic extends Component {
         }
       }
       console.log(attended);
-      // for suggested events, we need to check which events's suggested_by property includes the user id.
+      // for suggested events, we need to check which events's suggested_by property matches the user id.
       for (let y = 0; y < eventsLength; y++) {
-        // console.log(eventsData)
-        // console.log(eventsData[y])
-        // console.log(eventsData[y].suggested)
-        // console.log(eventsData[y].suggested.suggested_by)
-        // console.log(eventsData[y].suggested.suggested_by.includes(data))
-        // console.log(eventsData[y].suggested.suggested_by.includes(data.id))
-        if (eventsData[y].suggested.suggested_by.includes(data.id)) {
+        if (eventsData[y].suggested.suggested_by === data.id) {
           // we push into the suggested events the message of
           suggested.push(eventsData[y]);
           // suggested.push(eventsData[i].suggested.message[message.findIndex(data.id)])
@@ -59,15 +53,15 @@ class Statistic extends Component {
       // calculate the length of the suggested events data
       let suggestedLength = suggested.length;
       for (let w = 0; w < suggestedLength; w++) {
-        if (suggested[w].suggested.suggested_by.includes(data.id) && suggested[w].ca_recommended === true) {
+        if (suggested[w].ca_recommended === true) {
           approved.push(eventsData[w]);
         }
       }
       // for number of comments, we just need the comments of the ratings which user is the user
       // calculate length of ratingsData
-      let ratingsLength = ratingsData.length;
-      for (let x = 0; x < ratingsLength; x++) {
-        if (ratingsData[x].user.id === data.id) {
+      let reviewsLength = reviewsData.length;
+      for (let x = 0; x < reviewsLength; x++) {
+        if (reviewsData[x].user.id === data.id) {
           numberComments += 1;
         }
       }

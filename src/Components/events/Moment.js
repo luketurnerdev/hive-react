@@ -5,7 +5,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 // we import modal for the pop-up functionality
 import Modal from 'react-modal';
-
+import Info from "./Info";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const localizer = momentLocalizer(moment);
@@ -27,23 +27,9 @@ const customStyles = {
 
 class MyCalendar extends Component {
   state = {
-      events: [],
-      modalIsOpen: false
+      event: false,
+      events: []
   }
-
-  // when they click on the event's title, within the calendar, the pop up "opens"
-  openModal = () => {
-    // let modalIsOpen = true;
-    this.setState({modalIsOpen: true});
-  }
-
-  // to "close" the pop up
-  closeModal = () => {
-    // let modalIsOpen = false;
-    // console.log(this.modalIsOpen)
-    this.setState({modalIsOpen: false});
-  }
-
 
   componentDidMount(){
     // declare a variable for calendar events
@@ -67,13 +53,27 @@ class MyCalendar extends Component {
         if (eventsData[i].hive_attendees.includes(data.id)) {
           console.log(eventsData[i]);
           console.log((eventsData[i].local_date))
-          events.push({title: eventsData[i].name, start: eventsData[i].local_date, end: eventsData[i].local_date, description: "Blablabla"});
+          events.push({title: eventsData[i].name, start: new Date(`${eventsData[i].local_date}T${eventsData[i].local_time}`), end: new Date(`${eventsData[i].local_date}T${eventsData[i].local_time}`), desc: eventsData[i].description, time: eventsData[i].local_time, date: eventsData[i].local_date, photo: eventsData[i].photo_link});
         }
       }
       console.log(events);
       this.setState({events});
     }));
   };
+
+
+    // when they click on the event's title, within the calendar, the pop up "opens"
+    openModal = (event) => {
+      this.setState({ event });
+      // return <TodayEvents date={event.local_date}/>
+    }
+  
+    // to "close" the pop up
+    closeModal = () => {
+      this.setState({ event: false });
+    }
+
+  
     render(){
       const {events} = this.state;
         return(
@@ -83,22 +83,23 @@ class MyCalendar extends Component {
       events={events}
       startAccessor="start"
       endAccessor="end"
-      // give only agenda and month views, beause week and day give errors
+      // given only agenda and month views, beause week and day give errors
       views= {['agenda', 'month']}
       onDoubleClickEvent={this.openModal}
       // onDoubleClickEvent={this.openModal}
-    />
+    /> 
     {/* <button onClick={this.openModal}>Open Modal</button> */}
     <Modal
-          isOpen={this.state.modalIsOpen}
+          isOpen={this.state.event && true}
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
         >
- 
-          <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
-          <button onClick={this.closeModal}>close</button>
-          <div>{}</div>
+          
+          <div height="600">
+            <Info event={this.state.event} />
+            <button onClick={this.closeModal}>close</button>
+          </div>
         </Modal>
 
   

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 class TodayEvents extends Component {
   state = {
-    events = []
+    events: []
   }
 
   componentDidMount() {
@@ -40,10 +40,10 @@ class TodayEvents extends Component {
           }
         this.setState({events:todayEvents});
       
-    })
+    }))
         .catch(error => {
             console.log(error);
-        }))};
+        })};
         
   render(){
     console.log(this.state.events);
@@ -60,3 +60,5 @@ class TodayEvents extends Component {
     )
   }
 }
+
+export default TodayEvents;
