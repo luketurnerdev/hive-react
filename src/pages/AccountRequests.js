@@ -1,4 +1,4 @@
-// // Will return all the list of student's access request ( array of NAME CITY / 2 action Button Confirm/Delete )
+// // Will return all the list of student's access request ( array of NAME CITY / 2 action Button Confirm- boolean from confirmed false to true/Delete )
 // Express=> pages_controller (func AccountRequest) views/pages/account_request 
 // // SIGNED IN as ADMIN
 import React, { Component } from "react";
