@@ -2,9 +2,6 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import {Col,Row,Container,Button,Card,Nav}  from 'react-bootstrap';
-
-
-// import axios for sending requests to API
 import axios from 'axios';
 
 class CAEvents extends Component {
@@ -20,7 +17,7 @@ class CAEvents extends Component {
     let CAEventsId = [];
     axios
     // request call to the db
-        .get('http://localhost:3000/events')
+        .get('/events')
         .then(res => {
             // destructure data from response
             const {data} = res;
@@ -29,11 +26,13 @@ class CAEvents extends Component {
             let eventsLength = data.length;
             // for loop through all the events
             for (let i = 0; i < eventsLength; i++) {
+                console.log(data[i]);
                 // Ony if the event has been recommended by CA
                 if (data[i].ca_recommended === true) {
                     // mark it as CA event (event recommended by CA)
+                    console.log(data[i])
                     CAEvents.push(data[i]);
-                    CAEventsId.push(data[i].id);
+                    CAEventsId.push(data[i]._id);
                 }
             }
             // we change the state according to our previous code
@@ -47,6 +46,8 @@ class CAEvents extends Component {
 // END GET API 
 
 // START PUT API 
+//  if is student_suggested,click SAVE and the boolean false should update to true 
+
     handleChange = event => {
         console.log(event.target)
         this.setState({ suggested: event.target.value });
@@ -59,67 +60,56 @@ class CAEvents extends Component {
           suggested: this.state.suggested
         };
       
-        axios.put(`http://localhost:3000/events/${this.state.id}`, {stu:event_value})
+        axios.put(`/events/${this.state.id}`, {stu:event_value})
           .then(res => {
             console.log(res);
             console.log(res.data);
-           {/* HOW TO CHANGE THE value!!!! if is student_suggested and not ca_recommended,click SAVE and the boolean false should update to true AND how to put this to different component*/}
           })
           .catch(err => console.log(err));
       }
       
 // END PUT API      
 
-// RESPONSE
+// START RESPONSE
     render() {
         console.log(this.state.suggested)
         const {events, ids} = this.state
         return( 
-        
-                    <div>
-
-                            {events.map((item, index) => {
-                                console.log(item.student_suggested)
-                                return (
-                                  
-                                        <div key={item.id}>
-                                          
-                                                <Card border="light" >
-                                                <Card.Body>
-                                                <Card.Header> <Link to={`/events/${ids[index]}`}>{item.name}</Link></Card.Header>
+            <div>
+                    {events.map((item, index) => {
+                        console.log(ids)
+                        return (   
+                            <div key={item.id}>
+                                <Card border="light">
+                                    <Card.Body>
+                                        <Card.Text> <Link to={`/events/${item._id}`}>{item.name}</Link></Card.Text>
+                                        <Row>
+                                            <Col>
                                                 <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
-                                                <Nav.Item> 
-                                                <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                                <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                                </Nav.Item>
-                                                <footer className="blockquote-footer">
-                                               <Link to={`/events/${ids[index]}/attendees`}>Attendees</Link> 
-                                                </footer>
-                                                {
-                                                    ((item.student_suggeted===true) && (item.ca_recommended === false))?
-                                                    <di><h2>TEST</h2>
-                                                        <Button variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                                    </di>: null
-                                                }
-                                                   </Card.Body>
-                                                </Card>
-                         
-                                              
-                                                
-
-                                                                        
-                                        </div>
-                                )
-                            })}
-                       
-                        
-                        
-                       
-                    </div>
-          
-    )
-}
-
+                                            </Col>
+                                            <Col>
+                                                <Button size="sm" variant="info" value={item.student_suggested} onClick={this.handleChange}>Attend</Button>
+                                                <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Delete</Button>
+                                            </Col>
+                                        </Row>
+                                        <footer className="blockquote-footer">
+                                            <Link to={`/events/${ids[index]}/attendees`}>Attendees</Link> 
+                                        </footer>
+                                    {
+                                        ((item.student_suggeted===true) && (item.ca_recommended === false))?
+                                        <di><h2>TEST</h2>
+                                            <Button variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
+                                        </di>: null
+                                    }
+                                        </Card.Body>
+                                    </Card>                               
+                                </div>
+                        )
+                    })}  
+            </div> 
+        )
+    }
+// END RESPONSE    
 }
 
 export default CAEvents;

@@ -6,7 +6,7 @@ export class Test extends Component {
         users:[]
     }
     componentDidMount(){
-        axios.get('http://localhost:3000/users')
+        axios.get('/users')
         .then(resp=>{
             const {data} = resp;
             this.setState({users:data});

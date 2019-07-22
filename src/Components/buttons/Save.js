@@ -13,7 +13,7 @@ export class Save extends Component {
     let studentsEvents = [];
     axios
     // request call to the db
-        .get('http://localhost:3000/events')
+        .get('/events')
         .then(resp => {
             // destructure data from response
             const {data} = resp;
@@ -58,7 +58,7 @@ export class Save extends Component {
           name: this.state.name
         };
        
-        axios.put(`http://localhost:3000/events`, { eventname })
+        axios.put(`/events`, { eventname })
            
           .then(res => {
             console.log(res);

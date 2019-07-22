@@ -1,18 +1,19 @@
-//will render all the events 
+//Output: all events 
 //( Signed in as STUDENT/ADMIN)
 import React, { Component } from 'react';
-import CAEvents from '../Components/events/CAEvents';
-import StudentsEvents from '../Components/events/StudentsEvents.js';
+// import CAEvents from '../Components/events/CAEvents';
+import StudentsEvents from '../Components/events/StudentsEvents';
 import NotDbEvents from '../Components/events/NotDbEvents';
-import {Col,Row,Container}  from 'react-bootstrap';
-// import { MDBContainer, MDBScrollbar } from "mdbreact";
+import {Col,Row,Container,Badge,Alert}  from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
+import CAEventsBox from '../Components/CarouselBox/CAEventsBox';
 
 
-
+// import Moment from './../Components/events/Moment'
 
 // START Title component for an <h3> tag 
-const Title = styled.h3`
+const Calendar_style = styled.h3`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
@@ -22,15 +23,21 @@ const Title = styled.h3`
 // Style a Wrapper component with a <section> tag
 const Wrapper = styled.section`
   padding: 2em;
-  background: #e7e4d1;
-  margin:2em;
+  background: #f8f9fa;
+  margin:1em 0 0 0;
+  
 `;
 // Style a Calendar component with a <section> tag
 const Calendar = styled.section`
-  padding: 5em;
-  background: papayawhip;
-  margin:3em;
+    padding: 10em;
+    background: #f8f9fa;
+    margin: 3em;
 `;
+
+const SeeMore = styled.section`
+display: flex;
+align-content: flex-end;
+justify-content: flex-end;`
 
 export class Dashboard extends Component {
     
@@ -41,35 +48,48 @@ export class Dashboard extends Component {
                 <Row>
                     <Col>
                         <Calendar>
-                            <Title>
-                            CALENDAR
-                            </Title>
+                            <Calendar_style>
+                            {/* <Moment /> */}
+                            </Calendar_style>
                         </Calendar>
                     </Col>   
 
-                    {/* <ADMIN'S SUGGESTION LIST */}
                     <Col>
+                    {/* <ADMIN'S SUGGESTION LIST */}
                     <Wrapper>
-                        <h5>Coder Academy List</h5>
-                        <CAEvents/>
+                        <Container>
+                            <Row>
+                                <Col><Alert><h1>Coder Academy List</h1></Alert></Col>
+                                <SeeMore>
+                                <Col><Link to="/events"><Badge size="sm" variant="outline-secondary" >See more</Badge></Link></Col>
+                                </SeeMore>
+                            </Row>
+                            <CAEventsBox/>
+                        </Container>
                     </Wrapper>
                     {/* <END> */}
 
                     {/* <STUDENTS'S SUGGESTION LIST */}
                     <Wrapper>
-                        <h5>Students List</h5>
-                        <StudentsEvents/>
+                        <Container>
+                            <Row>
+                                <Col><Alert><h1>Students List</h1></Alert></Col>
+                                <SeeMore>
+                                <Col><Link to="/events"><Badge size="sm" variant="outline-secondary" >See more</Badge></Link></Col>
+                                </SeeMore>
+                            </Row>
+                            <StudentsEvents/>
+                        </Container>
                     </Wrapper>
                     {/* <END> */}
-
-                    </Col> 
-                    </Row>
+                    </Col>
+                </Row>
 
                     {/* <NON DB MEETUP LIST */}
                     <Wrapper>
-                        <Title>
+                        
                         <NotDbEvents/>
-                        </Title>
+                        
                     </Wrapper>
                     {/* <END> */}
                     

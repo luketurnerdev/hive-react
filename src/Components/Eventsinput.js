@@ -26,7 +26,7 @@ name:" "
   
 // pass in to jsonserver the new event
     axios
-        .post(`http://localhost:3000/events`,events)
+        .post(`/events`,events)
         .then(res =>{
           console.log(res);
           console.log(res.data);

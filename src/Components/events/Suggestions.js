@@ -19,28 +19,29 @@ class Suggestions extends Component {
     let messages = [];
     // we need two request calls to the db (one for events, one for users)
       axios.all([
-        // axios.get(`http://localhost:3000/events/${this.props.match.params.id}`),
-        axios.get('http://localhost:3000/events/'),
-        axios.get('http://localhost:3000/users')
+        // axios.get(`/events/${this.props.match.params.id}`),
+        axios.get('/events/'),
+        axios.get('/users')
       ])
       .then(axios.spread((eventsResp, usersResp) => {
           // destructure data from response
           let {data} = eventsResp;
           console.log(data);
           let usersData = usersResp.data;
-           // we need three pieces of data: user name, user avatar and suggestion message.
+           // we need three pieces of data: user name, user photo and suggestion message.
            // to get the suggestion message, we need to loop through events and get the suggested.message property
-           // to get user name and user avatar, we need to get the user id first from suggested.suggested_by
+           // to get user name and user photo, we need to get the user id first from suggested.suggested_by
            // then we need to find that user id in usersData and get from the latter the name and the avatar
            let eventsLength = data.length;
+           // for each event, check if it has been suggested.
            for (let i = 0; i < eventsLength; i++) {
-             if(data[i].suggested.suggested_by.length > 0) {
+             if(data[i].suggested.is_suggested) {
               messages.push(data[i].suggested.message);
-              // now we have a messages array containing an array of messages for each suggested event..
+              // now we have a messages array containing the messages for each suggested event.
               users_ids.push(data[i].suggested.suggested_by);
-              // now we have a users_id array containing an array of the ids of the users who suggested each suggested event
-              // [[1,2],[2,3],[1]]
-              // [["hi", "hello"], ["hi", "Hola"], ["Bye"]];
+              // now we have a users_id array containing the ids of the users who suggested each suggested event
+              // [1,2,2,3,1]
+              // ["hi", "hello","hi", "Hola", "Bye"];
              }
            }
            console.log(users_ids);
@@ -49,18 +50,16 @@ class Suggestions extends Component {
            let usersLength = usersData.length;
            // we loop through users_ids
            for (let x = 0; x < usersIdsLength; x++) {
-             // and we continue looping, through each item of users_ids
-             for (let z = 0; z < users_ids[x].length; z++) {
                // and keep looping inside the usersData to find each id
                for (let y = 0; y < usersLength; y++) {
-                 if(usersData[y].id === users_ids[x][z]) {
-                   users.push({name: usersData[y].name, avatar: usersData[y].avatar, message: messages[x][z]});
-                   // now we have an array containing an object for each name, avatar and message of the user with the id we had at users_ids' array
+                 // if the id of the user is inside the ids array
+                 if(usersData[y].id === users_ids[x]) {
+                   users.push({name: usersData[y].name, photo: usersData[y].photo, message: messages[x]});
+                   // now we have an array containing an object for each name, photo and message of the user with the id we had at users_ids' array
                    // [{name: "Juan", avatar: "image", message: "hi"}, {name: "Lorenzo", avatar: "image2", message: "hello"}, {name: "Lorenzo", avatar: "image2", message: "hello"}, etc]
-                 }
-               }
-             }
-           }
+                 };
+               };
+             };
            this.setState({usersAndMessages: users});
           }))
           .catch(error => {
@@ -74,7 +73,7 @@ class Suggestions extends Component {
          {usersAndMessages.map((item)=>(
             <div key={item.id} >
             {item.name}
-            {item.avatar}
+            {item.photo}
             {item.message}
             </div>))}
       </div>

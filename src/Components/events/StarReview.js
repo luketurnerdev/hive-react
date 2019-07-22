@@ -17,34 +17,34 @@ class Reviews extends Component {
         // declare variable for all rankings
         let reviews = [];
         axios.all([
-            axios.get(`http://localhost:3000/events/${this.props.id}`),
-            axios.get('http://localhost:3000/ratings'),
-            axios.get('http://localhost:3000/users')
+            axios.get(`/events/${this.props.id}`),
+            axios.get('/ratings'),
+            axios.get('/users')
           ])
-          .then(axios.spread((eventsResp, ratingsResp, usersResp) => {
+          .then(axios.spread((eventsResp, reviewsResp, usersResp) => {
               // destructure data of eventsResp
               const {data} = eventsResp;
               // cannot destructure data again (not possible to have 2 variables called data)
-              const ratingsData = ratingsResp.data;
+              const reviewsData = reviewsResp.data;
               const usersData = usersResp.data;
               // we need to loop through all the rankings to know which ones belong to the specific event
               // calculate the length of the rankings' data
-              let ratingsLength = ratingsData.length;
+              let reviewsLength = reviewsData.length;
               // then we need to look for the user matching the user_id inside each rating.
               // calculate the length of the loop
               let usersLength = usersData.length;
-              for (let i = 0; i < ratingsLength; i++) {
-                  if (ratingsData[i].event === data.id) {
+              for (let i = 0; i < reviewsLength; i++) {
+                  if (reviewsData[i].event === data.id) {
                     for (let x = 0; x < usersLength; x++){
-                        if (usersData[x].id === ratingsData[i].user) {
+                        if (usersData[x].id === reviewsData[i].user) {
                             // users.push({name: usersData[x].name, avatar: usersData[x].avatar});
                             reviews.push(
                                 {
-                                    comment: ratingsData[i].comment, 
-                                    score: {food: ratingsData[i].score.food, 
-                                        drinks:ratingsData[i].score.drinks, 
-                                        talk:ratingsData[i].score.talk, 
-                                        vibe:ratingsData[i].score.vibe
+                                    comment: reviewsData[i].comment, 
+                                    rating: {food: reviewsData[i].score.food, 
+                                        drinks:reviewsData[i].score.drinks, 
+                                        talk:reviewsData[i].score.talk, 
+                                        vibe:reviewsData[i].score.vibe
                                     },
                                     name: usersData[x].name,
                                     avatar: usersData[x].avatar
@@ -88,44 +88,35 @@ class Reviews extends Component {
             <div>
             <h3>Individual rates</h3>
                 {reviews.map((review)=>(
-            <div key={review.id} >
+            <div key={review._id} >
             {review.name}
             {review.avatar}
-            {/* {review.score.food}
-            {review.score.drinks}
-            {review.score.talk}
-            {review.score.vibe} */}
-            {/* Use StarRating Component for the star styling */}
             Food:
             <StarRatingComponent 
                 name="food"
                 starCount={5}
-                value={review.score.food}
-                // onStarClick={this.onStarClick.bind(this)}
+                value={review.rating.food}
                 editing={false}
                 />
             Drinks:
             <StarRatingComponent 
                 name="drinks"
                 starCount={5}
-                value={review.score.drinks}
-                // onStarClick={this.onStarClick.bind(this)}
+                value={review.rating.drinks}
                 editing={false}
                 />
             Talk:
             <StarRatingComponent 
                 name="talk"
                 starCount={5}
-                value={review.score.talk}
-                // onStarClick={this.onStarClick.bind(this)}
+                value={review.rating.talk}
                 editing={false}
                 />
             Vibe:
             <StarRatingComponent 
                 name="vibe"
                 starCount={5}
-                value={review.score.vibe}
-                // onStarClick={this.onStarClick.bind(this)}
+                value={review.rating.vibe}
                 editing={false}
                 />
             {review.comment}

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 class TodayEvents extends Component {
   state = {
-    events = []
+    events: []
   }
 
   componentDidMount() {
@@ -12,8 +12,8 @@ class TodayEvents extends Component {
   let todayEvents = [];
   // we need two request calls to the db (one for events, one for users)
     axios.all([
-      axios.get('http://localhost:3000/events'),
-      axios.get('http://localhost:3000/users/3')
+      axios.get('/events'),
+      axios.get('/users/3')
     ])
     .then(axios.spread((eventsResp, usersResp) => {
         // destructure data from response
@@ -40,10 +40,10 @@ class TodayEvents extends Component {
           }
         this.setState({events:todayEvents});
       
-    })
+    }))
         .catch(error => {
             console.log(error);
-        }))};
+        })};
         
   render(){
     console.log(this.state.events);
@@ -60,3 +60,5 @@ class TodayEvents extends Component {
     )
   }
 }
+
+export default TodayEvents;

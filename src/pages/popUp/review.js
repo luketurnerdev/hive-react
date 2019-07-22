@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class SingleEvent extends Component {
+export class review extends Component {
     render() {
         return (
             <div>
@@ -10,4 +10,4 @@ export class SingleEvent extends Component {
     }
 }
 
-export default SingleEvent
+export default review

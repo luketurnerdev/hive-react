@@ -3,20 +3,17 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavigationBAr from './Components/NavigationBar';
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
-import RequestAccess from './pages/RequestAccess'
-import UsersRequest from './pages/UsersRequest'
+import AccountRequests from './pages/AccountRequests'
+import RequestAccess from './pages/UserRequest'
 import Dashboard from './pages/Dashboard'
 import DbEvents from './pages/DbEvents'
-import Event_id from './pages/Event_id'
 import MyReviews from './pages/MyReviews'
 import AllSuggestions from './pages/AllSuggestions'
-import MyProfile from './pages/MyProfile'
-import EditRating from './Components/events/EditRating'
-import Attendees from './Components/events/Attendees'
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'bootstrap-css-only/css/bootstrap.min.css';
-import 'mdbreact/dist/css/mdb.css';
+import Profile from './Components/profiles/Profile'
+// import MyCalendar from './Components/events/Moment'
+
 import './App.css';
+import SingleEvent from './pages/SingleEvent';
 
 
 
@@ -30,17 +27,19 @@ class App extends Component {
                 <Switch>
                  
                       <Route exact path="/" component={HomePage} />
-                      <Route exact path="/account_requests" component={RequestAccess} />
-                      <Route exact path="/dashboard" component={Dashboard} />
                       <Route exact path="/auth/register" component={LoginPage} />
+                      <Route exact path="/account_requests" component={AccountRequests} />
+                      <Route exact path="/dashboard" component={Dashboard} />
                       <Route exact path="/events" component={DbEvents} />
                       <Route exact path="/events/suggestions" component={AllSuggestions} />
-                      <Route exact path="/events/:id" component={Event_id} />
+                      <Route exact path="/events/:id" component={SingleEvent} />
                       {/* TBD FOR THE PAGE -GROUP/:ID */}
-                      <Route exact path="/events/:group/:id" component={Event_id} />
-                      <Route exact path="/users/request" component={UsersRequest} />
-                      <Route exact path="/:id" component={MyProfile} />
+                      {/* <Route exact path="/events/:group/:id" component={Event_id} /> */}
+                      <Route exact path="/users/request" component={RequestAccess} />
+                      <Route exact path="/users/:_id" component={Profile} />
                       <Route exact path="/reviews" component={MyReviews} />
+                      <Route exact path="/events/calendar" component={MyCalendar} />
+
 
                   </Switch>
               </Router>
