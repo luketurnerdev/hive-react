@@ -8,7 +8,7 @@ class AverageRates extends Component {
   // set state
   state = {
     // the average of each rating's scores (food, drinks, talk, vibe)
-    averageScores: {}
+    averageRatings: {}
   }
 
   componentDidMount(){
@@ -30,10 +30,11 @@ class AverageRates extends Component {
       const reviewsData = reviewsResp.data;
       // calculate length for loop
       let reviewsLength = reviewsData.length;
+      console.log(reviewsLength);
       // for every rating
         for (let x = 0; x < reviewsLength; x++) {
           // if the ratings belong to the specific event
-          if (data.id === reviewsData[x].event) {
+          if (reviewsData.length > 0 && data.id === reviewsData[x].event) {
             eventFood.push(reviewsData[x].rating.food);
             eventDrinks.push(reviewsData[x].rating.drinks);
             eventTalk.push(reviewsData[x].rating.talk);
