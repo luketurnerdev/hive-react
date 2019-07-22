@@ -15,9 +15,10 @@ class Reviews extends Component {
         // declare variable for all rankings
         let reviews = [];
         axios.all([
-            axios.get(`/events/${this.props.id}`),
+            axios.get(`/events/${this.props.id || this.props.match.params.id}`),
             axios.get('/ratings'),
-            axios.get('/users')
+            // users referred in each rating
+            // axios.get('/users')
           ])
           .then(axios.spread((eventsResp, reviewsResp, usersResp) => {
               // destructure data of eventsResp

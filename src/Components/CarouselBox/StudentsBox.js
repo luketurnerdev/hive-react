@@ -3,7 +3,9 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card,Carousel}  from 'react-bootstrap';
 import Modal from 'react-modal';
-import PopUp from '../../pages/popUp/PopUp';
+import AttendeesPopUp from '../../pages/popUp/AttendeesPopUp';
+// import ReviewsPopUp from '../../pages/popUp/ReviewsPopUp';
+import Reviews from '../events/Reviews';
    
 const customStyles = {
   content : {
@@ -122,10 +124,22 @@ class CAEventsBox extends Component {
                                   >
                                     
                                     <div height="600">
-                                      <PopUp attendees={item.hive_attendees} users={users} />
+                                      <AttendeesPopUp attendees={item.hive_attendees} />
                                       <button onClick={this.closeModal}>close</button>
                                     </div>
                                   </Modal>
+                              <Modal
+                                isOpen={this.state.modalIsOpen}
+                                onRequestClose={this.closeModal}
+                                style={customStyles}
+                                contentLabel="Example Modal"
+                              >
+                                
+                                <div height="600">
+                                  <Reviews users={users} />
+                                  <button onClick={this.closeModal}>close</button>
+                                </div>
+                              </Modal>
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">
