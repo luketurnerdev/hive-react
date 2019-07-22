@@ -91,17 +91,11 @@ class Reviews extends Component {
             <div key={review._id} >
             {review.name}
             {review.avatar}
-            {/* {review.score.food}
-            {review.score.drinks}
-            {review.score.talk}
-            {review.score.vibe} */}
-            {/* Use StarRating Component for the star styling */}
             Food:
             <StarRatingComponent 
                 name="food"
                 starCount={5}
                 value={review.rating.food}
-                // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
             Drinks:
@@ -109,7 +103,6 @@ class Reviews extends Component {
                 name="drinks"
                 starCount={5}
                 value={review.rating.drinks}
-                // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
             Talk:
@@ -117,7 +110,6 @@ class Reviews extends Component {
                 name="talk"
                 starCount={5}
                 value={review.rating.talk}
-                // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
             Vibe:
@@ -125,7 +117,6 @@ class Reviews extends Component {
                 name="vibe"
                 starCount={5}
                 value={review.rating.vibe}
-                // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
             {review.comment}

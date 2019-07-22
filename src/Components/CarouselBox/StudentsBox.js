@@ -13,8 +13,8 @@ class CAEventsBox extends Component {
   };
 
   componentDidMount() {
-    let CAEvents = [];
-    let CAEventsId = [];
+    let cAEvents = [];
+    let cAEventsId = [];
     let array = [];
 
     axios
@@ -30,16 +30,16 @@ class CAEventsBox extends Component {
             // Ony if the event has been recommended by CA
           if ((data[i].hive_attendees.length > 0) && (data[i].ca_recommended === false)) {
             // mark it as student event (event a student is attending)
-              CAEvents.push(data[i]);
-              CAEventsId.push(data[i]._id);
+              cAEvents.push(data[i]);
+              cAEventsId.push(data[i]._id);
           }
       }
       for(let i = 0;i<3;i++){
         
-       array.push(CAEvents[i]);
+       array.push(cAEvents[i]);
        console.log(array)
       }
-      this.setState({events:CAEvents, ids:CAEventsId, array_:array});
+      this.setState({events:cAEvents, ids:cAEventsId, array_:array});
     })
     .catch(error => {
       console.log(error);

@@ -6,16 +6,6 @@ import axios from 'axios';
 import {Col,Row,Container,Button,Card,Nav}  from 'react-bootstrap';
 
 class Profile extends Component {
-//<<Profile>>
-// RENDERED : ProfilePage
-// meetup_uid: Number,
-// email: String,
-// firstName: String,
-// lastName: String,
-// city: String,
-// avatar: String,
-// created_at: Date
-
 state={
   user:[]
 }
