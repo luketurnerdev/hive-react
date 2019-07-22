@@ -23,8 +23,8 @@ class HomePage extends Component {
                  <h1>Welcome To The Hive!</h1>
                
                     <div>
-                        <Link to="/auth/meetup">
-                        <Button size="sm" variant="primary">Login</Button>
+                        <Link to="/">
+                        <Button size="sm" variant="primary" onClick={this.handleChange}>Login</Button>
                         </Link>
                         <Link to="/request_access">
                         <Button size="sm" variant="link">RequestAccess</Button>
