@@ -22,7 +22,8 @@ class CAEventsBox extends Component {
       events: [],
       ids: [],
       array_:[],
-      users: []
+      users: [],
+      modalIsOpen: false
   };
 
   componentDidMount() {
@@ -39,11 +40,11 @@ class CAEventsBox extends Component {
       axios.all([
         axios.get('/events'),
         axios.get('/users/5d2ec30722fd90520548a9d6'),
-        axios({
-          url: '/events/',
-          method: 'get',
-          data: hive_attendees
-        })
+        // axios({
+        //   url: '/users/',
+        //   method: 'get',
+        //   data: hive_attendees
+        // })
       ])
       .then(axios.spread((eventsResp, usersResp) => {
       const {data} = eventsResp;
@@ -78,12 +79,12 @@ class CAEventsBox extends Component {
 
   // when they click on the event's title, within the calendar, the pop up "opens"
   openModal = (event) => {
-    this.setState({ event });
+    this.setState({modalIsOpen: true});
   }
 
   // to "close" the pop up
   closeModal = () => {
-    this.setState({ event: false });
+    this.setState({modalIsOpen: false});
   }
 
   
@@ -92,6 +93,7 @@ class CAEventsBox extends Component {
   render() {
     const {array_, users} = this.state
     console.log(users)
+    console.log(array_)
     return (
         <div>  
           <Carousel bsPrefix="carousel">
@@ -113,14 +115,14 @@ class CAEventsBox extends Component {
                               {/* <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Delete</Button> */}
                               <button onClick={this.openModal}>Attendees</button>
                               <Modal
-                                    isOpen={this.state.event && true}
+                                    isOpen={this.state.modalIsOpen}
                                     onRequestClose={this.closeModal}
                                     style={customStyles}
                                     contentLabel="Example Modal"
                                   >
                                     
                                     <div height="600">
-                                      <PopUp users={item.hive_attendees} users={users} />
+                                      <PopUp attendees={item.hive_attendees} users={users} />
                                       <button onClick={this.closeModal}>close</button>
                                     </div>
                                   </Modal>

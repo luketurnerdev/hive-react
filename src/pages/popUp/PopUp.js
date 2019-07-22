@@ -1,5 +1,6 @@
 // this component will display one modal or another depending on the props
 import React from "react";
+import { get } from "http";
 
 export default (props) => {
     const { event, attendees, users } = props;
@@ -14,7 +15,10 @@ export default (props) => {
             <p>{event.desc}</p>
             </>
         )
-    } else if (attendees, users) {
+    } else if (props) {
+        console.log(props)
+        console.log(users);
+        console.log(attendees);
         return (
             // <>
             //        {attendees.map((attendee)=>(
@@ -26,12 +30,12 @@ export default (props) => {
             // </>
             <>
             {users.map((user) => (
-            <div key={user.id} >
-                {attendees.includes(user.id)?
+            <div key={user._id} >
+                {attendees.includes(user._id)?
                     <img ref={user.photo} />:
                     null
                 }
-                {attendees.includes(user.id)?
+                {attendees.includes(user._id)?
                     <p>{user.name}</p>:
                     null
                 }
@@ -44,3 +48,15 @@ export default (props) => {
 
     return null;
 }
+
+// class PopUp extends Component {
+//     componentDidMount() {
+        
+//     }
+
+//     render(){
+//         const { event, attendees, users } = props;
+//         return(
+//         )
+//     }
+// }
