@@ -11,7 +11,6 @@ export class SingleEvent extends Component {
 
     // just after rendering the event, call to the API
     componentDidMount() {
-
     axios
     // request call to the db
         .get(`/events/${this.props.match.params.id}`)
@@ -29,19 +28,21 @@ export class SingleEvent extends Component {
   
   render() {
     const {event} = this.state;    
-    const {id} = this.state.event;
+    console.log(event);
+    console.log(event._id);
+    const {_id} = this.state.event;
     console.log(this.props)
         return( 
             <div>                            
-                <Link to={`/events/${id}`}>{event.name}</Link>
+                <Link to={`/events/${_id}`}>{event.name}</Link>
                 <p>{event.local_date}</p>
-                <Link to={`/events/${id}/attendees`}>Attendees</Link>
+                <Link to={`/events/${_id}/attendees`}>Attendees</Link>
                 {/* conditional rendering */}
                 {event?
-                <AverageRates id={id}/> :
+                <AverageRates id={_id}/> :
                 null}             
                 {event?
-                <StarReview id={id}/>:
+                <StarReview id={_id}/>:
                 null}   
             </div>
         )
