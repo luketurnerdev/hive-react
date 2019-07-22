@@ -54,7 +54,7 @@ class Attendees extends Component {
         <h1>
           {users.map((user)=>(
             <div key={user.id} >
-            {user.avatar}
+            {user.photo}
             {user.name}
             </div>))}
             {/* {users[0].first_name} */}

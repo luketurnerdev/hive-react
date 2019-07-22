@@ -8,6 +8,8 @@ import {Col,Row,Container,Badge,Alert}  from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import CAEventsBox from '../Components/CarouselBox/CAEventsBox';
+import MyCalendar from '../Components/events/Moment';
+import StudentsBox from '../Components/CarouselBox/StudentsBox'
 
 
 // import Moment from './../Components/events/Moment'
@@ -49,7 +51,7 @@ export class Dashboard extends Component {
                     <Col>
                         <Calendar>
                             <Calendar_style>
-                            {/* <Moment /> */}
+                            <MyCalendar />
                             </Calendar_style>
                         </Calendar>
                     </Col>   
@@ -78,7 +80,7 @@ export class Dashboard extends Component {
                                 <Col><Link to="/events"><Badge size="sm" variant="outline-secondary" >See more</Badge></Link></Col>
                                 </SeeMore>
                             </Row>
-                            <StudentsEvents/>
+                            <StudentsBox/>
                         </Container>
                     </Wrapper>
                     {/* <END> */}

@@ -29,19 +29,19 @@ export class SingleEvent extends Component {
   
   render() {
     const {event} = this.state;    
-    const {_id} = this.state.event;
+    const {id} = this.state.event;
     console.log(this.props)
         return( 
             <div>                            
-                <Link to={`/events/${_id}`}>{event.name}</Link>
+                <Link to={`/events/${id}`}>{event.name}</Link>
                 <p>{event.local_date}</p>
-                <Link to={`/events/${_id}/attendees`}>Attendees</Link>
+                <Link to={`/events/${id}/attendees`}>Attendees</Link>
                 {/* conditional rendering */}
                 {event?
-                <AverageRates id={_id}/> :
+                <AverageRates id={id}/> :
                 null}             
                 {event?
-                <StarReview id={_id}/>:
+                <StarReview id={id}/>:
                 null}   
             </div>
         )

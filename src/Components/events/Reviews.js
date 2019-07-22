@@ -83,7 +83,7 @@ class Reviews extends Component {
                 {reviews.map((review)=>(
             <div key={review.id} >
             {review.name}
-            {review.avatar}
+            {review.photo}
             {review.comment}
             {review.rating.food}
             {review.rating.drinks}
