@@ -19,9 +19,9 @@ class Suggestions extends Component {
     let messages = [];
     // we need two request calls to the db (one for events, one for users)
       axios.all([
-        // axios.get(`http://localhost:3000/events/${this.props.match.params.id}`),
-        axios.get('http://localhost:3000/events/'),
-        axios.get('http://localhost:3000/users')
+        // axios.get(`/events/${this.props.match.params.id}`),
+        axios.get('/events/'),
+        axios.get('/users')
       ])
       .then(axios.spread((eventsResp, usersResp) => {
           // destructure data from response

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import axios from "axios"
-import Reviews from './Reviews';
-import AverageRates from './AverageRates'
-import StarReview from './StarReview'
+import AverageRates from '../Components/events/AverageRates'
+import StarReview from '../Components/events/StarReview'
 
 export class SingleEvent extends Component {
     state = {
@@ -16,7 +15,7 @@ export class SingleEvent extends Component {
 
     axios
     // request call to the db
-        .get(`http://localhost:3000/events/${this.props.match.params.id}`)
+        .get(`/events/5d2e659b89a7d42c791a9213`)
         .then(resp => {
             // destructure data from response
             const {data} = resp;
@@ -31,19 +30,19 @@ export class SingleEvent extends Component {
   
   render() {
     const {event} = this.state;    
-    const {id} = this.state.event;
-    console.log(event);
+    const {_id} = this.state.event;
+    console.log(this.props)
         return( 
             <div>                            
-                <Link to={`/events/${id}`}>{event.name}</Link>
+                <Link to={`/events/${_id}`}>{event.name}</Link>
                 <p>{event.local_date}</p>
-                <Link to={`/events/${id}/attendees`}>Attendees</Link>
+                <Link to={`/events/${_id}/attendees`}>Attendees</Link>
                 {/* conditional rendering */}
                 {event?
-                <AverageRates id={id}/> :
+                <AverageRates id={_id}/> :
                 null}             
                 {event?
-                <StarReview id={id}/>:
+                <StarReview id={_id}/>:
                 null}   
             </div>
         )

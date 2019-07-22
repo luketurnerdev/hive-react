@@ -15,9 +15,14 @@ const Wrapper = styled.section`
 
 class AccountRequests extends Component {
     state = {
-        users: []
+        users: [],
+        _id: "",
+    
     };
+
+
     componentDidMount() {
+// START SAVE IN [USERS] STATE USER's DATA 
         axios
             .get(`/account_requests`)
             .then(res => {
@@ -25,11 +30,32 @@ class AccountRequests extends Component {
             this.setState({ users });
            
                 console.log(users);
-             })
-      }
+             })     
+             
+    }
+// END SAVE IN [USERS] STATE USER's DATA 
+
+
+// START PUT IN [USERS] STATE USER's DATA 
+handleSubmit = (user) => {
+    event.preventDefault();
+        const { _id } = this.state;
+    LocalAPI.post(`/users/register`, { _id})
+    .then(response => {
+        this.props.setAuthToken(response.data.token);
+        this.props.history.push("/");
+    })
+    .catch(error=>console.log(error));
+}
+onInputChange = (_id) => {
+    this.setState({ [_id]: event.target.value });
+}
+
+// END PUT IN [USERS] STATE USER's DATA 
 
     render() {
         const {users} = this.state 
+        const {_id} = this.tate
         console.log(users)
         return (
             <div>
@@ -52,7 +78,7 @@ class AccountRequests extends Component {
                                     </footer>
                                     </Col>
                                     <Col>
-                                        <Button size="sm" variant="info" ><Link to={`/users/:id`}>Save</Link></Button>
+                                        <Button size="sm" variant="info" onClick={()=>this.handleSubmit(user)} ><Link to={`/users/:id`}>Save</Link></Button>
                                         <Button size="sm" variant="primary" >Delete</Button>
                                     </Col>
                                 </Row>
@@ -73,3 +99,17 @@ class AccountRequests extends Component {
 export default AccountRequests;
 
 
+{/* <div>
+<h1>USERS</h1>
+<div>
+    <ul>
+        {/* {this.state.persons.map(person => {person.name})} */}
+    // </ul>
+    {/* <Link to="/auth/meetup"> */}
+        // <button>Save</button>
+    {/* </Link> */}
+    {/* <Link to="/request_access"> */}
+        // <button>Delete</button>
+    {/* </Link> */}
+// </div>
+// </div> */}

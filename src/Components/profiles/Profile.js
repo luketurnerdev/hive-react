@@ -22,9 +22,12 @@ state={
 
 // just after rendering the user's info, call to the API
   componentDidMount(){
+    console.log(this.props)
+// Extracted userId from the Route params.    
+    const { _id } = this.props.match.params
+    console.log(_id)
     axios
-      .get('http://localhost:3000/users/show')
-     
+      .get('/users/${_id}')
       .then(res => {
           console.log(res.data)
           // modify the state according to the data in the API's response
@@ -42,22 +45,16 @@ state={
     const {user} = this.state
     return( 
       <div>
-        { user.map(user => <li>{user.name}</li>)}
-         <h2>PROFILE</h2>
+        {user.map(user => <li>{user.name}</li>)}
+        
         <Card border="light" style={{ width: '18rem' }}>
-          <Card.Img variant="top" href={user.photo} />
           <Card.Body>
             <Card.Title>{user.meetup_uid}</Card.Title>
             <Card.Text>{user.created_at}</Card.Text>
           </Card.Body>
         </Card>
 
-        <p>{user.email}</p>
-        <p>{user.first_name}</p>
-        <p>{user.last_name}</p>
       
-        <p></p>
-       
       </div>
    );
 

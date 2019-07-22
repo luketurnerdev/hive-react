@@ -20,8 +20,8 @@ class AverageRates extends Component {
     // two request calls (one for event info, one for ratings)
     console.log(this.props);
     axios.all([
-      axios.get(`http://localhost:3000/events/${this.props.id}`),
-      axios.get('http://localhost:3000/reviews')
+      axios.get(`/events/${this.props.id}`),
+      axios.get('/ratings')
     ])
     .then(axios.spread((eventResp, reviewsResp) => {
       // destructure events data

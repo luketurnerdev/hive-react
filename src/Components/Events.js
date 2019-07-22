@@ -11,7 +11,7 @@ class Events extends Component {
   // just after rendering the Events, call to the API
   componentDidMount(){
   axios
-      .get('http://localhost:3000/events')
+      .get('/events')
       .then(resp => {
           console.log(resp.data)
           const {data} = resp;
