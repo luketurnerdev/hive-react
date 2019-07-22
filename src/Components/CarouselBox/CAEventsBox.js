@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import {Button,Card,Row,Col}  from 'react-bootstrap';
 
+
 class CAEventsBox extends Component {
   
   state = {
@@ -24,20 +25,16 @@ class CAEventsBox extends Component {
       // set length of loop
       let eventsLength = data.length;
       // for loop through all the events
-
-      for (let i = 0; i < eventsLength; i++) {
-          
+      for (let i = 0; i < eventsLength; i++) {          
           // Ony if the event has been recommended by CA
           if (data[i].ca_recommended === true) {
-              // mark it as CA event (event recommended by CA)
+              // mark it as CA event
               cAEvents.push(data[i]);
-              cAEventsId.push(data[i]._id);
+              cAEventsId.push(data[i].id);
           }
       }
       for(let i = 0;i<3;i++){
-        
        array.push(cAEvents[i]);
-       console.log(array)
       }
       this.setState({events:cAEvents, ids:cAEventsId, array_:array});
     })
@@ -59,7 +56,7 @@ class CAEventsBox extends Component {
             return (
             
                 <Carousel.Item>
-                    <div key={item._id}>
+                    <div key={item.id}>
                       <Card border="light" >
                           <Card.Body> 
                           <Card.Text> <Link to={`/events/${item._id}`}>{item.name}</Link></Card.Text>

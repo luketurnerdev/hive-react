@@ -10,7 +10,7 @@ import DbEvents from './pages/DbEvents'
 import MyReviews from './pages/MyReviews'
 import AllSuggestions from './pages/AllSuggestions'
 import Profile from './Components/profiles/Profile'
-// import MyCalendar from './Components/events/Moment'
+import MyCalendar from './Components/events/Moment'
 
 import './App.css';
 import SingleEvent from './pages/SingleEvent';
