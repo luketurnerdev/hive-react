@@ -11,11 +11,10 @@ export class SingleEvent extends Component {
 
     // just after rendering the event, call to the API
     componentDidMount() {
-        console.log(this.props)
 
     axios
     // request call to the db
-        .get(`/events/5d2e659b89a7d42c791a9213`)
+        .get(`/events/${this.props.match.params.id}`)
         .then(resp => {
             // destructure data from response
             const {data} = resp;

@@ -50,6 +50,7 @@ export class Reviews extends Component {
                                         <Row>
                                             <Col>
                                                 <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
+                                                <Card.Text className="mb-2 text-muted"><small>{item.suggested.message}</small></Card.Text>
                                             </Col>
                                             <Col>
                                                 <Button size="sm" variant="info" >Save</Button>
