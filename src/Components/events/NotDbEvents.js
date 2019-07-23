@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LocalAPI from '../../localApi';
 import {Col,Row,Button,Card}  from 'react-bootstrap';
+import localApi from "../../localApi";
 
 
 export class NotDbEvents extends Component {
@@ -16,6 +17,17 @@ export class NotDbEvents extends Component {
         }
         
     }
+
+    handleAttend = (eventId, groupURLname) => {
+        // sending call to backend 
+            localApi.post(`events/new/`, {
+                meetupEventId:eventId,
+                groupUrlname:groupURLname 
+            })
+            .then(res=>{
+                console.log(res.data)
+            })
+        }
     componentDidMount() {
         LocalAPI.get('/dashboard')
         .then(resp => {
@@ -46,9 +58,8 @@ export class NotDbEvents extends Component {
     render() {
 
         const eventsData = this.state.eventsData;
-        const names = this.state.eventNames;
-        const times = this.state.eventTimes;
-        const dates = this.state.eventDates;
+        console.log(this.state.eventsData);
+
 
 
         return (
@@ -57,16 +68,23 @@ export class NotDbEvents extends Component {
             {
 
                 
-                
+
                 eventsData && eventsData.map((event) => {
                     return (
                         
+                        
                         <>
+                        {console.log(event)}
                         <h5 key={event.id}>{event.name} </h5>
                         <li 
                         key={event.id}>{event.local_date} at {event.local_time}
-                        <Button size="sm" variant="primary" value={event._id}>Attend</Button>   
-                        </li>
+        
+
+                        <Button size="sm" variant="primary" onClick={()=>this.handleAttend(event.id, event.group.urlname)}>
+                              
+                                Attend
+                              </Button>                   
+                         </li>
                         </>
                     )
                     
