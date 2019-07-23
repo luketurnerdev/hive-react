@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import LocalAPI from '../../localApi';
+import {Col,Row,Button,Card}  from 'react-bootstrap';
+
 
 export class NotDbEvents extends Component {
 
@@ -57,10 +59,12 @@ export class NotDbEvents extends Component {
                 eventsData && eventsData.map((event) => {
                     return (
                         
-
                         <>
                         <h5 key={event.id}>{event.name} </h5>
-                        <li key={event.id}>{event.local_date} at {event.local_time} Attend</li>
+                        <li 
+                        key={event.id}>{event.local_date} at {event.local_time}
+                        <Button size="sm" variant="primary" value={event._id}>Attend</Button>   
+                        </li>
                         </>
                     )
                     
