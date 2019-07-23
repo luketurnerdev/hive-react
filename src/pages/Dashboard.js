@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import CAEventsBox from '../Components/CarouselBox/CAEventsBox';
 import Moment from '../Components/events/Moment'
-import StudentsBox from '../Components/CarouselBox/StudentsBox'
+
 
 
 // import Moment from './../Components/events/Moment'

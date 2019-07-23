@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {Col,Row,Button,Card}  from 'react-bootstrap';
 // import axios for sending requests to API
 import axios from 'axios';
+import localApi from "../../localApi";
 
 class StudentsEvents extends Component {
     state = {
@@ -68,8 +69,10 @@ class StudentsEvents extends Component {
     handleSubmit = (item,boolean) => {
     item.ca_recommended=boolean 
     console.log(item._id)
-    axios.put(`/events/${item._id}`, item)
-    .then(() => {
+   localApi.put(`/events/recommend/${item._id}`, item)
+    .then((res) => {
+            console.log("here");
+            console.log(res);
             this.getUpdatedEvents()
         })
         .catch(err => console.log(err));

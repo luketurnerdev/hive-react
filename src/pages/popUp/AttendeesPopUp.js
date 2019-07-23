@@ -62,6 +62,7 @@ class AttendeesPopUp extends Component {
     render(){
     const {users} = this.state; 
     const {attendees } = this.props;
+    return null;
 //         return(
 // //             {users.map((user) => (
 // //             <div key={user._id} >

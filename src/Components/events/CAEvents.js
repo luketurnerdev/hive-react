@@ -2,7 +2,8 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card}  from 'react-bootstrap';
-import axios from 'axios';
+import localApi from "../../localApi";
+import axios from "axios";
 
 class CAEvents extends Component {
     state = {
@@ -61,10 +62,9 @@ class CAEvents extends Component {
 
 // START DELETE API 
     // setting in the singleEvent state the value of the button DELETE which is the event._id
-    handleChange = event => {
-        this.setState({singleEvent: event.target.value})
+    handleChange = (eventId) => {
     // sending DELETE call to backend 
-        axios.delete(`events/${this.state.singleEvent}`,event._id)
+        localApi.delete(`events/${eventId}`)
         .then(res=>{
             console.log(res.data)
         })
@@ -91,7 +91,7 @@ class CAEvents extends Component {
                                              {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                                             <Col>
                                             {users.admin === true?                                                 
-                                                <Button size="sm" variant="primary" value={item._id} onClick={this.handleChange}>Delete</Button>
+                                                <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                                                 :<Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Suggest</Button>
                                                 }
                                             </Col>
