@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import {Carousel}  from 'react-bootstrap';
-
-import axios from 'axios';
-import localApi from "../../localApi";
-
 import { Link } from "react-router-dom";
 import {Button,Card,Row,Col}  from 'react-bootstrap';
 import localApi from "../../localApi";
@@ -54,25 +50,25 @@ class CAEventsBox extends Component {
     }); 
 
 
-
-  // START ATTEND (PUT) API
-  handleAttend = (eventId) => {
-    // sending DELETE call to backend 
-        localApi.put(`events/attend/${eventId}`)
-        .then(res=>{
-            console.log(res.data)
-        })
-    }
-// END ATTEND (PUT) API
-
     // START CALL USER DATA
-    localApi.get(`/users/5d3118d3c015b5923b806846`)
+    localApi
+    .get('get_user')
     .then(resp =>{
         const userData = resp.data;
         this.setState({users : userData})
     })
     // END CALL USER DATA
   };
+
+    // START ATTEND (PUT) API
+    handleAttend = (eventId) => {
+      // sending DELETE call to backend 
+          localApi.put(`events/attend/${eventId}`)
+          .then(res=>{
+              console.log(res.data)
+          })
+      }
+  // END ATTEND (PUT) API
  // END GET EVENTS DATA
 
  // START DELETE API 

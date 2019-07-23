@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import localApi from "../../localApi";
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card,Carousel}  from 'react-bootstrap';
 import Modal from 'react-modal';
-import AttendeesPopUp from '../../pages/popUp/AttendeesPopUp';
 // import ReviewsPopUp from '../../pages/popUp/ReviewsPopUp';
 import Reviews from '../events/Reviews';
-import localApi from "../../localApi";
 
 
 const customStyles = {
