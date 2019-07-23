@@ -3,6 +3,15 @@ import { Link } from "react-router-dom";
 import axios from "axios"
 import AverageRates from '../Components/events/AverageRates'
 import StarReview from '../Components/events/StarReview'
+import {Card, Container}  from 'react-bootstrap';
+import styled from 'styled-components';
+
+const Wrapper = styled.section`
+  padding: 2em;
+  background: white;
+  margin:2em;
+`;
+
 
 export class SingleEvent extends Component {
     state = {
@@ -33,10 +42,18 @@ export class SingleEvent extends Component {
     const {_id} = this.state.event;
     console.log(this.props)
         return( 
-            <div>                            
+            <div>     
+                <Container>
+                <Wrapper>
+                
+                <Card border="light" style={{ width: '18rem' }}>
+          <Card.Body>      
+            <Card.Title>                
                 <Link to={`/events/${_id}`}>{event.name}</Link>
-                <p>{event.local_date}</p>
-                <Link to={`/events/${_id}/attendees`}>Attendees</Link>
+            </Card.Title>
+            <Card.Text>{event.local_date}</Card.Text>
+            <Card.Text><Link to={`/events/${_id}/attendees`}>Attendees</Link></Card.Text>
+            <Card.Text>
                 {/* conditional rendering */}
                 {event?
                 <AverageRates id={_id}/> :
@@ -44,6 +61,11 @@ export class SingleEvent extends Component {
                 {event?
                 <StarReview id={_id}/>:
                 null}   
+            </Card.Text>
+            </Card.Body> 
+            </Card>
+            </Wrapper>
+            </Container>
             </div>
         )
     }

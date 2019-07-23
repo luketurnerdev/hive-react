@@ -101,9 +101,9 @@ class StudentsEvents extends Component {
                                             </Col>
                                         {/* show SAVE button if is admin . otherwise show SUGGEST button */}
                                             <Col>
-                                           {users.admin === true?                                                 
-                                           <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
-                                           :<Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Suggest</Button>
+                                           {(users.admin === true)?                                                 
+                                           <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
+                                           :null
                                            }
 
                                             <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Attend</Button>

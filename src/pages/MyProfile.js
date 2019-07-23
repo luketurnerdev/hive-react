@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import Profile from '../Components/profiles/Profile'
 // import Statistic from '../Components/profiles/Statistic';
-import {Col,Row,Container,Button,Card,Nav,Alert}  from 'react-bootstrap';
+import {Col,Container,Alert}  from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
