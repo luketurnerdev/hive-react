@@ -15,3 +15,4 @@ export class Suggest extends Component {
 }
 
 export default Suggest
+
