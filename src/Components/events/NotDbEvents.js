@@ -6,10 +6,10 @@ export class NotDbEvents extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            eventName: null,
-            eventTime: null,
-            eventDate: null,
-            eventNames: []
+            eventNames: [],
+            eventTimes: [],
+            eventDates: [],
+            eventsData: null
 
         }
         
@@ -20,10 +20,13 @@ export class NotDbEvents extends Component {
             let [userData, eventsData] = resp.data;
             this.setState({eventsData: eventsData});
             let eventNames = [];
+            let eventDates = [];
+            let eventTimes = [];
 
             for (let i=0; i<10; i++) {
-                console.log(eventsData[i].name);
                 eventNames.push(eventsData[i].name);
+                eventDates.push(eventsData[i].local_date);
+                eventTimes.push(eventsData[i].local_time);
             }
             this.setState({eventNames:eventNames});
             
@@ -35,31 +38,35 @@ export class NotDbEvents extends Component {
             console.log(err);
         })
     }
-    // render(){
-    //     console.log(this.state.events);
-    //     const {events} = this.state;
-    //     return(
-          
-    //       <div>
-    //         {
-    //           events.map((event) => {
-    //             return <li key={event.id}>{event.name}</li>
-    //           })
-    //         }
-    //       </div>
-    //     )
-    //   }
 
     render() {
 
         const eventsData = this.state.eventsData;
         const names = this.state.eventNames;
-        //
+        const times = this.state.eventTimes;
+        const dates = this.state.eventDates;
+
+
         return (
-            <div> {
-                names.map((name) => {
-                    return <li key={name.id}>{name}</li>
+            <div> 
+            <h1>Events from Meetup.com</h1> 
+            {
+
+                
+                
+                eventsData && eventsData.map((event) => {
+                    return (
+                        
+
+                        <>
+                        <h5 key={event.id}>{event.name} </h5>
+                        <li key={event.id}>{event.local_date} at {event.local_time} Attend</li>
+                        </>
+                    )
+                    
                 })
+
+                
             }
                 
                 
