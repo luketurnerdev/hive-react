@@ -20,6 +20,8 @@ export class NotDbEvents extends Component {
         LocalAPI.get('/dashboard')
         .then(resp => {
             let [userData, eventsData] = resp.data;
+            // need to use event name and event group url name to the attend button
+
             this.setState({eventsData: eventsData});
             let eventNames = [];
             let eventDates = [];
