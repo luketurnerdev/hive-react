@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import localApi from "../../localApi";
 
 class TodayEvents extends Component {
   state = {
@@ -12,8 +13,8 @@ class TodayEvents extends Component {
   let todayEvents = [];
   // we need two request calls to the db (one for events, one for users)
     axios.all([
-      axios.get('/events'),
-      axios.get('/users/3')
+      localApi.get('/events'),
+      localApi.get('/users/3')
     ])
     .then(axios.spread((eventsResp, usersResp) => {
         // destructure data from response

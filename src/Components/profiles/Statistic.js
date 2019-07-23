@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import localApi from "../../localApi";
 
 
 class Statistic extends Component {
@@ -17,12 +18,12 @@ class Statistic extends Component {
     let approved = [];
     let numberComments = 0;
 
-    axios.all([
-      axios.get(`/users/${this.props.match.params.id}`),
-      axios.get('/events/'),
-      axios.get('/ratings')
+    localApi.all([
+      localApi.get(`/users/${this.props.match.params.id}`),
+      localApi.get('/events/'),
+      lop.get('/ratings')
     ])
-    .then(axios.spread((userResp, eventsResp, reviewsResp) => {
+    .then(localApi.spread((userResp, eventsResp, reviewsResp) => {
       // destructure data from response of user
       const {data} = userResp;
       // declare variables for events and ratings data

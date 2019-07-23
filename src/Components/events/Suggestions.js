@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import localApi from "../../localApi";
 
 class Suggestions extends Component {
 
@@ -20,8 +21,8 @@ class Suggestions extends Component {
     // we need two request calls to the db (one for events, one for users)
       axios.all([
         // axios.get(`/events/${this.props.match.params.id}`),
-        axios.get('/events/'),
-        axios.get('/users')
+        localApi.get('/events/'),
+        localApi.get('/users')
       ])
       .then(axios.spread((eventsResp, usersResp) => {
           // destructure data from response

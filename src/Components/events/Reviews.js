@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import localApi from "../../localApi";
 import EditRating from './EditRating';
 
 
@@ -14,13 +15,13 @@ class Reviews extends Component {
     componentDidMount(){
         // declare variable for all rankings
         let reviews = [];
-        axios.all([
-            axios.get(`/events/${this.props.id || this.props.match.params.id}`),
-            axios.get('/ratings'),
+        localApi.all([
+            localApi.get(`/events/${this.props.id || this.props.match.params.id}`),
+            localApi.get('/ratings'),
             // users referred in each rating
             // axios.get('/users')
           ])
-          .then(axios.spread((eventsResp, reviewsResp, usersResp) => {
+          .then(localApi.spread((eventsResp, reviewsResp, usersResp) => {
               // destructure data of eventsResp
               const {data} = eventsResp;
               // cannot destructure data again (not possible to have 2 variables called data)
