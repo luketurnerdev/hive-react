@@ -1,4 +1,4 @@
-
+// Dispaly The Hive attendees for SingleEvent => name and photo ( pop up page)
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
@@ -54,7 +54,7 @@ class Attendees extends Component {
         <h1>
           {users.map((user)=>(
             <div key={user.id} >
-            {user.avatar}
+            {user.photo}
             {user.name}
             </div>))}
             {/* {users[0].first_name} */}

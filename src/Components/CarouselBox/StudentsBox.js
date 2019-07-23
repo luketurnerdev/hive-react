@@ -26,19 +26,19 @@ class CAEventsBox extends Component {
       // for loop through all the events
 
       for (let i = 0; i < eventsLength; i++) {
-          
-            // Ony if the event has been recommended by CA
-          if ((data[i].hive_attendees.length > 0) && (data[i].ca_recommended === false)) {
-            // mark it as student event (event a student is attending)
+        if ((data[i].ca_recommended === false)){
+          //   // Ony if the event has been recommended by CA
+          // if ((data[i].hive_attendees.length > 0) && (data[i].ca_recommended === false)) {
+          //   // mark it as student event (event a student is attending)
               cAEvents.push(data[i]);
-              cAEventsId.push(data[i]._id);
+              cAEventsId.push(data[i].id);
           }
-      }
+        }
       for(let i = 0;i<3;i++){
         
        array.push(cAEvents[i]);
        console.log(array)
-      }
+    }
       this.setState({events:cAEvents, ids:cAEventsId, array_:array});
     })
     .catch(error => {

@@ -14,8 +14,7 @@ const Wrapper = styled.section`
   background: white;
   margin:2em;
 `;
-const EventsTitle = styled.p
-`
+const EventsTitle = styled.p`
 display:flex;
 justify-content: flex-end;
 `
@@ -27,7 +26,6 @@ export class DbEvents extends Component {
     onSubmit=(event)=> this.setState({location: event.target.value})
 
     render() {
-        console.log(this.state)
         // Set the object "location" as state
         const {location} = this.state;
         

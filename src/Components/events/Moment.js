@@ -36,7 +36,8 @@ class MyCalendar extends Component {
     let events = [];
     axios.all([
 
-      axios.get(`/users/${this.props.match.params.id}`),
+      // axios.get(`/users/${this.props.match.params.id}`),
+      axios.get(`/users`),
       axios.get('/events')
 
     ])

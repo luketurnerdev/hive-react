@@ -1,8 +1,7 @@
 // Output: Form to request access to admin ( name and message for admin)
 // Signed in as STUDENTS with meetup
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
-import {Col,Row,Button,Card,Form,Container}  from 'react-bootstrap';
+import {Button,Form,Container}  from 'react-bootstrap';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -14,19 +13,19 @@ margin:2em;
 
 class UsersRequest extends Component {
   state = { 
-      request:[]
-    
+      request:[],
+      message:""
     };
 
     componentDidMount(){
         let array = []
     axios
-// START request call to the db
+// START CALL USER DATA
         .get('/users/request')
             .then( res =>{
                 // destructure data from response
                 const {data} = res; 
-                
+                // push the data to array so we can map and pull out the key that we want
                 array.push(data)
                 this.setState({request: array});
                 console.log(array)
@@ -35,34 +34,57 @@ class UsersRequest extends Component {
                 console.log(error);
             }); 
         }
-// END request call to the db
+// END CALL USER DATA
 
+// START PUT API   
+// click SUBMIT and send the message to admin
 
+        handleChange = (event) => {
+            this.setState({ message: event.target.value });
+
+        }
+        handleSubmit = event => {
+        event.preventDefault();
+
+            const user = this.state.request
+            const id = user.map(single=>single._id)
+            console.log(id)
+            const request_message = {
+                message: this.state.message
+                };
+  
+// !!!! HAVE TO SEND HE USER_ID and REQUEST MESSAGE
+                axios.put(`/users/request`, { id,request_message })
+                .then(res => {
+                  console.log(res);
+                  console.log(res.data);
+                })
+            }
+// END PUT API 
 
   // START RESPONSE
     render() {
         const { request } = this.state
-            console.log(request)
+        
+            
         return (
             <div>
                 <Container>
                     <Wrapper>
                     {request.map(profile => 
-                        <Form>
+                        <Form onSubmit = {this.handleSubmit}>
                             <Form.Group>
                             <Form.Label>Hello {profile.name} !</Form.Label>
                             </Form.Group>
                                 <Form.Group controlId="messasge">
                                 <Form.Label>Message</Form.Label>
-                                <Form.Control type="message" placeholder="Please tell us about you..." />
+                                <Form.Control input type="text" placeholder="Please tell us about you..." name="request_message" onChange={this.handleChange}/>
                             </Form.Group>
-                            <Button variant="info" type="submit">
-                            <Link to={`/users/request?_method=PUT`}>Submit</Link>
-
-                           
-                            </Button>
+                            <Button variant="info" type="submit">Submit</Button>
                         </Form>
+    
                     )}
+                    
                     </Wrapper>
                 </Container> 
             </div>

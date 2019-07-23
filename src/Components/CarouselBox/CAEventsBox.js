@@ -31,10 +31,10 @@ class CAEventsBox extends Component {
           if (data[i].ca_recommended === true) {
               // mark it as CA event (event recommended by CA)
               cAEvents.push(data[i]);
-              cAEventsId.push(data[i]._id);
+              cAEventsId.push(data[i].id);
           }
       }
-      for(let i = 0;i<3;i++){
+      for(let i = 0;i<2;i++){
         
        array.push(cAEvents[i]);
        console.log(array)

@@ -3,44 +3,50 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
-import {Col,Row,Container,Button,Card,Nav}  from 'react-bootstrap';
+import {Card}  from 'react-bootstrap';
 
 class Profile extends Component {
 state={
-  user:[]
+  users:[]
 }
 
 // just after rendering the user's info, call to the API
   componentDidMount(){
-    console.log(this.props)
+    // let Users = []
+ 
 // Extracted userId from the Route params.    
-    const { _id } = this.props.match.params
-    console.log(_id)
+    const { id } = this.props.match.params
+    console.log(id)
+
     axios
-      .get('/users/${_id}')
+      .get(`/users/${this.props.match.params.id}`)
       .then(res => {
+        // modify the state according to the data in the API's response
+        const {data} = res;
           console.log(res.data)
-          // modify the state according to the data in the API's response
-        const persons = res.data;
-        this.setState({ persons });
+          
+        // add response of api call to users array
+        this.setState({ users: data });
       })
       .catch(err => {
           console.log(err);
       });  
-    
+      
+     
   };
 
   render(){
-    console.log(this.state.user)
-    const {user} = this.state
+    console.log(this.state.users)
+    const {users} = this.state
+   
     return( 
       <div>
-        {user.map(user => <li>{user.name}</li>)}
+        {users.map(users => <li>{users.name}</li>)}
         
         <Card border="light" style={{ width: '18rem' }}>
           <Card.Body>
-            <Card.Title>{user.meetup_uid}</Card.Title>
-            <Card.Text>{user.created_at}</Card.Text>
+            <Card.Title>{users.meetup_uid}</Card.Title>
+            <Card.Text>{users.created_at}</Card.Text>
           </Card.Body>
         </Card>
 

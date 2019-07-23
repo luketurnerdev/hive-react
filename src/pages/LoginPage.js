@@ -1,6 +1,6 @@
     
 import React, { Component } from "react";
-import {Col,Row,Container,Button,Card,Nav,Alert}  from 'react-bootstrap';
+import {Col,Container,Button}  from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
@@ -14,6 +14,7 @@ const WrapperLogin = styled.section`
 
 class HomePage extends Component {
     render() {
+        console.log(process.env);
         return (
             <div>
                 <Container>
@@ -23,10 +24,10 @@ class HomePage extends Component {
                  <h1>Welcome To The Hive!</h1>
                
                     <div>
-                        <Link to="/auth/meetup">
+                        <a href={`${process.env.REACT_APP_BACKEND_API}/auth/meetup`}>
                         <Button size="sm" variant="primary">Login</Button>
-                        </Link>
-                        <Link to="/request_access">
+                        </a>
+                        <Link to="/users/request">
                         <Button size="sm" variant="link">RequestAccess</Button>
                         </Link>
                     </div>

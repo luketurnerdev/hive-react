@@ -11,11 +11,10 @@ const Wrapper = styled.section`
   background: white;
   margin:2em;
 `;
-const EventsTitle = styled.p
-`
-display:flex;
-justify-content: flex-end;
-`
+const EventsTitle = styled.p`
+    display:flex;
+    justify-content: flex-end;
+    `
 
 export class Reviews extends Component {
     state = {
