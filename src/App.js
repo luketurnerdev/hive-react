@@ -37,7 +37,7 @@ class App extends Component {
                       {/* TBD FOR THE PAGE -GROUP/:ID */}
                       {/* <Route exact path="/events/:group/:id" component={Event_id} /> */}
                       <Route exact path="/users/request" component={RequestAccess} />
-                      <Route exact path="/users/:_id" component={Profile} />
+                      <Route exact path="/users/:id" component={Profile} />
                       <Route exact path="/reviews" component={MyReviews} />
                       <Route exact path="/calendar" component={MyCalendar} />
                       <Route exact path="/reviewform" component={ReviewForm} />

@@ -4,7 +4,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import {Card,Alert,Col,Row,Container,Button,Image}  from 'react-bootstrap';
+import {Card,Alert,Col,Row,Container,Button}  from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`

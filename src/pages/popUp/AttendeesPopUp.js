@@ -59,23 +59,24 @@ import React, {Component} from 'react';
 //         // and push it into this.state.users
 //     }
 
-//     render(){
-//     const {users} = this.state; 
-//     const {attendees } = this.props;
-// //         return(
-// // //             {users.map((user) => (
-// // //             <div key={user._id} >
-// // //                 {attendees.includes(user._id)?
-// // //                     <img ref={user.photo} />:
-// // //                     null
-// // //                 }
-// // //                 {attendees.includes(user._id)?
-// // //                     <p>{user.name}</p>:
-// // //                     null
-// // //                 }
-// // //             </div>                
-// // //             ))}
-// // //             </>
+    render(){
+    const {users} = this.state; 
+    const {attendees } = this.props;
+    return null;
+//         return(
+// //             {users.map((user) => (
+// //             <div key={user._id} >
+// //                 {attendees.includes(user._id)?
+// //                     <img ref={user.photo} />:
+// //                     null
+// //                 }
+// //                 {attendees.includes(user._id)?
+// //                     <p>{user.name}</p>:
+// //                     null
+// //                 }
+// //             </div>                
+// //             ))}
+// //             </>
 
 // // //     return null;
 // // // }
