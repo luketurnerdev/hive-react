@@ -34,13 +34,12 @@ class MyCalendar extends Component {
     let events = [];
     axios.all([
       // axios.get(`/users/${this.props.match.params.id}`),
-      axios.get(`http://localhost:3000/get_user`),
+      axios.get(`get_user`),
       axios.get('/events')
 
     ])
     .then(axios.spread((userResp, eventsResp) => {
       // destructure data of user
-      console.log("peme")
       console.log(userResp);
       const {data} = userResp;
       // declare a variable for eventsData
@@ -58,7 +57,10 @@ class MyCalendar extends Component {
       }
       console.log(events);
       this.setState({events});
-    }));
+    }))
+    .catch(error => {
+      console.log(error);
+    })
   };
 
 
