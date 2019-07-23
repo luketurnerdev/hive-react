@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
+import localApi from "../../src/localApi";
 import AverageRates from '../Components/events/AverageRates'
 import StarReview from '../Components/events/StarReview'
 
@@ -11,7 +12,7 @@ export class SingleEvent extends Component {
 
     // just after rendering the event, call to the API
     componentDidMount() {
-    axios
+    localApi
     // request call to the db
         .get(`/events/${this.props.match.params.id}`)
         .then(resp => {

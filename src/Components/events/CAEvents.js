@@ -18,7 +18,7 @@ class CAEvents extends Component {
     componentDidMount() {
     let CAEvents = [];
     let CAEventsId = [];
-    axios
+    localApi
     // START GET EVENTS DATA
         .get('/events')
         .then(res => {
@@ -55,11 +55,6 @@ class CAEvents extends Component {
     };
 // END GET API 
 
-// START PUT API 
-
-      
-// END PUT API      
-
 // START DELETE API 
     // setting in the singleEvent state the value of the button DELETE which is the event._id
     handleChange = (eventId) => {
@@ -71,6 +66,7 @@ class CAEvents extends Component {
     }
 // END DELETE API
 
+// START ATTEND (PUT) API
     handleAttend = (eventId) => {
         // sending DELETE call to backend 
             localApi.put(`events/attend/${eventId}`)
@@ -78,6 +74,8 @@ class CAEvents extends Component {
                 console.log(res.data)
             })
         }
+// END ATTEND (PUT) API
+
 // START RESPONSE
     render() {
         const {users} = this.state;

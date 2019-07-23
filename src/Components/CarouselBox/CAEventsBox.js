@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Carousel}  from 'react-bootstrap';
 import axios from 'axios';
+import localApi from "../../localApi";
 import { Link } from "react-router-dom";
 import {Button,Card,Row,Col}  from 'react-bootstrap';
 
@@ -18,10 +19,11 @@ class CAEventsBox extends Component {
     let cAEventsId = [];
     let array = [];
 
-    axios
-    .get('/events')
+    localApi
+    .get('events')
     .then(res=>{
       const {data} = res;
+      console.log(data);
       // set length of loop
       let eventsLength = data.length;
       // for loop through all the events
@@ -30,14 +32,15 @@ class CAEventsBox extends Component {
           if (data[i].ca_recommended === true) {
               // mark it as CA event
               cAEvents.push(data[i]);
-              cAEventsId.push(data[i].id);
-          }
-      }
+              cAEventsId.push(data[i]._id);
+          };
+      };
+      // we just show three events in the box
       for(let i = 0;i<2;i++){
-        
-       array.push(cAEvents[i]);
+      array.push(cAEvents[i]);
       }
       this.setState({events:cAEvents, ids:cAEventsId, array_:array});
+      console.log(this.state.array_)
     })
     .catch(error => {
       console.log(error);
@@ -45,13 +48,21 @@ class CAEventsBox extends Component {
 
   }
 
-  
+  // START ATTEND (PUT) API
+  handleAttend = (eventId) => {
+    // sending DELETE call to backend 
+        localApi.put(`events/attend/${eventId}`)
+        .then(res=>{
+            console.log(res.data)
+        })
+    }
+// END ATTEND (PUT) API
   
 
 // START RESPONSE CAROUSEL
   render() {
-    const {array_} = this.state
-    console.log(array_.name)
+    const {array_} = this.state;
+    console.log(array_)
     return (
         <div>  
           <Carousel >
@@ -59,7 +70,7 @@ class CAEventsBox extends Component {
             return (
             
                 <Carousel.Item>
-                    <div key={item.id}>
+                    <div key={item._id}>
                       <Card border="light" >
                           <Card.Body> 
                           <Card.Text> <Link to={`/events/${item._id}`}>{item.name}</Link></Card.Text>
@@ -68,8 +79,8 @@ class CAEventsBox extends Component {
                               <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                             </Col>
                             <Col>
-                              <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Attend</Button>
                               <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Delete</Button>
+                              <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>Attend</Button>
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">

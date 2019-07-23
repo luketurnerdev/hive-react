@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import localApi from "../../localApi";
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 // we import modal for the pop-up functionality
@@ -33,8 +34,7 @@ class MyCalendar extends Component {
     // declare a variable for calendar events
     let events = [];
     axios.all([
-      // axios.get(`/users/${this.props.match.params.id}`),
-      axios.get(`get_user`),
+      axios.get('get_user'),
       axios.get('events')
 
     ])
