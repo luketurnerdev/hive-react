@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import localApi from "../localApi";
+import axios from "axios";
+import localApi from "../../src/localApi";
 import AverageRates from '../Components/events/AverageRates'
 import StarReview from '../Components/events/StarReview'
 import {Card, Container}  from 'react-bootstrap';
