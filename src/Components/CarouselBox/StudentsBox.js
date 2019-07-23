@@ -56,14 +56,14 @@ class CAEventsBox extends Component {
       let eventsLength = data.length;
       // for loop through all the events
       for (let i = 0; i < eventsLength; i++) {
-            // Only if the event is attended OR suggested by a hiver, AND CA hasn't recommended it yet
-          if ((data[i].ca_recommended === false) || ((data[i].hive_attendees.length > 0) || (data[i].suggested.is_suggested))) {
-            // mark it as student event
+        if ((data[i].ca_recommended === false)){
+          //   // Ony if the event has been recommended by CA
+          // if ((data[i].hive_attendees.length > 0) && (data[i].ca_recommended === false)) {
+          //   // mark it as student event (event a student is attending)
               cAEvents.push(data[i]);
-            // we also store the id of each event
-              cAEventsId.push(data[i]._id);
+              cAEventsId.push(data[i].id);
           }
-      }
+        }
       for(let i = 0;i<3;i++){
        array.push(cAEvents[i]);
        console.log(array)

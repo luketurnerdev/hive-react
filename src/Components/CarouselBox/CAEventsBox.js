@@ -33,7 +33,8 @@ class CAEventsBox extends Component {
               cAEventsId.push(data[i].id);
           }
       }
-      for(let i = 0;i<3;i++){
+      for(let i = 0;i<2;i++){
+        
        array.push(cAEvents[i]);
       }
       this.setState({events:cAEvents, ids:cAEventsId, array_:array});

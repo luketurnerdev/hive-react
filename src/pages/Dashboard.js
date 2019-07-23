@@ -2,14 +2,14 @@
 //( Signed in as STUDENT/ADMIN)
 import React, { Component } from 'react';
 // import CAEvents from '../Components/events/CAEvents';
-import StudentsEvents from '../Components/events/StudentsEvents';
+import StudentsBox from '../Components/CarouselBox/StudentsBox';
 import NotDbEvents from '../Components/events/NotDbEvents';
 import {Col,Row,Container,Badge,Alert}  from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import CAEventsBox from '../Components/CarouselBox/CAEventsBox';
-import MyCalendar from '../Components/events/Moment';
-import StudentsBox from '../Components/CarouselBox/StudentsBox'
+import Moment from '../Components/events/Moment'
+
 
 
 // import Moment from './../Components/events/Moment'
@@ -51,7 +51,7 @@ export class Dashboard extends Component {
                     <Col>
                         <Calendar>
                             <Calendar_style>
-                            <MyCalendar />
+                            <Moment />
                             </Calendar_style>
                         </Calendar>
                     </Col>   
