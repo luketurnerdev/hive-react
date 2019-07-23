@@ -27,7 +27,8 @@ const customStyles = {
 class MyCalendar extends Component {
   state = {
       event: false,
-      events: []
+      events: [],
+      eventsData: []
   }
 
   componentDidMount(){
@@ -58,11 +59,12 @@ class MyCalendar extends Component {
         }
       }
       console.log(events);
-      this.setState({events});
+      this.setState({events,eventsData});
     }))
     .catch(error => {
       console.log(error);
     })
+    // setInterval(this.componentDidMount(), 1000000);
   };
 
 
@@ -76,12 +78,12 @@ class MyCalendar extends Component {
       this.setState({ event: false });
     }
 
-    // componentWillUnmount() {
-    //   clearInterval(this.interval);
-    // }
+    componentDidUpdate(eventsData) {
+      
+    }
 
     keepRuning = () => {
-      setTimeout(this.componentDidMount, 1000);
+      // setTimeout(this.componentDidMount, 1000);
     }
 
     render(){

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Carousel}  from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import {Button,Card,Row,Col}  from 'react-bootstrap';
+import axios from 'axios';
 import localApi from "../../localApi";
 
 
@@ -10,7 +11,8 @@ class CAEventsBox extends Component {
   state = {
       events: [],
       ids: [],
-      array_:[]
+      array_:[],
+      user: ""
   };
 
   componentDidMount() { 
@@ -20,11 +22,14 @@ class CAEventsBox extends Component {
  
     
     // START GET EVENTS DATA
-    localApi
-    .get('events')
-    .then(res=>{
-      const {data} = res;
+    axios.all([
+      localApi.get('events'),
+      localApi.get('get_user')
+    ])
+    .then(axios.spread((eventsResp, userResp) => {
+      const {data} = eventsResp;
       console.log(data);
+      const userData = userResp.data;
       // set length of loop
       let eventsLength = data.length;
       // for loop through all the events
@@ -42,9 +47,9 @@ class CAEventsBox extends Component {
       array.push(cAEvents[i]);
 
       }
-      this.setState({events:cAEvents, ids:cAEventsId, array_:array});
+      this.setState({events:cAEvents, ids:cAEventsId, array_:array, user: userData});
       console.log(this.state.array_)
-    })
+    }))
     .catch(error => {
       console.log(error);
     }); 
@@ -86,9 +91,7 @@ class CAEventsBox extends Component {
 
 // START RESPONSE CAROUSEL
   render() {
-    const {users} = this.state;
-    const {array_} = this.state
-    console.log(array_.name)
+    const {users, user, array_} = this.state;
 
     return (
         <div>  
@@ -108,7 +111,11 @@ class CAEventsBox extends Component {
                           {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                             <Col>
 
-                              <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>Attend</Button>
+                            <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>
+                              {!(item.hive_attendees.includes(user._id))?
+                              <>Attend</>:
+                              <>Unattend</>}
+                              </Button>
 
                             {users.admin === true?                                                 
                               <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
@@ -133,4 +140,4 @@ class CAEventsBox extends Component {
 
 };
 
-export default CAEventsBox
+export default CAEventsBox;

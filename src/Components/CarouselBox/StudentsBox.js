@@ -26,14 +26,13 @@ class CAEventsBox extends Component {
       ids: [],
       array_:[],
       modalIsOpen: false,
-      user: "",
+      user: ""
   };
 
   componentDidMount() { 
     let cAEvents = [];
     let cAEventsId = [];
     let array = [];
-    let user = "";
 
     axios.all([
       localApi.get('/events'),
