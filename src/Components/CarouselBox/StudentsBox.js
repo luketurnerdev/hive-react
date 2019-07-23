@@ -6,7 +6,9 @@ import Modal from 'react-modal';
 import AttendeesPopUp from '../../pages/popUp/AttendeesPopUp';
 // import ReviewsPopUp from '../../pages/popUp/ReviewsPopUp';
 import Reviews from '../events/Reviews';
-   
+import localApi from "../../localApi";
+
+
 const customStyles = {
   content : {
     top                   : '50%',
@@ -90,7 +92,22 @@ class CAEventsBox extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  
+// START PUT API     
+// click SAVE and the boolean ca_recommended=false should update to true 
+// with submit it gets the event and the true value
+handleSubmit = (item,boolean) => {
+  item.ca_recommended=boolean 
+  console.log(item._id)
+ localApi.put(`/events/recommend/${item._id}`, item)
+  .then((res) => {
+          console.log("here");
+          console.log(res);
+          this.getUpdatedEvents()
+      })
+      .catch(err => console.log(err));
+  }
+// END PUT API      
+
 
 // START RESPONSE CAROUSEL
   render() {
@@ -113,9 +130,11 @@ class CAEventsBox extends Component {
                               <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                             </Col>
                             <Col>
-                              <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
-                              <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Attend</Button>
-                              {/* <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Delete</Button> */}
+                            {(users.admin === true)?                                                 
+                                           <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
+                                           :null
+                                           }                              
+                             <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Attend</Button>
                               <button onClick={this.openModal}>Attendees</button>
                               {/* <Modal
                                     isOpen={this.state.modalIsOpen}

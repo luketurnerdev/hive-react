@@ -3,14 +3,14 @@ import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card}  from 'react-bootstrap';
 import localApi from "../../localApi";
-import axios from "axios";
+
 
 class CAEvents extends Component {
     state = {
         events: [],
         ids: [],
         suggested: "",
-        user: "",
+        users: [],
         singleEvent: ""
     };
 // START GET EVENT API 
@@ -18,9 +18,9 @@ class CAEvents extends Component {
     componentDidMount() {
     let CAEvents = [];
     let CAEventsId = [];
-    axios
+    
     // START GET EVENTS DATA
-        .get('/events')
+    localApi.get('/events')
         .then(res => {
             // destructure data from response
             const {data} = res;
@@ -46,7 +46,7 @@ class CAEvents extends Component {
         // END GET EVENTS DATA
 
         // START CALL USER DATA
-        axios.get(`/users/5d3118d3c015b5923b806846`)
+        localApi.get(`/users/5d3118d3c015b5923b806846`)
         .then(resp =>{
             const userData = resp.data;
             this.setState({users : userData})
@@ -98,8 +98,8 @@ class CAEvents extends Component {
                                              {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                                             <Col>
                                             {users.admin === true?                                                 
-                                                <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
-                                                :<Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Suggest</Button>
+                                                <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
+                                                :null
                                                 }
                                             <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}>Attend</Button>
                                             </Col>
