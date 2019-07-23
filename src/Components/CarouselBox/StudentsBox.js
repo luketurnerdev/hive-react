@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 // import ReviewsPopUp from '../../pages/popUp/ReviewsPopUp';
 import Reviews from '../events/Reviews';
 
+Modal.setAppElement('#root');
 
 const customStyles = {
   content : {
@@ -18,7 +19,6 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)'
   }
 };
-
 class CAEventsBox extends Component {
   
   state = {

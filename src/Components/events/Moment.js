@@ -8,6 +8,7 @@ import moment from 'moment'
 import Modal from 'react-modal';
 import Info from "../../pages/popUp/Info";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+// import customStyles from "../../styles/PopUpStyle"
 
 const localizer = momentLocalizer(moment);
 
@@ -78,9 +79,11 @@ class MyCalendar extends Component {
       this.setState({ event: false });
     }
 
-    componentDidUpdate(eventsData) {
-      
-    }
+    // componentDidUpdate(this.state.eventsData) {
+    //   localApi
+    //   .get("events")
+    //   if (eventsData )
+    // }
 
     keepRuning = () => {
       // setTimeout(this.componentDidMount, 1000);

@@ -4,6 +4,23 @@ import { Link } from "react-router-dom";
 import {Button,Card,Row,Col}  from 'react-bootstrap';
 import axios from 'axios';
 import localApi from "../../localApi";
+import Modal from 'react-modal';
+// import customStyles from "../../styles/PopUpStyle";
+import SuggestForm from "../forms/SuggestForm";
+
+
+Modal.setAppElement('#root');
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 
 class CAEventsBox extends Component {
@@ -12,7 +29,8 @@ class CAEventsBox extends Component {
       events: [],
       ids: [],
       array_:[],
-      user: ""
+      user: "",
+      modalIsOpen: false
   };
 
   componentDidMount() { 
@@ -75,7 +93,16 @@ class CAEventsBox extends Component {
           })
       }
   // END ATTEND (PUT) API
- // END GET EVENTS DATA
+
+  // to "open" the pop up
+  openModal = (event) => {
+    this.setState({modalIsOpen: true});
+  }
+
+  // to "close" the pop up
+  closeModal = () => {
+    this.setState({modalIsOpen: false});
+  }
 
  // START DELETE API 
     // setting in the singleEvent state the value of the button DELETE which is the event._id
@@ -117,11 +144,29 @@ class CAEventsBox extends Component {
                               <>Unattend</>}
                               </Button>
 
-                            {users.admin === true?                                                 
+                            {user.admin === true?                                                 
                               <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                               :null
                              }
+                             {/* Suggest button (it doesn't modify the db yet, but only displays one modal with the form) */}
+                             {!item.suggested.is_suggested?
+                             <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>:
+                              null
+                            }
 
+                            <Modal
+                                isOpen={this.state.modalIsOpen}
+                                onRequestClose={this.closeModal}
+                                style={customStyles}
+                                contentLabel="Example Modal"
+                              >
+                                
+                                <div height="600">
+                                  <SuggestForm event={item}/>
+                                  <button onClick={this.closeModal}>close</button>
+                                </div>
+                              </Modal>
+                            
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">
