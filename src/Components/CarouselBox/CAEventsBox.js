@@ -33,14 +33,12 @@ class CAEventsBox extends Component {
           if (data[i].ca_recommended === true) {
               // mark it as CA event
               cAEvents.push(data[i]);
-
               cAEventsId.push(data[i]._id);
           };
       };
       // we just show three events in the box
       for(let i = 0;i<2;i++){
       array.push(cAEvents[i]);
-
       }
       this.setState({events:cAEvents, ids:cAEventsId, array_:array});
       console.log(this.state.array_)
@@ -87,7 +85,7 @@ class CAEventsBox extends Component {
   render() {
     const {users} = this.state;
     const {array_} = this.state
-    console.log(array_.name)
+    console.log(array_)
 
     return (
         <div>  

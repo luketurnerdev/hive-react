@@ -35,13 +35,7 @@ class CAEventsBox extends Component {
     let array = [];
     let users = [];
 
-    // axios
-    // .get('/events')
-    // .then(res=>{
-    //   const {data} = res;
-
-
-    localApi.get('events')
+    localApi.get('/events')
       .then(eventsResp => {
       const {data} = eventsResp;
       console.log(data);
@@ -56,7 +50,7 @@ class CAEventsBox extends Component {
               cAEventsId.push(data[i].id);
           }
         }
-      for(let i = 0;i<3;i++){
+      for(let i = 0; i<1; i++){
        array.push(cAEvents[i]);
        console.log(array)
       }
