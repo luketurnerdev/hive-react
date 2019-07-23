@@ -35,7 +35,7 @@ class MyCalendar extends Component {
     axios.all([
       // axios.get(`/users/${this.props.match.params.id}`),
       axios.get(`get_user`),
-      axios.get('/events')
+      axios.get('events')
 
     ])
     .then(axios.spread((userResp, eventsResp) => {
@@ -44,6 +44,7 @@ class MyCalendar extends Component {
       const {data} = userResp;
       // declare a variable for eventsData
       const eventsData = eventsResp.data;
+      console.log(eventsData);
       // we need to find those events the user is attending
       // calculate the length of the loop
       let eventsLength = eventsData.length;
