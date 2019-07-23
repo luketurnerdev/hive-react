@@ -44,6 +44,7 @@ export class SingleEvent extends Component {
                 {event?
                 <StarReview id={_id}/>:
                 null}   
+
             </div>
         )
     }
