@@ -42,6 +42,7 @@ class CAEventsBox extends Component {
       console.log(error);
     }); 
 
+
     // START CALL USER DATA
     localApi.get(`/users/5d3118d3c015b5923b806846`)
     .then(resp =>{

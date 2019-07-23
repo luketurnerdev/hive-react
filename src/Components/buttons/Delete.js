@@ -25,7 +25,7 @@ export class Delete extends Component {
         })
     }
 
-    rrender() {
+    render() {
     return (
       <div>
            <form onSubmit={this.handleSubmit}>

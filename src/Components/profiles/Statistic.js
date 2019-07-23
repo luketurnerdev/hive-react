@@ -73,6 +73,9 @@ class Statistic extends Component {
       // update the state
       this.setState({attended, numberComments, suggested, approved});
     }))
+    .catch(error => {
+      console.log(error);
+    })
   }
 
   render() {
