@@ -9,6 +9,7 @@ export class NotDbEvents extends Component {
             eventName: null,
             eventTime: null,
             eventDate: null,
+            eventNames: []
 
         }
         
@@ -17,30 +18,55 @@ export class NotDbEvents extends Component {
         LocalAPI.get('/dashboard')
         .then(resp => {
             let [userData, eventsData] = resp.data;
-            this.setState({eventName: eventsData[1].name });
-            
             this.setState({eventsData: eventsData});
-            console.log('state:' + this.state.eventsData);
+            let eventNames = [];
+
+            for (let i=0; i<10; i++) {
+                console.log(eventsData[i].name);
+                eventNames.push(eventsData[i].name);
+            }
+            this.setState({eventNames:eventNames});
+            
+            
+           
             
         })
         .catch(err =>{
             console.log(err);
         })
     }
+    // render(){
+    //     console.log(this.state.events);
+    //     const {events} = this.state;
+    //     return(
+          
+    //       <div>
+    //         {
+    //           events.map((event) => {
+    //             return <li key={event.id}>{event.name}</li>
+    //           })
+    //         }
+    //       </div>
+    //     )
+    //   }
 
     render() {
 
         const eventsData = this.state.eventsData;
-        console.log(this.state.eventsData);
-        // let str = {ob:123};
+        const names = this.state.eventNames;
+        //
         return (
-            <div>
-                <h1>{this.state.eventName}</h1>
-                <h1>Event1</h1>
-                <h1>Event1</h1>
-                <h1>Event1</h1>
+            <div> {
+                names.map((name) => {
+                    return <li key={name.id}>{name}</li>
+                })
+            }
+                
                 
             </div>
+
+
+
         )
     }
 }
