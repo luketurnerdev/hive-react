@@ -3,14 +3,14 @@ import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card}  from 'react-bootstrap';
 import localApi from "../../localApi";
-import axios from "axios";
+
 
 class CAEvents extends Component {
     state = {
         events: [],
         ids: [],
         suggested: "",
-        user: "",
+        users: [],
         singleEvent: ""
     };
 // START GET EVENT API 
@@ -18,9 +18,9 @@ class CAEvents extends Component {
     componentDidMount() {
     let CAEvents = [];
     let CAEventsId = [];
-    axios
+
     // START GET EVENTS DATA
-        .get('/events')
+    localApi.get('/events')
         .then(res => {
             // destructure data from response
             const {data} = res;
@@ -46,7 +46,7 @@ class CAEvents extends Component {
         // END GET EVENTS DATA
 
         // START CALL USER DATA
-        axios.get(`/users/5d3118d3c015b5923b806846`)
+        localApi.get("get_user")
         .then(resp =>{
             const userData = resp.data;
             this.setState({users : userData})
@@ -54,11 +54,6 @@ class CAEvents extends Component {
         // END CALL USER DATA
     };
 // END GET API 
-
-// START PUT API 
-
-      
-// END PUT API      
 
 // START DELETE API 
     // setting in the singleEvent state the value of the button DELETE which is the event._id
@@ -71,6 +66,7 @@ class CAEvents extends Component {
     }
 // END DELETE API
 
+// START ATTEND (PUT) API
     handleAttend = (eventId) => {
         // sending DELETE call to backend 
             localApi.put(`events/attend/${eventId}`)
@@ -78,6 +74,8 @@ class CAEvents extends Component {
                 console.log(res.data)
             })
         }
+// END ATTEND (PUT) API
+
 // START RESPONSE
     render() {
         const {users} = this.state;
@@ -98,8 +96,8 @@ class CAEvents extends Component {
                                              {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                                             <Col>
                                             {users.admin === true?                                                 
-                                                <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
-                                                :<Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Suggest</Button>
+                                                <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
+                                                :null
                                                 }
                                             <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}>Attend</Button>
                                             </Col>

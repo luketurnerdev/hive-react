@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import localApi from "../../localApi";
 import EditRating from './EditRating';
 import StarRatingComponent from 'react-star-rating-component';
 
@@ -17,9 +18,9 @@ class Reviews extends Component {
         // declare variable for all rankings
         let reviews = [];
         axios.all([
-            axios.get(`/events/${this.props.id}`),
-            axios.get('/ratings'),
-            axios.get('/users')
+            localApi.get(`/events/${this.props.id}`),
+            localApi.get('/ratings'),
+            localApi.get('/users')
           ])
           .then(axios.spread((eventsResp, reviewsResp, usersResp) => {
               // destructure data of eventsResp
@@ -86,7 +87,7 @@ class Reviews extends Component {
         const {reviews} = this.state;
         return(
             <div>
-            <h3>Individual rates</h3>
+            <h4>Individual rates</h4>
                 {reviews.map((review)=>(
             <div key={review._id} >
             {review.name}

@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import localApi from "../../localApi";
 import StarRatingComponent from 'react-star-rating-component';
 
 class AverageRates extends Component {
@@ -20,8 +21,8 @@ class AverageRates extends Component {
     // two request calls (one for event info, one for ratings)
     console.log(this.props);
     axios.all([
-      axios.get(`/events/${this.props.id}`),
-      axios.get('/ratings')
+      localApi.get(`/events/${this.props.id}`),
+      localApi.get('/ratings')
     ])
     .then(axios.spread((eventResp, reviewsResp) => {
       // destructure events data

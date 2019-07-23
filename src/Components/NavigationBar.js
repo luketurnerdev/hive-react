@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link,NavLink } from 'react-router-dom';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar ,Button} from 'react-bootstrap';
 import styled from 'styled-components';
 
 
@@ -24,6 +24,7 @@ const Styles = styled.div`
 `;
 
 export const NavigationBar = () => (
+  
   <Styles>
     <Navbar expand="lg">
       <Navbar.Brand as={Link} to='/'>The Hive</Navbar.Brand>
@@ -37,13 +38,12 @@ export const NavigationBar = () => (
             <Nav.Link as={NavLink} to="/events">Events</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={NavLink} to="/my_reviews">My Reviews</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
             <Nav.Link as={NavLink} to="/events/suggestions">All Suggestions</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={NavLink} to="/users/">Profile</Nav.Link>
+       
+          <Nav.Link as={NavLink} to="users/5d3118d3c015b5923b806846">Profile</Nav.Link>
+
           </Nav.Item>
           <Nav.Item>
             <Nav.Link as={NavLink} to="/auth/register">Log In</Nav.Link>
