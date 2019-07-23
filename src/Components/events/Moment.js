@@ -5,12 +5,10 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 // we import modal for the pop-up functionality
 import Modal from 'react-modal';
-import Info from "./Info";
+import Info from "../../pages/popUp/Info";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const localizer = momentLocalizer(moment);
-
-
 
 Modal.setAppElement('#root');
 
@@ -35,7 +33,6 @@ class MyCalendar extends Component {
     // declare a variable for calendar events
     let events = [];
     axios.all([
-
       // axios.get(`/users/${this.props.match.params.id}`),
       axios.get(`/users`),
       axios.get('/events')
@@ -66,7 +63,6 @@ class MyCalendar extends Component {
     // when they click on the event's title, within the calendar, the pop up "opens"
     openModal = (event) => {
       this.setState({ event });
-      // return <TodayEvents date={event.local_date}/>
     }
   
     // to "close" the pop up
@@ -87,7 +83,6 @@ class MyCalendar extends Component {
       // given only agenda and month views, beause week and day give errors
       views= {['agenda', 'month']}
       onDoubleClickEvent={this.openModal}
-      // onDoubleClickEvent={this.openModal}
     /> 
     {/* <button onClick={this.openModal}>Open Modal</button> */}
     <Modal
