@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import localApi from "../../localApi";
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card,Carousel}  from 'react-bootstrap';
@@ -24,20 +25,24 @@ class CAEventsBox extends Component {
       events: [],
       ids: [],
       array_:[],
-      users: [],
-      modalIsOpen: false
+      modalIsOpen: false,
+      user: "",
   };
 
   componentDidMount() { 
     let cAEvents = [];
     let cAEventsId = [];
     let array = [];
-    let users = [];
+    let user = "";
 
-    localApi.get('events')
-      .then(eventsResp => {
+    axios.all([
+      localApi.get('/events'),
+      localApi.get('get_user')
+    ])
+    .then(axios.spread((eventsResp, userResp) => {
       const {data} = eventsResp;
       console.log(data);
+      const usersData = userResp.data;
       // set length of loop
       let eventsLength = data.length;
       // for loop through all the events
@@ -66,8 +71,8 @@ class CAEventsBox extends Component {
       }
       console.log(array)
 
-      this.setState({events:cAEvents, ids:cAEventsId, array_:array, users: users});
-    })
+      this.setState({events:cAEvents, ids:cAEventsId, array_:array, user: usersData});
+    }))
     .catch(error => {
       console.log(error);
     });
@@ -89,6 +94,7 @@ class CAEventsBox extends Component {
         localApi.put(`events/attend/${eventId}`)
         .then(res=>{
             console.log(res.data)
+            this.componentDidMount()
         })
     }
 // END ATTEND (PUT) API
@@ -114,8 +120,8 @@ handleSubmit = (item,boolean) => {
 
 // START RESPONSE CAROUSEL
   render() {
-    const {array_, users} = this.state
-    console.log(users)
+    const {array_, user, users} = this.state
+    console.log(user)
     console.log(array_)
     return (
         <div>  
@@ -133,11 +139,15 @@ handleSubmit = (item,boolean) => {
                             </Col>
                             <Col>
 
-                              <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>Attend</Button>
+                              <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>
+                              {!(item.hive_attendees.includes(user._id))?
+                              <>Attend</>:
+                              <>Unattend</>}
+                              </Button>
                          
                               <button onClick={this.openModal}>Attendees</button>
 
-                            {(users.admin === true)?                                                 
+                            {(user.admin === true)?                                                 
                                            <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
                                            :null
                                            }                              
