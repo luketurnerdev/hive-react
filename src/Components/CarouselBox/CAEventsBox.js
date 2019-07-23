@@ -17,11 +17,14 @@ class CAEventsBox extends Component {
     let cAEvents = [];
     let cAEventsId = [];
     let array = [];
-
+ 
+    
     // START GET EVENTS DATA
-    localApi.get('/events')
+    localApi
+    .get('events')
     .then(res=>{
       const {data} = res;
+      console.log(data);
       // set length of loop
       let eventsLength = data.length;
       // for loop through all the events
@@ -30,13 +33,17 @@ class CAEventsBox extends Component {
           if (data[i].ca_recommended === true) {
               // mark it as CA event
               cAEvents.push(data[i]);
-              cAEventsId.push(data[i].id);
-          }
-      }
-      for(let i = 0;i<3;i++){
-       array.push(cAEvents[i]);
+
+              cAEventsId.push(data[i]._id);
+          };
+      };
+      // we just show three events in the box
+      for(let i = 0;i<2;i++){
+      array.push(cAEvents[i]);
+
       }
       this.setState({events:cAEvents, ids:cAEventsId, array_:array});
+      console.log(this.state.array_)
     })
     .catch(error => {
       console.log(error);
@@ -44,13 +51,24 @@ class CAEventsBox extends Component {
 
 
     // START CALL USER DATA
-    localApi.get(`/users/5d3118d3c015b5923b806846`)
+    localApi
+    .get('get_user')
     .then(resp =>{
         const userData = resp.data;
         this.setState({users : userData})
     })
     // END CALL USER DATA
   };
+
+    // START ATTEND (PUT) API
+    handleAttend = (eventId) => {
+      // sending DELETE call to backend 
+          localApi.put(`events/attend/${eventId}`)
+          .then(res=>{
+              console.log(res.data)
+          })
+      }
+  // END ATTEND (PUT) API
  // END GET EVENTS DATA
 
  // START DELETE API 
@@ -70,6 +88,7 @@ class CAEventsBox extends Component {
     const {users} = this.state;
     const {array_} = this.state
     console.log(array_.name)
+
     return (
         <div>  
           <Carousel >
@@ -77,7 +96,7 @@ class CAEventsBox extends Component {
             return (
             
                 <Carousel.Item>
-                    <div key={item.id}>
+                    <div key={item._id}>
                       <Card border="light" >
                           <Card.Body> 
                           <Card.Text> <Link to={`/events/${item._id}`}>{item.name}</Link></Card.Text>
@@ -87,10 +106,14 @@ class CAEventsBox extends Component {
                             </Col>
                           {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                             <Col>
+
+                              <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>Attend</Button>
+
                             {users.admin === true?                                                 
                               <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                               :null
                              }
+
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">

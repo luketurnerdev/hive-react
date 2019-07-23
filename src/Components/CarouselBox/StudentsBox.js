@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import localApi from "../../localApi";
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card,Carousel}  from 'react-bootstrap';
 import Modal from 'react-modal';
-import AttendeesPopUp from '../../pages/popUp/AttendeesPopUp';
 // import ReviewsPopUp from '../../pages/popUp/ReviewsPopUp';
 import Reviews from '../events/Reviews';
-import localApi from "../../localApi";
 
 
 const customStyles = {
@@ -42,27 +40,18 @@ class CAEventsBox extends Component {
     // .then(res=>{
     //   const {data} = res;
 
-      axios.all([
-        axios.get('/events'),
-        axios.get('/users/5d2ec30722fd90520548a9d6'),
-        // axios({
-        //   url: '/users/',
-        //   method: 'get',
-        //   data: hive_attendees
-        // })
-      ])
-      .then(axios.spread((eventsResp, usersResp) => {
+
+    localApi.get('events')
+      .then(eventsResp => {
       const {data} = eventsResp;
       console.log(data);
-      let usersData = usersResp.data;
       // set length of loop
       let eventsLength = data.length;
       // for loop through all the events
       for (let i = 0; i < eventsLength; i++) {
-        if ((data[i].ca_recommended === false)){
-          //   // Ony if the event has been recommended by CA
-          // if ((data[i].hive_attendees.length > 0) && (data[i].ca_recommended === false)) {
-          //   // mark it as student event (event a student is attending)
+        if ((data[i].ca_recommended === false) && ((data[i].hive_attendees.length > 0) || (data[i].suggested.is_suggested))){
+          // Ony if the event has not been recommended by CA, and any hivers have interacted with it (attending or suggesting it)
+          // mark it as student event (event a student is attending)
               cAEvents.push(data[i]);
               cAEventsId.push(data[i].id);
           }
@@ -71,12 +60,9 @@ class CAEventsBox extends Component {
        array.push(cAEvents[i]);
        console.log(array)
       }
-      // we put all the users' data to an array in order to take it to the state and then pass it as props to PopUp.js
-      users.push(usersData);
-      console.log(usersData);
 
       this.setState({events:cAEvents, ids:cAEventsId, array_:array, users: users});
-    }))
+    })
     .catch(error => {
       console.log(error);
     });
@@ -91,6 +77,17 @@ class CAEventsBox extends Component {
   closeModal = () => {
     this.setState({modalIsOpen: false});
   }
+
+  // START ATTEND (PUT) API
+  handleAttend = (eventId) => {
+    // sending DELETE call to backend 
+        localApi.put(`events/attend/${eventId}`)
+        .then(res=>{
+            console.log(res.data)
+        })
+    }
+// END ATTEND (PUT) API
+  
 
 // START PUT API     
 // click SAVE and the boolean ca_recommended=false should update to true 
@@ -107,6 +104,7 @@ handleSubmit = (item,boolean) => {
       .catch(err => console.log(err));
   }
 // END PUT API      
+
 
 
 // START RESPONSE CAROUSEL
@@ -130,12 +128,16 @@ handleSubmit = (item,boolean) => {
                               <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                             </Col>
                             <Col>
+
+                              <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>Attend</Button>
+                         
+                              <button onClick={this.openModal}>Attendees</button>
+
                             {(users.admin === true)?                                                 
                                            <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
                                            :null
                                            }                              
-                             <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Attend</Button>
-                              <button onClick={this.openModal}>Attendees</button>
+
                               {/* <Modal
                                     isOpen={this.state.modalIsOpen}
                                     onRequestClose={this.closeModal}
