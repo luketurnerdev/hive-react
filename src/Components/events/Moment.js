@@ -5,7 +5,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 // we import modal for the pop-up functionality
 import Modal from 'react-modal';
-import Info from "./Info";
+import Info from "../../pages/popUp/Info";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const localizer = momentLocalizer(moment);
