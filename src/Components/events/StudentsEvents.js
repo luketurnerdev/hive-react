@@ -23,7 +23,7 @@ class StudentsEvents extends Component {
         .then(resp => {
             // destructure data from response
             const {data} = resp;
-           
+            console.log(data);
             // set length of loop
             let eventsLength = data.length;
             // for loop through all the events
