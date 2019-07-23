@@ -48,16 +48,16 @@ import React, {Component} from 'react';
 //     return null;
 // }
 
-class AttendeesPopUp extends Component {
-    state = {
-        users: []
-    }
+// class AttendeesPopUp extends Component {
+//     state = {
+//         users: []
+//     }
 
-    componentDidMount() {
-        let users = [];
-        // here we do the axios call to get the users' data
-        // and push it into this.state.users
-    }
+//     componentDidMount() {
+//         let users = [];
+//         // here we do the axios call to get the users' data
+//         // and push it into this.state.users
+//     }
 
     render(){
     const {users} = this.state; 
@@ -78,11 +78,11 @@ class AttendeesPopUp extends Component {
 // //             ))}
 // //             </>
 
-// //     return null;
-// // }
+// // //     return null;
+// // // }
 
-//         )
-    }
-}
+// //         )
+//     }
+// }
 
-export default AttendeesPopUp;
+// export default AttendeesPopUp;

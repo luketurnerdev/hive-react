@@ -39,6 +39,7 @@ class CAEventsBox extends Component {
     // .get('/events')
     // .then(res=>{
     //   const {data} = res;
+
       axios.all([
         axios.get('/events'),
         axios.get('/users/5d2ec30722fd90520548a9d6'),
@@ -116,7 +117,7 @@ class CAEventsBox extends Component {
                               <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Attend</Button>
                               {/* <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Delete</Button> */}
                               <button onClick={this.openModal}>Attendees</button>
-                              <Modal
+                              {/* <Modal
                                     isOpen={this.state.modalIsOpen}
                                     onRequestClose={this.closeModal}
                                     style={customStyles}
@@ -127,7 +128,7 @@ class CAEventsBox extends Component {
                                       <AttendeesPopUp attendees={item.hive_attendees} />
                                       <button onClick={this.closeModal}>close</button>
                                     </div>
-                                  </Modal>
+                                  </Modal> */}
                               <Modal
                                 isOpen={this.state.modalIsOpen}
                                 onRequestClose={this.closeModal}

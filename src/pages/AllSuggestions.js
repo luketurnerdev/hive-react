@@ -25,8 +25,8 @@ export class Reviews extends Component {
         axios
             .get(`suggestions`)
             .then(res => {
-                const events = res.data;
-            this.setState({ events });  
+            const events = res.data;
+            this.setState({ events }); 
             })
     }
 
@@ -38,7 +38,7 @@ export class Reviews extends Component {
                 <div>
                 <Container>
                     <Wrapper>
-                        <Col><Alert><h2>Suggestios</h2></Alert></Col>
+                        <Col><Alert><h2>Suggestions</h2></Alert></Col>
                             <Alert variant= "light">
                                 <EventsTitle>Students list</EventsTitle>
                                 <hr />
