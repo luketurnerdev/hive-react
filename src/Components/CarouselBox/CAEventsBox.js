@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import {Carousel}  from 'react-bootstrap';
+
 import axios from 'axios';
 import localApi from "../../localApi";
+
 import { Link } from "react-router-dom";
 import {Button,Card,Row,Col}  from 'react-bootstrap';
+import localApi from "../../localApi";
 
 
 class CAEventsBox extends Component {
@@ -18,7 +21,9 @@ class CAEventsBox extends Component {
     let cAEvents = [];
     let cAEventsId = [];
     let array = [];
-
+ 
+    
+    // START GET EVENTS DATA
     localApi
     .get('events')
     .then(res=>{
@@ -32,12 +37,14 @@ class CAEventsBox extends Component {
           if (data[i].ca_recommended === true) {
               // mark it as CA event
               cAEvents.push(data[i]);
+
               cAEventsId.push(data[i]._id);
           };
       };
       // we just show three events in the box
       for(let i = 0;i<2;i++){
       array.push(cAEvents[i]);
+
       }
       this.setState({events:cAEvents, ids:cAEventsId, array_:array});
       console.log(this.state.array_)
@@ -46,7 +53,7 @@ class CAEventsBox extends Component {
       console.log(error);
     }); 
 
-  }
+
 
   // START ATTEND (PUT) API
   handleAttend = (eventId) => {
@@ -57,12 +64,35 @@ class CAEventsBox extends Component {
         })
     }
 // END ATTEND (PUT) API
-  
+
+    // START CALL USER DATA
+    localApi.get(`/users/5d3118d3c015b5923b806846`)
+    .then(resp =>{
+        const userData = resp.data;
+        this.setState({users : userData})
+    })
+    // END CALL USER DATA
+  };
+ // END GET EVENTS DATA
+
+ // START DELETE API 
+    // setting in the singleEvent state the value of the button DELETE which is the event._id
+    handleChange = (eventId) => {
+      // sending DELETE call to backend 
+          localApi.delete(`events/${eventId}`)
+          .then(res=>{
+              console.log(res.data)
+          })
+      }
+  // END DELETE API
+
 
 // START RESPONSE CAROUSEL
   render() {
-    const {array_} = this.state;
-    console.log(array_)
+    const {users} = this.state;
+    const {array_} = this.state
+    console.log(array_.name)
+
     return (
         <div>  
           <Carousel >
@@ -78,9 +108,16 @@ class CAEventsBox extends Component {
                             <Col>
                               <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                             </Col>
+                          {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                             <Col>
-                              <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Delete</Button>
+
                               <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>Attend</Button>
+
+                            {users.admin === true?                                                 
+                              <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
+                              :null
+                             }
+
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">

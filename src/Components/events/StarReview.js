@@ -87,7 +87,7 @@ class Reviews extends Component {
         const {reviews} = this.state;
         return(
             <div>
-            <h3>Individual rates</h3>
+            <h4>Individual rates</h4>
                 {reviews.map((review)=>(
             <div key={review._id} >
             {review.name}

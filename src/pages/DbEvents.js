@@ -64,7 +64,12 @@ export class DbEvents extends Component {
                             <hr />
                             <CAEvents/>
                         </Alert>:
-                        null}
+                        <Alert variant= "light">
+                        <EventsTitle>Coder Acedemy List</EventsTitle>
+                        <hr />
+                        <CAEvents/>
+                    </Alert>
+                }
                 </Wrapper>
             </Container>
             </div>

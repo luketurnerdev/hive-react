@@ -53,8 +53,8 @@ class StudentsEvents extends Component {
 // END CALL EVENTS DATAS 
 
 // START CALL USER DATA
-// WHAT FOR?
-        axios.get(`get_user`)
+
+        localApi.get("get_user")
         .then(resp =>{
             const userData = resp.data;
             this.setState({users : userData})
@@ -111,9 +111,9 @@ handleAttend = (eventId) => {
                                             </Col>
                                         {/* show SAVE button if is admin . otherwise show SUGGEST button */}
                                             <Col>
-                                           {users.admin === true?                                                 
-                                           <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
-                                           :<Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Suggest</Button>
+                                           {(users.admin === true)?                                                 
+                                           <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
+                                           :null
                                            }
                                             <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}>Attend</Button>
                                             </Col>
