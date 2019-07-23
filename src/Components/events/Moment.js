@@ -34,8 +34,8 @@ class MyCalendar extends Component {
     // declare a variable for calendar events
     let events = [];
     axios.all([
-      axios.get('get_user'),
-      axios.get('events')
+      localApi.get('get_user'),
+      localApi.get('events')
 
     ])
     .then(axios.spread((userResp, eventsResp) => {

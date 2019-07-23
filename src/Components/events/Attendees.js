@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import localApi from "../../localApi";
 
 class Attendees extends Component {
 // define the state
@@ -16,8 +17,8 @@ class Attendees extends Component {
   let users = [];
   // make the request calls
   axios.all([
-    axios.get(`/events/${this.props.match.params.id}`),
-    axios.get('/users/')
+    localApi.get(`/events/${this.props.match.params.id}`),
+    localApi.get('/users/')
   ])
   .then(axios.spread((eventResp, usersResp) => {
       // destructure data from response
