@@ -103,8 +103,15 @@ class StudentsEvents extends Component {
                                             <Col>
                                            {users.admin === true?                                                 
                                            <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
-                                           :<Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Suggest</Button>
+                                           : null
                                            }
+
+                                            {users.admin === false?                                                 
+                                           <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Suggest</Button>
+                                           : null
+                                           }
+
+                                           
 
                                             <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Attend</Button>
                                             </Col>
