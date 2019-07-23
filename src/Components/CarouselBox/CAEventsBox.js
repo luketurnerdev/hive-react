@@ -77,7 +77,7 @@ class CAEventsBox extends Component {
             return (
             
                 <Carousel.Item>
-                    <div key={item.id}>
+                    <div key={item._id}>
                       <Card border="light" >
                           <Card.Body> 
                           <Card.Text> <Link to={`/events/${item._id}`}>{item.name}</Link></Card.Text>

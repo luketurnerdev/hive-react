@@ -46,7 +46,7 @@ class CAEvents extends Component {
         // END GET EVENTS DATA
 
         // START CALL USER DATA
-        localApi.get(`/users/5d3118d3c015b5923b806846`)
+        localApi.get("get_user")
         .then(resp =>{
             const userData = resp.data;
             this.setState({users : userData})

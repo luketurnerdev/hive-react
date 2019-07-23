@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import axios from "axios"
+import localApi from "../localApi";
 import AverageRates from '../Components/events/AverageRates'
 import StarReview from '../Components/events/StarReview'
 import {Card, Container}  from 'react-bootstrap';
@@ -20,7 +20,7 @@ export class SingleEvent extends Component {
 
     // just after rendering the event, call to the API
     componentDidMount() {
-    axios
+    localApi
     // request call to the db
         .get(`/events/${this.props.match.params.id}`)
         .then(resp => {
@@ -47,22 +47,22 @@ export class SingleEvent extends Component {
                 <Wrapper>
                 
                 <Card border="light" style={{ width: '18rem' }}>
-          <Card.Body>      
-            <Card.Title>                
-                <Link to={`/events/${_id}`}>{event.name}</Link>
-            </Card.Title>
-            <Card.Text>{event.local_date}</Card.Text>
-            <Card.Text><Link to={`/events/${_id}/attendees`}>Attendees</Link></Card.Text>
-            <Card.Text>
-                {/* conditional rendering */}
-                {event?
-                <AverageRates id={_id}/> :
-                null}             
-                {event?
-                <StarReview id={_id}/>:
-                null}   
-            </Card.Text>
-            </Card.Body> 
+                <Card.Body>      
+                    <Card.Title>                
+                        <Link to={`/events/${_id}`}>{event.name}</Link>
+                    </Card.Title>
+                    <Card.Text>{event.local_date}</Card.Text>
+                    <Card.Text><Link to={`/events/${_id}/attendees`}>Attendees</Link></Card.Text>
+                    <Card.Text>
+                    {/* conditional rendering */}
+                    {event?
+                    <AverageRates id={_id}/> :
+                    null}             
+                    {event?
+                    <StarReview id={_id}/>:
+                    null}   
+                    </Card.Text>
+                </Card.Body> 
             </Card>
             </Wrapper>
             </Container>

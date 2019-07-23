@@ -53,7 +53,7 @@ class StudentsEvents extends Component {
 // END CALL EVENTS DATAS 
 
 // START CALL USER DATA
-        axios.get(`/users/5d3118d3c015b5923b806846`)
+        localApi.get("get_user")
         .then(resp =>{
             const userData = resp.data;
             this.setState({users : userData})

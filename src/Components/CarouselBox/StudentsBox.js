@@ -135,7 +135,7 @@ handleSubmit = (item,boolean) => {
                                            :null
                                            }                              
                              <Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Attend</Button>
-                              <button onClick={this.openModal}>Attendees</button>
+                              {/* <button onClick={this.openModal}>Attendees</button> */}
                               {/* <Modal
                                     isOpen={this.state.modalIsOpen}
                                     onRequestClose={this.closeModal}
