@@ -66,6 +66,7 @@ class CAEventsBox extends Component {
           localApi.put(`events/attend/${eventId}`)
           .then(res=>{
               console.log(res.data)
+              this.componentDidMount()
           })
       }
   // END ATTEND (PUT) API

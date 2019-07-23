@@ -31,6 +31,7 @@ class MyCalendar extends Component {
   }
 
   componentDidMount(){
+    // this.interval = setInterval(() => this.setState({ events: this.state.events }), 1000);
     // declare a variable for calendar events
     let events = [];
     axios.all([
@@ -75,7 +76,14 @@ class MyCalendar extends Component {
       this.setState({ event: false });
     }
 
-  
+    // componentWillUnmount() {
+    //   clearInterval(this.interval);
+    // }
+
+    keepRuning = () => {
+      setTimeout(this.componentDidMount, 1000);
+    }
+
     render(){
       const {events} = this.state;
         return(
