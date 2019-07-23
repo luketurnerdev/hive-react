@@ -72,7 +72,7 @@ class CAEvents extends Component {
 // END DELETE API
 
     handleAttend = (eventId) => {
-        // sending DELETE call to backend 
+        // sending PUT call to backend 
             localApi.put(`events/attend/${eventId}`)
             .then(res=>{
                 console.log(res.data)
