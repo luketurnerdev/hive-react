@@ -34,21 +34,23 @@ class MyCalendar extends Component {
     let events = [];
     axios.all([
       // axios.get(`/users/${this.props.match.params.id}`),
-      axios.get(`/users`),
-      axios.get('/events')
+      axios.get(`get_user`),
+      axios.get('events')
 
     ])
     .then(axios.spread((userResp, eventsResp) => {
       // destructure data of user
+      console.log(userResp);
       const {data} = userResp;
       // declare a variable for eventsData
       const eventsData = eventsResp.data;
+      console.log(eventsData);
       // we need to find those events the user is attending
       // calculate the length of the loop
       let eventsLength = eventsData.length;
       // loop through all the events
       for (let i = 0; i < eventsLength; i++) {
-        if (eventsData[i].hive_attendees.includes(data.id)) {
+        if (eventsData[i].hive_attendees.includes(data._id)) {
           console.log(eventsData[i]);
           console.log((eventsData[i].local_date))
           events.push({title: eventsData[i].name, start: new Date(`${eventsData[i].local_date}T${eventsData[i].local_time}`), end: new Date(`${eventsData[i].local_date}T${eventsData[i].local_time}`), desc: eventsData[i].description, time: eventsData[i].local_time, date: eventsData[i].local_date, photo: eventsData[i].photo_link});
@@ -56,7 +58,10 @@ class MyCalendar extends Component {
       }
       console.log(events);
       this.setState({events});
-    }));
+    }))
+    .catch(error => {
+      console.log(error);
+    })
   };
 
 

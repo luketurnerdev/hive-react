@@ -11,6 +11,7 @@ import MyReviews from './pages/MyReviews'
 import AllSuggestions from './pages/AllSuggestions'
 import Profile from './Components/profiles/Profile'
 import MyCalendar from './Components/events/Moment'
+import ReviewForm from './Components/forms/ReviewForm';
 
 import './App.css';
 import SingleEvent from './pages/SingleEvent';
@@ -38,7 +39,8 @@ class App extends Component {
                       <Route exact path="/users/request" component={RequestAccess} />
                       <Route exact path="/users/:id" component={Profile} />
                       <Route exact path="/reviews" component={MyReviews} />
-                      <Route exact path="/events/calendar" component={MyCalendar} />
+                      <Route exact path="/calendar" component={MyCalendar} />
+                      <Route exact path="/reviewform" component={ReviewForm} />
 
 
                   </Switch>
