@@ -44,6 +44,8 @@ class CAEventsBox extends Component {
     }); 
 
   }
+
+  
   
 
 // START RESPONSE CAROUSEL

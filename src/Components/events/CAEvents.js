@@ -71,6 +71,13 @@ class CAEvents extends Component {
     }
 // END DELETE API
 
+    handleAttend = (eventId) => {
+        // sending DELETE call to backend 
+            localApi.put(`events/attend/${eventId}`)
+            .then(res=>{
+                console.log(res.data)
+            })
+        }
 // START RESPONSE
     render() {
         const {users} = this.state;
@@ -94,6 +101,7 @@ class CAEvents extends Component {
                                                 <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                                                 :<Button size="sm" variant="primary" onClick={()=>this.handleSubmit(item,true)}>Suggest</Button>
                                                 }
+                                            <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}>Attend</Button>
                                             </Col>
                                             {/* END show DELETE button if is admin . otherwise show SUGGEST button */}
                                         </Row>

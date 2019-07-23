@@ -58,7 +58,7 @@ export class Dashboard extends Component {
 
                     <Col>
                     {/* <ADMIN'S SUGGESTION LIST */}
-                    {/* <Wrapper>
+                    <Wrapper>
                         <Container>
                             <Row>
                                 <Col><Alert><h1>Coder Academy List</h1></Alert></Col>
@@ -68,11 +68,11 @@ export class Dashboard extends Component {
                             </Row>
                             <CAEventsBox/>
                         </Container>
-                    </Wrapper> */}
+                    </Wrapper>
                     {/* <END> */}
 
                     {/* <STUDENTS'S SUGGESTION LIST */}
-                    {/* <Wrapper>
+                    <Wrapper>
                         <Container>
                             <Row>
                                 <Col><Alert><h1>Students List</h1></Alert></Col>
@@ -85,7 +85,7 @@ export class Dashboard extends Component {
                     </Wrapper>
                     {/* <END> */}
                     </Col>
-                </Row> */}
+                </Row>
 
                     {/* <NON DB MEETUP LIST */}
                     <Wrapper>
