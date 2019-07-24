@@ -42,7 +42,6 @@ class CAEventsBox extends Component {
           if (data[i].ca_recommended === true) {
               // mark it as CA event
               cAEvents.push(data[i]);
-
               cAEventsId.push(data[i]._id);
           };
       };
@@ -112,6 +111,7 @@ class CAEventsBox extends Component {
 // START RESPONSE CAROUSEL
   render() {
     const {user, array_} = this.state;
+
 
     return (
         <div>  
