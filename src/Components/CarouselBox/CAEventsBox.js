@@ -56,14 +56,12 @@ class CAEventsBox extends Component {
           if (data[i].ca_recommended === true) {
               // mark it as CA event
               cAEvents.push(data[i]);
-
               cAEventsId.push(data[i]._id);
           };
       };
       // we just show three events in the box
       for(let i = 0;i<2;i++){
       array.push(cAEvents[i]);
-
       }
       this.setState({events:cAEvents, ids:cAEventsId, array_:array, user: userData});
       console.log(this.state.array_)
@@ -118,7 +116,9 @@ class CAEventsBox extends Component {
 
 // START RESPONSE CAROUSEL
   render() {
+
     const {users, user, array_} = this.state;
+
 
     return (
         <div>  
