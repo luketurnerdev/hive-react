@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card}  from 'react-bootstrap';
 // import axios for sending requests to API
-import axios from 'axios';
 import localApi from "../../localApi";
 
 class StudentsEvents extends Component {
@@ -28,15 +27,7 @@ class StudentsEvents extends Component {
             // set length of loop
             let eventsLength = data.length;
             // for loop through all the events
-            for (let i = 0; i < eventsLength; i++) {
-                // Ony if hivers are attending to the event, or have suggested it, and this event hasn't been recommended by CA yet
-           
-                // if ((data[i].hive_attendees.length > 0) && (data[i].ca_recommended === false)) {
-                //     // mark it as student event (event a student is attending)
-                //     console.log(data[i])
-                //     studentsEvents.push(data[i]);
-                // }   
-
+            for (let i = 0; i < eventsLength; i++) {               
                 if ((data[i].ca_recommended === false) && ((data[i].hive_attendees.length > 0) || (data[i].suggested.is_suggested))) {
 
                     // mark it as student event (event a student is attending)
