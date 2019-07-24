@@ -28,8 +28,8 @@ class CAEventsBox extends Component {
     
     // START GET EVENTS DATA
     axios.all([
-      localApi.get('events'),
-      localApi.get('get_user')
+      localApi.get('/events'),
+      localApi.get('/get_user')
     ])
     .then(axios.spread((eventsResp, userResp) => {
       const {data} = eventsResp;

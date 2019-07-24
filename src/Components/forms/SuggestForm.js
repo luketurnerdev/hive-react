@@ -7,9 +7,8 @@ class SuggestForm extends Component {
 
   handleSubmit = (event) => {
     // if we get a route for suggest event that is not in db, 
-    // sending PUT call to backend
-       
-        localApi.put(`events/suggest/${event.meetup_id}`)
+    // sending PUT call to backend       
+        localApi.put(`/events/suggest/${event.meetup_id}`)
         .then(res=>{
             console.log(res);
         })

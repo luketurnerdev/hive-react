@@ -28,11 +28,11 @@ class CAEventsBox extends Component {
 
     axios.all([
       localApi.get('/events'),
-      localApi.get('get_user')
+      localApi.get('/get_user')
     ])
     .then(axios.spread((eventsResp, userResp) => {
       const {data} = eventsResp;
-      const usersData = userResp.data;
+      const userData = userResp.data;
       // set length of loop
       let eventsLength = data.length;
       // for loop through all the events
@@ -57,7 +57,7 @@ class CAEventsBox extends Component {
           array.push(cAEvents[i]);
          }
       }
-      this.setState({events:cAEvents, ids:cAEventsId, array_:array, user: usersData});
+      this.setState({events:cAEvents, ids:cAEventsId, array_:array, user: userData});
     }))
     .catch(error => {
       console.log(error);
@@ -77,7 +77,7 @@ class CAEventsBox extends Component {
   // START ATTEND (PUT) API
   handleAttend = (eventId) => {
     // sending DELETE call to backend 
-        localApi.put(`events/attend/${eventId}`)
+        localApi.put(`/events/attend/${eventId}`)
         .then(res=>{
             this.componentDidMount();
             this.props.handleRerenderCalendar();
@@ -103,7 +103,8 @@ handleSubmit = (item,boolean) => {
 
 // START RESPONSE CAROUSEL
   render() {
-    const {array_, user} = this.state
+    const {array_, user} = this.state;
+    console.log(user);
     return (
         <div>  
           <Carousel bsPrefix="carousel">
@@ -132,7 +133,7 @@ handleSubmit = (item,boolean) => {
                                            :null
                                            }      
                             {/* If current user is normal user (not admin), and the specific event has not been suggested yet, show Suggest Button, which is actually a Modal */}
-                            {(user.admin === false)?
+                            {(user.admin === true)?
                             <Button size="sm" variant="info" onClick={this.openModal}>Suggest</Button>
                                           // if contition is met, show button that will display the modal/popup. 
                                           // it doesn't modify the db yet, but only displays one modal with the form                            
