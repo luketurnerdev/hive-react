@@ -11,7 +11,15 @@ const Wrapper = styled.section`
   background: white;
   margin:2em;
 `;
-
+const Back = styled.section`
+  padding: 2em;
+  background: white;
+  font-size:0.8rem;
+  color: #555e64;
+  display:flex;
+  align-items:right;
+  justify-content:center;
+`;
 
 export class SingleEvent extends Component {
     state = {
@@ -47,42 +55,19 @@ export class SingleEvent extends Component {
             <div>     
                 <Container>
                 <Wrapper>
-                
-                <Card border="light" style={{ width: '18rem' }}>
+                 
+                <Card border="light" >
                 <Card.Body>      
                     <Card.Title>                
                         <Link to={`/events/${_id}`}>{event.name}</Link>
                     </Card.Title>
                     <Card.Text>{event.local_date}</Card.Text>
-                    <Card.Text><Link to={`/events/${_id}/attendees`}>Attendees</Link></Card.Text>
-                   
-                   
-                    
                 </Card.Body> 
                 </Card>
-                 {/* conditional rendering */}
-                 
-
-                 
-
-                 <Tabs id={_id} defaultActiveKey="average">
-                 {event?
-                    <Tab eventKey="average" title="average">
-                    <AverageRates id={_id}/>            
-                    </Tab>
-                    :
-                    null}             
-                    {event?
-                
-                <Tab eventKey="all" title="all">
-                <StarReview id={_id}/>
-                </Tab>:
-                null}    
-                </Tabs>
-             
-                 
-                    
-
+                {event.description}
+                <Back>
+                <Card.Text> <Link to={`/events`}>Back</Link></Card.Text>
+                </Back>
             </Wrapper>
             </Container>
             </div>
