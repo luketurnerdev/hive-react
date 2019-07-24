@@ -7,19 +7,10 @@ import Modal from 'react-modal';
 // import ReviewsPopUp from '../../pages/popUp/ReviewsPopUp';
 // import Reviews from '../events/Reviews';
 import SuggestForm from '../forms/SuggestForm';
+import customStyles from "../../styles/PopUpStyle"
 
 Modal.setAppElement('#root');
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
 class CAEventsBox extends Component {
   
   state = {
@@ -102,11 +93,8 @@ class CAEventsBox extends Component {
 // with submit it gets the event and the true value
 handleSubmit = (item,boolean) => {
   item.ca_recommended=boolean 
-  console.log(item._id)
  localApi.put(`/events/recommend/${item._id}`, item)
   .then((res) => {
-          console.log("here");
-          console.log(res);
           this.getUpdatedEvents()
       })
       .catch(err => console.log(err));
@@ -118,8 +106,6 @@ handleSubmit = (item,boolean) => {
 // START RESPONSE CAROUSEL
   render() {
     const {array_, user} = this.state
-    console.log(user)
-    console.log(array_)
     return (
         <div>  
           <Carousel bsPrefix="carousel">
@@ -140,8 +126,12 @@ handleSubmit = (item,boolean) => {
                               {!(item.hive_attendees.includes(user._id))?
                               <>Attend</>:
                               <>Unattend</>}
+<<<<<<< HEAD
                               </Button>
                          
+=======
+                              </Button>                      
+>>>>>>> origin/luke-testing
                             
                             {/* If current user is admin, show Save Button (No need of more conditions as any of the events in StudentBox has been saved yet) */}
                             {(user.admin === false)?                                                 
@@ -149,7 +139,7 @@ handleSubmit = (item,boolean) => {
                                            :null
                                            }      
                             {/* If current user is normal user (not admin), and the specific event has not been suggested yet, show Suggest Button, which is actually a Modal */}
-                            {(user.admin === true)?
+                            {(user.admin === false)?
                             <Button size="sm" variant="info" onClick={this.openModal}>Suggest</Button>
                                           // if contition is met, show button that will display the modal/popup. 
                                           // it doesn't modify the db yet, but only displays one modal with the form                            

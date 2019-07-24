@@ -31,9 +31,7 @@ export class Reviews extends Component {
     }
 
     render() {
-        console.log(this.state.events)
         const {events} = this.state 
-            console.log(events)
             return (
                 <div>
                 <Container>

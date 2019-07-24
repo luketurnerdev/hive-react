@@ -35,9 +35,7 @@ export class SingleEvent extends Component {
         .then(resp => {
             // destructure data from response
             const {data} = resp;
-            console.log(data);
            this.setState({event:data}); 
-           console.log(data);
         })
         .catch(error => {
             console.log(error);
@@ -46,9 +44,8 @@ export class SingleEvent extends Component {
   
   render() {
     const {event} = this.state;    
-    console.log(event);
-    console.log(event._id);
     const {_id} = this.state.event;
+<<<<<<< HEAD
     console.log(this.props)
 
     return( 
@@ -64,6 +61,31 @@ export class SingleEvent extends Component {
                 <Card.Text>{event.local_date}</Card.Text>
                 {event.description}
             </Card.Body> 
+=======
+        return( 
+            <div>     
+                <Container>
+                <Wrapper>
+                
+                <Card border="light" style={{ width: '18rem' }}>
+                <Card.Body>      
+                    <Card.Title>                
+                        <Link to={`/events/${_id}`}>{event.name}</Link>
+                    </Card.Title>
+                    <Card.Text>{event.local_date}</Card.Text>
+                    <Card.Text><Link to={`/events/${_id}/attendees`}>Attendees</Link></Card.Text>
+                    <Card.Text>
+                    {/* conditional rendering */}
+                    {event?
+                    <AverageRates id={_id}/> :
+                    null}             
+                    {event?
+                    <StarReview id={_id}/>:
+                    null}
+                    
+                    </Card.Text>
+                </Card.Body> 
+>>>>>>> origin/luke-testing
             </Card>
              {/* conditional rendering */}
             <Tabs id={_id} defaultActiveKey="average">

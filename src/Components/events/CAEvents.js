@@ -10,7 +10,7 @@ class CAEvents extends Component {
         events: [],
         ids: [],
         suggested: "",
-        users: [],
+        user: "",
         singleEvent: ""
     };
 // START GET EVENT API 
@@ -49,7 +49,7 @@ class CAEvents extends Component {
         localApi.get("get_user")
         .then(resp =>{
             const userData = resp.data;
-            this.setState({users : userData})
+            this.setState({user : userData})
         })
         // END CALL USER DATA
     };
@@ -61,7 +61,6 @@ class CAEvents extends Component {
     // sending DELETE call to backend 
         localApi.delete(`events/${eventId}`)
         .then(res=>{
-            console.log(res.data)
         })
     }
 // END DELETE API
@@ -71,14 +70,13 @@ class CAEvents extends Component {
         // sending PUT call to backend 
             localApi.put(`events/attend/${eventId}`)
             .then(res=>{
-                console.log(res.data)
             })
         }
 // END ATTEND (PUT) API
 
 // START RESPONSE
     render() {
-        const {users} = this.state;
+        const {user} = this.state;
         const {events, ids} = this.state
         return( 
             <div>
@@ -95,7 +93,7 @@ class CAEvents extends Component {
                                             </Col>
                                              {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                                             <Col>
-                                            {users.admin === true?                                                 
+                                            {user.admin === true?                                                 
                                                 <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                                                 :null
                                                 }
