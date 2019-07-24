@@ -26,6 +26,7 @@ class CAEventsBox extends Component {
     let cAEventsId = [];
     let array = [];
 
+
     axios.all([
       localApi.get('/events'),
       localApi.get('get_user')
@@ -56,6 +57,7 @@ class CAEventsBox extends Component {
         for(let i = 0;i<3;i++){
           array.push(cAEvents[i]);
          }
+
       }
       this.setState({events:cAEvents, ids:cAEventsId, array_:array, user: usersData});
     }))
