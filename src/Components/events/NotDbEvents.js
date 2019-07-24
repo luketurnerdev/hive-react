@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import LocalAPI from '../../localApi';
-import {Col,Row,Button,Card}  from 'react-bootstrap';
-import localApi from "../../localApi";
+import React, { Component } from 'react';
+import axios from "axios";
+import localApi from '../../localApi';
+import {Button}  from 'react-bootstrap';
 
 
 export class NotDbEvents extends Component {
@@ -12,7 +12,9 @@ export class NotDbEvents extends Component {
             eventNames: [],
             eventTimes: [],
             eventDates: [],
-            eventsData: null
+            eventsData: null,
+            userData: "",
+            currentEvents: []
 
         }
         
@@ -26,12 +28,18 @@ export class NotDbEvents extends Component {
             })
             .then(res=>{
                 console.log(res.data)
+                this.props.handleRerenderCalendar();
             })
         }
     componentDidMount() {
-        LocalAPI.get('/dashboard')
-        .then(resp => {
-            let [userData, eventsData] = resp.data;
+        axios.all([
+            localApi.get('/events'),
+            localApi.get('/dashboard')
+          ])
+          .then(axios.spread((eventsResp, dashBoardResp) => {
+            let [userData, eventsData] = dashBoardResp.data;
+            let {data} = eventsResp.data;
+            console.log(eventsResp);
             // need to use event name and event group url name to the attend button
 
             this.setState({eventsData: eventsData});
@@ -44,12 +52,9 @@ export class NotDbEvents extends Component {
                 eventDates.push(eventsData[i].local_date);
                 eventTimes.push(eventsData[i].local_time);
             }
-            this.setState({eventNames:eventNames});
-            
-            
-           
-            
-        })
+            this.setState({eventNames:eventNames, userData, currentEvents: data});   
+            console.log(data);     
+        }))
         .catch(err =>{
             console.log(err);
         })
@@ -57,10 +62,9 @@ export class NotDbEvents extends Component {
 
     render() {
 
-        const eventsData = this.state.eventsData;
-        console.log(this.state.eventsData);
-
-
+        const {eventsData, userData, currentEvents} = this.state;
+        console.log(eventsData);
+        console.log(userData);
 
         return (
             <div> 
@@ -79,15 +83,14 @@ export class NotDbEvents extends Component {
                         <li 
                         key={event.id}>{event.local_date} at {event.local_time}
         
-
                         <Button size="sm" variant="primary" onClick={()=>this.handleAttend(event.id, event.group.urlname)}>
-                              
-                                Attend
-                              </Button>                   
+                            {((event.hive_attendees !== undefined))?
+                                <>Unattend</>:
+                                <>Attend</>}
+                        </Button>                   
                          </li>
                         </>
-                    )
-                    
+                    )                    
                 })
 
                 
