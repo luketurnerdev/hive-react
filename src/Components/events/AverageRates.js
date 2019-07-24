@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import localApi from "../../localApi";
 import StarRatingComponent from 'react-star-rating-component';
+import {Alert,Row,Container,Col}  from 'react-bootstrap';
 
 class AverageRates extends Component {
   // set state
@@ -19,7 +20,6 @@ class AverageRates extends Component {
     let eventTalk = [];
     let eventVibe= [];
     // two request calls (one for event info, one for ratings)
-    console.log(this.props);
     axios.all([
       localApi.get(`/events/${this.props.id}`),
       localApi.get('/ratings')
@@ -31,7 +31,6 @@ class AverageRates extends Component {
       const reviewsData = reviewsResp.data;
       // calculate length for loop
       let reviewsLength = reviewsData.length;
-      console.log(reviewsLength);
       // for every rating
         for (let x = 0; x < reviewsLength; x++) {
           // if the ratings belong to the specific event
@@ -91,7 +90,10 @@ class AverageRates extends Component {
     const {food, drinks, talk, vibe} = this.state.averageRatings;
     return(
       <div>
-        <h3>Average rates</h3>
+        <Container>
+       <Alert variant="light"> Average rates </Alert>
+       <Row>
+         <Col>
         Food:
         <StarRatingComponent 
                 name="food"
@@ -100,6 +102,8 @@ class AverageRates extends Component {
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
+                </Col>
+                <Col>
         Drinks:
         <StarRatingComponent 
                 name="food"
@@ -108,6 +112,9 @@ class AverageRates extends Component {
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
+                </Col>
+                <Col>
+
         Talk:
         <StarRatingComponent 
                 name="food"
@@ -116,6 +123,8 @@ class AverageRates extends Component {
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
+                </Col>
+                <Col>
         Vibe:
         <StarRatingComponent 
                 name="food"
@@ -124,6 +133,10 @@ class AverageRates extends Component {
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
+                </Col>
+                </Row>
+                </Container>
+                
       </div>
     )
   }

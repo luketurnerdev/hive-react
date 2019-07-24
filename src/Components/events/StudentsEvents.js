@@ -2,15 +2,14 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card}  from 'react-bootstrap';
-// import axios for sending requests to API
-import axios from 'axios';
 import localApi from "../../localApi";
 import SuggestForm from '../forms/SuggestForm';
 
 class StudentsEvents extends Component {
     state = {
         events: [],
-        users:[]
+        user:"",
+        modalIsOpen: false,
     };
 
     componentDidMount() { 
@@ -25,12 +24,10 @@ class StudentsEvents extends Component {
         .then(resp => {
             // destructure data from response
             const {data} = resp;
-            console.log(data);
             // set length of loop
             let eventsLength = data.length;
             // for loop through all the events
-            for (let i = 0; i < eventsLength; i++) {
-                // Ony if hivers are attending to the event, or have suggested it, and this event hasn't been recommended by CA yet
+            for (let i = 0; i < eventsLength; i++) {               
                 if ((data[i].ca_recommended === false) && ((data[i].hive_attendees.length > 0) || (data[i].suggested.is_suggested))) {
 
                     // mark it as student event (event a student is attending)
@@ -51,23 +48,29 @@ class StudentsEvents extends Component {
         localApi.get("get_user")
         .then(resp =>{
             const userData = resp.data;
-            this.setState({users : userData})
-           console.log(this.state.users)
+            this.setState({user : userData})
         })
 // END CALL USER DATA
 };
 // END GET API 
+
+// to "open" poo up with suggestion form.
+openModal = (event) => {
+    this.setState({modalIsOpen: true});
+  }
+
+  // to "close" the pop up
+  closeModal = () => {
+    this.setState({modalIsOpen: false});
+  }
 
 // START PUT API     
 // click SAVE and the boolean ca_recommended=false should update to true 
 // with submit it gets the event and the true value
     handleSubmit = (item,boolean) => {
     item.ca_recommended=boolean 
-    console.log(item._id)
    localApi.put(`/events/recommend/${item._id}`, item)
     .then((res) => {
-            console.log("here");
-            console.log(res);
             this.getUpdatedEvents()
         })
         .catch(err => console.log(err));
@@ -79,16 +82,14 @@ handleAttend = (eventId) => {
     // sending DELETE call to backend 
         localApi.put(`events/attend/${eventId}`)
         .then(res=>{
-            console.log(res.data)
+            this.componentDidMount()
         })
     }
 // END ATTEND (PUT) API
  
 // START RESPONSE
     render() {
-        
-        const {users} = this.state;
-        const {events} = this.state;
+        const {user, events} = this.state;
 
         return(       
                 <div>
@@ -103,16 +104,38 @@ handleAttend = (eventId) => {
                                             <Col>
                                                 <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                                             </Col>
-                                       
+                                            <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>
+                                                {!(item.hive_attendees.includes(user._id))?
+                                                <>Attend</>:
+                                                <>Unattend</>}
+                                            </Button>
+                                        {/* show SAVE button if is admin . otherwise show SUGGEST button */}
                                             <Col>
-                                            <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}>Attend</Button>
-                                            {/* show SAVE button if is admin . otherwise show SUGGEST button */}
-                                           {(users.admin === true)?                                                 
+                                           {(user.admin === true)?                                                 
                                            <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
                                            :null
-                                           }
-                                            
+                                           }                                            
                                             </Col>
+                                            {(user.admin === false) && (!item.suggested.is_suggested)?
+                            <Button size="sm" variant="info" onClick={this.openModal}>Suggest</Button>
+                                          // if contition is met, show button that will display the modal/popup. 
+                                          // it doesn't modify the db yet, but only displays one modal with the form                            
+                                              :
+                                           null
+                            }                      
+                                        <Modal
+                                        isOpen={this.state.modalIsOpen}
+                                        onRequestClose={this.closeModal}
+                                        style={customStyles}
+                                        contentLabel="Suggest Form"
+                                      >
+                                        
+                                        <div height="600">
+                                          <SuggestForm event={item} function={this.closeModal}/>
+                                          <button onClick={this.closeModal}>close</button>
+                                        </div>
+                                      </Modal>
+
                                         </Row>
                                         <footer className="blockquote-footer">
                                         <Link to={`/events/${item._id}/attendees`}>Attendees</Link> 

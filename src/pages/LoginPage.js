@@ -1,9 +1,9 @@
     
 import React, { Component } from "react";
-import {Col,Container,Button}  from 'react-bootstrap';
+import {Row,Col,Container,Button}  from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
-
+import logo from './honeycomb-logo.svg';
 const WrapperLogin = styled.section`
   padding: 2em;
   background: white;
@@ -12,14 +12,19 @@ const WrapperLogin = styled.section`
   align-items:center
 `;
 
-class HomePage extends Component {
+class LoginPage extends Component {
     render() {
-        console.log(process.env);
         return (
             <div>
                 <Container>
-            
-                <WrapperLogin>
+                    <Row>
+
+                    <WrapperLogin>
+                        <Col>
+        <img src={logo} className="App-logo" alt="logo" />
+        
+        </Col>
+
                 <Col>
                  <h1>Welcome To The Hive!</h1>
                
@@ -28,17 +33,16 @@ class HomePage extends Component {
                         <Button size="sm" variant="primary">Login</Button>
                         </a>
                         <Link to="/users/request">
-
                         <Button size="sm" variant="link">RequestAccess</Button>
                         </Link>
                     </div>
                 </Col>
                 </WrapperLogin>
-               
+                </Row>
                 </Container>
             </div>
         );
     }
 }
 
-export default HomePage;
+export default LoginPage;

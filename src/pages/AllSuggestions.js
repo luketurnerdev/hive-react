@@ -1,7 +1,7 @@
 // Output: all Suggestions of Students . The admin will be able to 'save' and 'reject'. 
 // Signed in as ADMIN
 import React, { Component } from 'react'
-import axios from 'axios';
+import localApi from "../localApi";
 import {Col,Row,Container,Button,Card,Alert}  from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
@@ -22,8 +22,8 @@ export class Reviews extends Component {
     };
 
     componentDidMount() {
-        axios
-            .get(`suggestions`)
+        localApi
+            .get(`/events/suggestions`)
             .then(res => {
             const events = res.data;
             this.setState({ events }); 
@@ -31,9 +31,7 @@ export class Reviews extends Component {
     }
 
     render() {
-        console.log(this.state.events)
         const {events} = this.state 
-            console.log(events)
             return (
                 <div>
                 <Container>

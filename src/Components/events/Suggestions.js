@@ -27,7 +27,6 @@ class Suggestions extends Component {
       .then(axios.spread((eventsResp, usersResp) => {
           // destructure data from response
           let {data} = eventsResp;
-          console.log(data);
           let usersData = usersResp.data;
            // we need three pieces of data: user name, user photo and suggestion message.
            // to get the suggestion message, we need to loop through events and get the suggested.message property
@@ -43,9 +42,8 @@ class Suggestions extends Component {
               // now we have a users_id array containing the ids of the users who suggested each suggested event
               // [1,2,2,3,1]
               // ["hi", "hello","hi", "Hola", "Bye"];
-             }
-           }
-           console.log(users_ids);
+             };
+           };
            // then we need to find the users' name and avatar from the users_ids array.
            let usersIdsLength = users_ids.length;
            let usersLength = usersData.length;

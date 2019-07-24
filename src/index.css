@@ -18,6 +18,22 @@ div{
   font-weight: bold;
 }
 
+p5{
+  color: #555e64;
+}
+.sc-ifAKCX fphqty{
+  font-size: 2px
+}
+ .rbc-date-cell > a{
+  font-size: 0.5em
+}
+span{
+  font-size: 0.6em
+}
+.rbc-row-segment .rbc-event-content{
+  font-size: 0.5em
+}
+
 @media (min-width: 1200px){
 .container {
     max-width: 2000px;

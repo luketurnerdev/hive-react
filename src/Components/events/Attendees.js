@@ -38,7 +38,6 @@ class Attendees extends Component {
         }
       }
       this.setState({users});
-      console.log(users);
     }))
     .catch(error => {
       console.log(error);
@@ -47,7 +46,6 @@ class Attendees extends Component {
   
 
   render(){
-    console.log(this.state.users);
     const {users} = this.state;
 
     return(

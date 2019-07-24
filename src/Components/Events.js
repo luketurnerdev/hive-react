@@ -13,7 +13,6 @@ class Events extends Component {
   axios
       .get('/events')
       .then(resp => {
-          console.log(resp.data)
           const {data} = resp;
           // modify the state according to the data in the API's response
          this.setState({events:data})
@@ -26,7 +25,6 @@ class Events extends Component {
   }
 
 render(){
-  console.log(this.state.events)
   const {events} = this.state
   return( 
     <div><h1>{events.map((event)=>(<div key={event.id} >{event.name}</div>))}</h1></div>

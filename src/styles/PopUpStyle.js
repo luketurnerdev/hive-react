@@ -1,5 +1,5 @@
 
-export const customStyles = {
+const customStyles = {
     content : {
       top                   : '50%',
       left                  : '50%',
@@ -10,3 +10,4 @@ export const customStyles = {
     }
   };
 
+export default customStyles;

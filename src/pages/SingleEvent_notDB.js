@@ -12,7 +12,6 @@ export class SingleEvent extends Component {
 
     // just after rendering the event, call to the API
     componentDidMount() {
-        console.log(this.props)
 
     axios
     // request call to the db
@@ -20,9 +19,7 @@ export class SingleEvent extends Component {
         .then(resp => {
             // destructure data from response
             const {data} = resp;
-            console.log(data);
            this.setState({event:data}); 
-           console.log(data);
         })
         .catch(error => {
             console.log(error);
@@ -32,7 +29,6 @@ export class SingleEvent extends Component {
   render() {
     const {event} = this.state;    
     const {_id} = this.state.event;
-    console.log(this.props)
         return( 
             <div>                            
                 <Link to={`/events/${_id}`}>{event.name}</Link>

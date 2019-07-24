@@ -19,7 +19,6 @@ class TodayEvents extends Component {
     .then(axios.spread((eventsResp, usersResp) => {
         // destructure data from response
         const {data} = eventsResp;
-        console.log(data);
         const usersData = usersData.data;
         // state today's date in ISO 8601 (as in Meetup API) without time
         let today = new Date();
@@ -47,7 +46,6 @@ class TodayEvents extends Component {
         })};
         
   render(){
-    console.log(this.state.events);
     const {events} = this.state;
     return(
       

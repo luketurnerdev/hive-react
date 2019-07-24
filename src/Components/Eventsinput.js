@@ -28,8 +28,6 @@ name:" "
     axios
         .post(`/events`,events)
         .then(res =>{
-          console.log(res);
-          console.log(res.data);
       })
     }
 

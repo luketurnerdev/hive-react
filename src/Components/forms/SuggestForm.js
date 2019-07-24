@@ -7,19 +7,21 @@ class SuggestForm extends Component {
 
   handleSubmit = (event) => {
     // if we get a route for suggest event that is not in db, 
-    // sending PUT call to backend
-        localApi.put(`events/${event._id}`)
+    // sending PUT call to backend       
+        localApi.put(`/events/suggest/${event.meetup_id}`)
         .then(res=>{
-            console.log(res.data)
-        })
-    }
+            console.log(res);
+            this.props.closeModal();
+        })        
+    };
+    
     render(){
       let {event} = this.props;
+      console.log(event)
         return(
             <Form>
             <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label>What made you suggest this event?</Form.Label>
-                <Form.Control as="textarea" rows="3" />
+                <Form.Label>Please confirm you want to suggest this event to Coder Academy</Form.Label>
             </Form.Group>
             <Button variant="primary" type="submit" onClick={this.handleSubmit(event)}>
                 Submit
