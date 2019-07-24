@@ -126,12 +126,7 @@ handleSubmit = (item,boolean) => {
                               {!(item.hive_attendees.includes(user._id))?
                               <>Attend</>:
                               <>Unattend</>}
-<<<<<<< HEAD
-                              </Button>
-                         
-=======
                               </Button>                      
->>>>>>> origin/luke-testing
                             
                             {/* If current user is admin, show Save Button (No need of more conditions as any of the events in StudentBox has been saved yet) */}
                             {(user.admin === false)?                                                 

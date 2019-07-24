@@ -111,11 +111,6 @@ class CAEventsBox extends Component {
 // START RESPONSE CAROUSEL
   render() {
     const {user, array_} = this.state;
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/luke-testing
-
     return (
         <div>  
           <Carousel >
