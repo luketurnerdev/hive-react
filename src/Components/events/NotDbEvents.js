@@ -75,7 +75,7 @@ export class NotDbEvents extends Component {
                         
                         <>
                         {console.log(event.id)}
-                        <h5 key={event.id}>{event.name} </h5>
+                        <h5>{event.name}}</h5>
                         <li 
                         key={event.id}>{event.local_date} at {event.local_time}
         
