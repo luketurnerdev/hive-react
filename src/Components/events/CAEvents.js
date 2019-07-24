@@ -13,6 +13,8 @@ class CAEvents extends Component {
         user: "",
         singleEvent: ""
     };
+
+
 // START GET EVENT API 
     // just after rendering the Events, call to the API
     componentDidMount() {
@@ -61,6 +63,7 @@ class CAEvents extends Component {
     // sending DELETE call to backend 
         localApi.delete(`events/${eventId}`)
         .then(res=>{
+            this.componentDidMount();
         })
     }
 // END DELETE API
@@ -93,11 +96,12 @@ class CAEvents extends Component {
                                                 <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                                             </Col>
                                              {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
-                                            <Col>
+                                             <Col>
                                             <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}> {!(item.hive_attendees.includes(user._id))?
                                                 <>Attend</>:
                                                 <>Unattend</>}
                                             </Button>
+                                           
                                             {user.admin === true?                                                 
                                                 <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                                                 :null

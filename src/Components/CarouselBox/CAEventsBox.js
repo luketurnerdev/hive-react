@@ -137,10 +137,10 @@ class CAEventsBox extends Component {
                               <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                               :null
                              }                              */}
-                             {!item.suggested.is_suggested?
-                             <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>:
-                              null
-                            }
+                             {/* {!item.suggested.is_suggested? */}
+                             <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
+                              {/* :null
+                            } */}
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">
