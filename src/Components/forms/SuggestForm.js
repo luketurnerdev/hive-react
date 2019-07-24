@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Form, Button}  from 'react-bootstrap';
-import axios from 'axios';
 import localApi from "../../localApi";
 
 
@@ -12,7 +11,6 @@ class SuggestForm extends Component {
         localApi.put(`events/${event._id}`)
         .then(res=>{
             console.log(res.data)
-            
         })
     }
     render(){

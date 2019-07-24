@@ -5,6 +5,7 @@ import {Col,Row,Button,Card}  from 'react-bootstrap';
 // import axios for sending requests to API
 import axios from 'axios';
 import localApi from "../../localApi";
+import SuggestForm from '../forms/SuggestForm';
 
 class StudentsEvents extends Component {
     state = {
@@ -30,13 +31,6 @@ class StudentsEvents extends Component {
             // for loop through all the events
             for (let i = 0; i < eventsLength; i++) {
                 // Ony if hivers are attending to the event, or have suggested it, and this event hasn't been recommended by CA yet
-           
-                // if ((data[i].hive_attendees.length > 0) && (data[i].ca_recommended === false)) {
-                //     // mark it as student event (event a student is attending)
-                //     console.log(data[i])
-                //     studentsEvents.push(data[i]);
-                // }   
-
                 if ((data[i].ca_recommended === false) && ((data[i].hive_attendees.length > 0) || (data[i].suggested.is_suggested))) {
 
                     // mark it as student event (event a student is attending)
@@ -109,13 +103,15 @@ handleAttend = (eventId) => {
                                             <Col>
                                                 <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                                             </Col>
-                                        {/* show SAVE button if is admin . otherwise show SUGGEST button */}
+                                       
                                             <Col>
+                                            <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}>Attend</Button>
+                                            {/* show SAVE button if is admin . otherwise show SUGGEST button */}
                                            {(users.admin === true)?                                                 
                                            <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
                                            :null
                                            }
-                                            <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}>Attend</Button>
+                                            
                                             </Col>
                                         </Row>
                                         <footer className="blockquote-footer">
