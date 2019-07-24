@@ -61,7 +61,8 @@ export class SingleEvent extends Component {
                     null}             
                     {event?
                     <StarReview id={_id}/>:
-                    null}   
+                    null}
+                    
                     </Card.Text>
                 </Card.Body> 
             </Card>

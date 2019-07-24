@@ -8,6 +8,7 @@ import moment from 'moment'
 import Modal from 'react-modal';
 import Info from "../../pages/popUp/Info";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+// import customStyles from "../../styles/PopUpStyle"
 
 const localizer = momentLocalizer(moment);
 
@@ -27,10 +28,12 @@ const customStyles = {
 class MyCalendar extends Component {
   state = {
       event: false,
-      events: []
+      events: [],
+      eventsData: []
   }
 
   componentDidMount(){
+    // this.interval = setInterval(() => this.setState({ events: this.state.events }), 1000);
     // declare a variable for calendar events
     let events = [];
     axios.all([
@@ -57,11 +60,12 @@ class MyCalendar extends Component {
         }
       }
       console.log(events);
-      this.setState({events});
+      this.setState({events,eventsData});
     }))
     .catch(error => {
       console.log(error);
     })
+    // setInterval(this.componentDidMount(), 1000000);
   };
 
 
@@ -75,7 +79,16 @@ class MyCalendar extends Component {
       this.setState({ event: false });
     }
 
-  
+    // componentDidUpdate(this.state.eventsData) {
+    //   localApi
+    //   .get("events")
+    //   if (eventsData )
+    // }
+
+    keepRuning = () => {
+      // setTimeout(this.componentDidMount, 1000);
+    }
+
     render(){
       const {events} = this.state;
         return(

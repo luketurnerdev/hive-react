@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import localApi from "../../localApi";
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card,Carousel}  from 'react-bootstrap';
@@ -6,6 +7,7 @@ import Modal from 'react-modal';
 // import ReviewsPopUp from '../../pages/popUp/ReviewsPopUp';
 import Reviews from '../events/Reviews';
 
+Modal.setAppElement('#root');
 
 const customStyles = {
   content : {
@@ -17,28 +19,30 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)'
   }
 };
-
 class CAEventsBox extends Component {
   
   state = {
       events: [],
       ids: [],
       array_:[],
-      users: [],
-      modalIsOpen: false
+      modalIsOpen: false,
+      user: ""
   };
 
-  componentDidMount() {
-    let hive_attendees = [];
+  componentDidMount() { 
     let cAEvents = [];
     let cAEventsId = [];
     let array = [];
-    let users = [];
 
-    localApi.get('/events')
-      .then(eventsResp => {
+
+    axios.all([
+      localApi.get('/events'),
+      localApi.get('get_user')
+    ])
+    .then(axios.spread((eventsResp, userResp) => {
       const {data} = eventsResp;
       console.log(data);
+      const usersData = userResp.data;
       // set length of loop
       let eventsLength = data.length;
       // for loop through all the events
@@ -47,16 +51,29 @@ class CAEventsBox extends Component {
           // Ony if the event has not been recommended by CA, and any hivers have interacted with it (attending or suggesting it)
           // mark it as student event (event a student is attending)
               cAEvents.push(data[i]);
-              cAEventsId.push(data[i].id);
-          }
-        }
-      for(let i = 0; i<1; i++){
-       array.push(cAEvents[i]);
-       console.log(array)
-      }
+              cAEventsId.push(data[i]._id);
+          };
+        };
+      console.log(cAEvents);
+      console.log(cAEventsId);
+      let loopLength;
+      // if the length of cAEvent array is less than 3, we put all the events inside the array in the box
+      if (cAEvents.length < 3){
+        loopLength = cAEvents.length;
+        for(let i = 0;i<loopLength;i++){
+          array.push(cAEvents[i]);
+         }
+      // if the length of cAEvent array is more than 3, we put only 3 events in the box
+      } else {
+        for(let i = 0;i<3;i++){
+          array.push(cAEvents[i]);
+         }
 
-      this.setState({events:cAEvents, ids:cAEventsId, array_:array, users: users});
-    })
+      }
+      console.log(array)
+
+      this.setState({events:cAEvents, ids:cAEventsId, array_:array, user: usersData});
+    }))
     .catch(error => {
       console.log(error);
     });
@@ -78,6 +95,7 @@ class CAEventsBox extends Component {
         localApi.put(`events/attend/${eventId}`)
         .then(res=>{
             console.log(res.data)
+            this.componentDidMount()
         })
     }
 // END ATTEND (PUT) API
@@ -103,15 +121,14 @@ handleSubmit = (item,boolean) => {
 
 // START RESPONSE CAROUSEL
   render() {
-    const {array_, users} = this.state
-    console.log(users)
+    const {array_, user, users} = this.state
+    console.log(user)
     console.log(array_)
     return (
         <div>  
           <Carousel bsPrefix="carousel">
            {array_.map((item)=> {
             return (
-            
                 <Carousel.Item>
                     <div key={item._id}>
                       <Card border="light" >
@@ -123,11 +140,15 @@ handleSubmit = (item,boolean) => {
                             </Col>
                             <Col>
 
-                              <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>Attend</Button>
+                              <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>
+                              {!(item.hive_attendees.includes(user._id))?
+                              <>Attend</>:
+                              <>Unattend</>}
+                              </Button>
                          
                               <button onClick={this.openModal}>Attendees</button>
 
-                            {(users.admin === true)?                                                 
+                            {(user.admin === true)?                                                 
                                            <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
                                            :null
                                            }                              

@@ -1,5 +1,5 @@
-/* 
-export fconst customStyles = {
+
+export const customStyles = {
     content : {
       top                   : '50%',
       left                  : '50%',
@@ -9,4 +9,4 @@ export fconst customStyles = {
       transform             : 'translate(-50%, -50%)'
     }
   };
-   */
+
