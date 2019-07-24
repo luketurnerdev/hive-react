@@ -14,7 +14,6 @@ const WrapperLogin = styled.section`
 
 class LoginPage extends Component {
     render() {
-        console.log(process.env);
         return (
             <div>
                 <Container>

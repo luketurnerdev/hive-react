@@ -29,14 +29,16 @@ state={
  
 // Extracted userId from the Route params.    
     const { id } = this.props.match.params
-    console.log(id)
 
     localApi
       .get("get_user")
       .then(res => {
         // modify the state according to the data in the API's response
         const {data} = res;
+<<<<<<< HEAD
           console.log(data)
+=======
+>>>>>>> db55a11428d8de3e25a2b21820098715d7b8a938
           
         // add response of api call to users array
         this.setState({ users: data });
@@ -49,6 +51,10 @@ state={
   };
 
   render(){
+<<<<<<< HEAD
+=======
+    const {users} = this.state
+>>>>>>> db55a11428d8de3e25a2b21820098715d7b8a938
    
     const {users} = this.state
     console.log(users)

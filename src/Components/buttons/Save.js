@@ -61,8 +61,6 @@ export class Save extends Component {
         axios.put(`/events`, { eventname })
            
           .then(res => {
-            console.log(res);
-            console.log(res.data);
           })
       }
     

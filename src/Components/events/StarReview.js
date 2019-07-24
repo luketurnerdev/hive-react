@@ -75,7 +75,6 @@ class Reviews extends Component {
     //     }
 
     goToEdit(event){
-        console.log(event.target)
         return (<EditRating rating={this}/>);
     };
 

@@ -23,14 +23,11 @@ class AccountRequests extends Component {
             .then(res => {
                 const users = res.data;
             this.setState({ users });
-           
-                console.log(users);
              })
       }
 
     render() {
-        const {users} = this.state 
-        console.log(users)
+        const {users} = this.state
         return (
             <div>
                 <Container>
