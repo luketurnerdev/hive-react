@@ -19,12 +19,12 @@ class LoginPage extends Component {
             <div>
                 <Container>
                     <Row>
+                    <WrapperLogin>
                         <Col>
-                <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        </header>
+        
         </Col>
-                <WrapperLogin>
+                
                 <Col>
                  <h1>Welcome To The Hive!</h1>
                

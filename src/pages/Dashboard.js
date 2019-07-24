@@ -53,7 +53,6 @@ export class Dashboard extends Component {
                 <Row>
                     <Col>
                         <Calendar>
-            
                             <Calendar_style>
                             <Moment />
                             </Calendar_style>
@@ -93,7 +92,8 @@ export class Dashboard extends Component {
 
                     {/* <NON DB MEETUP LIST */}
                     <Wrapper>
-                        
+                    <Col><Alert><h1>Meetups</h1></Alert></Col>
+
                         <NotDbEvents/>
                         
                     </Wrapper>
