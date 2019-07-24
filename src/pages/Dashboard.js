@@ -136,7 +136,8 @@ export class Dashboard extends Component {
 
                     {/* <NON DB MEETUP LIST */}
                     <Wrapper>
-                        
+                    <Col><Alert><h1>Meetups</h1></Alert></Col>
+
                         <NotDbEvents/>
                         
                     </Wrapper>

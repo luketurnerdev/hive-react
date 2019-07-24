@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import localApi from "../../src/localApi";
 import AverageRates from '../Components/events/AverageRates'
 import StarReview from '../Components/events/StarReview'
-import {Card, Container}  from 'react-bootstrap';
+import {Card, Container,Tabs,Tab}  from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
@@ -12,6 +12,15 @@ const Wrapper = styled.section`
   margin:2em;
 `;
 
+const Back = styled.section`
+  padding: 2em;
+  background: white;
+  font-size:0.8rem;
+  color: #555e64;
+  display:flex;
+  align-items:right;
+  justify-content:center;
+`;
 
 export class SingleEvent extends Component {
     state = {
@@ -36,33 +45,42 @@ export class SingleEvent extends Component {
   render() {
     const {event} = this.state;    
     const {_id} = this.state.event;
-        return( 
-            <div>     
-                <Container>
-                <Wrapper>
-                
-                <Card border="light" style={{ width: '18rem' }}>
-                <Card.Body>      
-                    <Card.Title>                
-                        <Link to={`/events/${_id}`}>{event.name}</Link>
-                    </Card.Title>
-                    <Card.Text>{event.local_date}</Card.Text>
-                    <Card.Text><Link to={`/events/${_id}/attendees`}>Attendees</Link></Card.Text>
-                    <Card.Text>
-                    {/* conditional rendering */}
-                    {event?
-                    <AverageRates id={_id}/> :
-                    null}             
-                    {event?
-                    <StarReview id={_id}/>:
-                    null}
-                    
-                    </Card.Text>
-                </Card.Body> 
+    return( 
+            
+        <div>     
+        <Container>
+        <Wrapper>
+            <Card border="light" >
+            <Card.Body>      
+                <Card.Title>                
+                    <Link to={`/events/${_id}`}>{event.name}</Link>
+                </Card.Title>
+                <Card.Text>{event.local_date}</Card.Text>
+                {event.description}
+            </Card.Body> 
             </Card>
-            </Wrapper>
-            </Container>
-            </div>
+             {/* conditional rendering */}
+            <Tabs id={_id} defaultActiveKey="average">
+                {event?
+                <Tab eventKey="average" title="average">
+                <AverageRates id={_id}/>            
+                </Tab>
+             :
+                null}             
+                {event?
+
+                <Tab eventKey="all" title="all">
+                <StarReview id={_id}/>
+                </Tab>:
+                null}    
+            </Tabs>
+  
+        </Wrapper>
+        <Back>
+            <Card.Text> <Link to={`/events`}>Back</Link></Card.Text>
+            </Back>
+        </Container>
+        </div>
         )
     }
 }

@@ -5,6 +5,7 @@ import axios from 'axios';
 import localApi from "../../localApi";
 import EditRating from './EditRating';
 import StarRatingComponent from 'react-star-rating-component';
+import {Alert}  from 'react-bootstrap';
 
 
 
@@ -86,7 +87,8 @@ class Reviews extends Component {
         const {reviews} = this.state;
         return(
             <div>
-            <h4>Individual rates</h4>
+             <Alert variant="light">
+       All rates </Alert>
                 {reviews.map((review)=>(
             <div key={review._id} >
             {review.name}
