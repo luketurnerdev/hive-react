@@ -54,7 +54,6 @@ class CAEventsBox extends Component {
           if (data[i].ca_recommended === true) {
               // mark it as CA event
               cAEvents.push(data[i]);
-
               cAEventsId.push(data[i]._id);
           };
       };

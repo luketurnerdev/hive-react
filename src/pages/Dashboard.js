@@ -34,9 +34,12 @@ const Wrapper = styled.section`
 `;
 // Style a Calendar component with a <section> tag
 const Calendar = styled.section`
-    padding: 10em;
-    background: #f8f9fa;
-    margin: 3em;
+    padding: 3em;
+    background: white;
+    justify-content: center;
+    display: flex;
+    align-content: center;
+  
 `;
 
 const SeeMore = styled.section`
@@ -94,6 +97,7 @@ export class Dashboard extends Component {
                 <Row>
                     <Col>
                         <Calendar>
+            
                             <Calendar_style>
                             <Moment events={events} />
                             </Calendar_style>

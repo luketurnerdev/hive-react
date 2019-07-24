@@ -72,6 +72,7 @@ class UsersRequest extends Component {
                 <Container>
                     <Wrapper>
                     {request.map(profile => 
+                    
                         <Form onSubmit = {this.handleSubmit}>
                             <Form.Group>
                             <Form.Label>Hello {profile.name} !</Form.Label>

@@ -42,7 +42,7 @@ class MyCalendar extends Component {
       const {events} = this.props;
 
         return(
-          <div style={{ width: 700, height: 500 }}>
+          <div style={{ width: 350, height: 350, padding:10 }}>
     <Calendar height={500}
       localizer={localizer}
       events={events}
