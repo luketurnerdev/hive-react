@@ -5,22 +5,10 @@ import {Button,Card,Row,Col}  from 'react-bootstrap';
 import axios from 'axios';
 import localApi from "../../localApi";
 import Modal from 'react-modal';
-// import customStyles from "../../styles/PopUpStyle";
+import customStyles from "../../styles/PopUpStyle";
 
 
 Modal.setAppElement('#root');
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
-
 
 class CAEventsBox extends Component {
   
@@ -40,8 +28,8 @@ class CAEventsBox extends Component {
     
     // START GET EVENTS DATA
     axios.all([
-      localApi.get('events'),
-      localApi.get('get_user')
+      localApi.get('/events'),
+      localApi.get('/get_user')
     ])
     .then(axios.spread((eventsResp, userResp) => {
       const {data} = eventsResp;
@@ -115,7 +103,6 @@ class CAEventsBox extends Component {
       // sending DELETE call to backend 
           localApi.delete(`events/${eventId}`)
           .then(res=>{
-              console.log(res.data)
           })
       }
   // END DELETE API
@@ -124,6 +111,7 @@ class CAEventsBox extends Component {
 // START RESPONSE CAROUSEL
   render() {
     const {user, array_} = this.state;
+
 
     return (
         <div>  
@@ -139,16 +127,14 @@ class CAEventsBox extends Component {
                           <Row>
                             <Col>
                               <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
-                            </Col>
-                          {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
+                            </Col>                          
                             <Col>
-
                             <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>
                               {!(item.hive_attendees.includes(user._id))?
                               <>Attend</>:
                               <>Unattend</>}
-                              </Button>
-
+                            </Button>
+                          {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                             {user.admin === true?                                                 
                               <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                               :null

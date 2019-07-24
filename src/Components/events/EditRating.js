@@ -25,8 +25,6 @@ class EditRating extends Component {
 
 
 componentDidMount(){
-    console.log(this);
-    console.log(this.props.params)
 }
 
 handleChange(event) {

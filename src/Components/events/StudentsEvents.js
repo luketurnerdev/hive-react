@@ -2,13 +2,12 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card}  from 'react-bootstrap';
-// import axios for sending requests to API
 import localApi from "../../localApi";
 
 class StudentsEvents extends Component {
     state = {
         events: [],
-        users:[]
+        user:""
     };
 
     componentDidMount() { 
@@ -23,7 +22,6 @@ class StudentsEvents extends Component {
         .then(resp => {
             // destructure data from response
             const {data} = resp;
-            console.log(data);
             // set length of loop
             let eventsLength = data.length;
             // for loop through all the events
@@ -48,8 +46,7 @@ class StudentsEvents extends Component {
         localApi.get("get_user")
         .then(resp =>{
             const userData = resp.data;
-            this.setState({users : userData})
-           console.log(this.state.users)
+            this.setState({user : userData})
         })
 // END CALL USER DATA
 };
@@ -60,11 +57,8 @@ class StudentsEvents extends Component {
 // with submit it gets the event and the true value
     handleSubmit = (item,boolean) => {
     item.ca_recommended=boolean 
-    console.log(item._id)
    localApi.put(`/events/recommend/${item._id}`, item)
     .then((res) => {
-            console.log("here");
-            console.log(res);
             this.getUpdatedEvents()
         })
         .catch(err => console.log(err));
@@ -76,16 +70,14 @@ handleAttend = (eventId) => {
     // sending DELETE call to backend 
         localApi.put(`events/attend/${eventId}`)
         .then(res=>{
-            console.log(res.data)
+            this.componentDidMount()
         })
     }
 // END ATTEND (PUT) API
  
 // START RESPONSE
     render() {
-        
-        const {users} = this.state;
-        const {events} = this.state;
+        const {user, events} = this.state;
 
         return(       
                 <div>
@@ -100,13 +92,17 @@ handleAttend = (eventId) => {
                                             <Col>
                                                 <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                                             </Col>
+                                            <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>
+                                                {!(item.hive_attendees.includes(user._id))?
+                                                <>Attend</>:
+                                                <>Unattend</>}
+                                            </Button>
                                         {/* show SAVE button if is admin . otherwise show SUGGEST button */}
                                             <Col>
-                                           {(users.admin === true)?                                                 
+                                           {(user.admin === true)?                                                 
                                            <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
                                            :null
-                                           }
-                                            <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}>Attend</Button>
+                                           }                                            
                                             </Col>
                                         </Row>
                                         <footer className="blockquote-footer">

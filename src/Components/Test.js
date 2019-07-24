@@ -17,7 +17,6 @@ export class Test extends Component {
     }
 
     render() {
-        console.log(this.state.users)
     const {users} = this.state
     
         return (

@@ -95,7 +95,7 @@ export class NotDbEvents extends Component {
               </Card.Body>
                             </Card>  
                             
-            
+
                 
                 
             </div>
