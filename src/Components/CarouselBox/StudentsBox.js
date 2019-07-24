@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import {Col,Row,Button,Card,Carousel}  from 'react-bootstrap';
 import Modal from 'react-modal';
 // import ReviewsPopUp from '../../pages/popUp/ReviewsPopUp';
-import Reviews from '../events/Reviews';
+// import Reviews from '../events/Reviews';
+import SuggestForm from '../forms/SuggestForm';
 
 Modal.setAppElement('#root');
 
@@ -40,7 +41,6 @@ class CAEventsBox extends Component {
     ])
     .then(axios.spread((eventsResp, userResp) => {
       const {data} = eventsResp;
-      console.log(data);
       const usersData = userResp.data;
       // set length of loop
       let eventsLength = data.length;
@@ -53,8 +53,6 @@ class CAEventsBox extends Component {
               cAEventsId.push(data[i]._id);
           };
         };
-      console.log(cAEvents);
-      console.log(cAEventsId);
       let loopLength;
       // if the length of cAEvent array is less than 3, we put all the events inside the array in the box
       if (cAEvents.length < 3){
@@ -68,8 +66,6 @@ class CAEventsBox extends Component {
           array.push(cAEvents[i]);
          }
       }
-      console.log(array)
-
       this.setState({events:cAEvents, ids:cAEventsId, array_:array, user: usersData});
     }))
     .catch(error => {
@@ -92,8 +88,8 @@ class CAEventsBox extends Component {
     // sending DELETE call to backend 
         localApi.put(`events/attend/${eventId}`)
         .then(res=>{
-            console.log(res.data)
-            this.componentDidMount()
+            this.componentDidMount();
+            this.props.handleRerenderCalendar();
         })
     }
 // END ATTEND (PUT) API
@@ -119,7 +115,7 @@ handleSubmit = (item,boolean) => {
 
 // START RESPONSE CAROUSEL
   render() {
-    const {array_, user, users} = this.state
+    const {array_, user} = this.state
     console.log(user)
     console.log(array_)
     return (
@@ -145,12 +141,32 @@ handleSubmit = (item,boolean) => {
                               </Button>
                          
                               <button onClick={this.openModal}>Attendees</button>
-
-                            {(user.admin === true)?                                                 
+                            
+                            {/* If current user is admin, show Save Button (No need of more conditions as any of the events in StudentBox has been saved yet) */}
+                            {(user.admin === false)?                                                 
                                            <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
                                            :null
-                                           }                              
-
+                                           }      
+                            {/* If current user is normal user (not admin), and the specific event has not been suggested yet, show Suggest Button, which is actually a Modal */}
+                            {(user.admin === true)?
+                            <Button size="sm" variant="info" onClick={this.openModal}>Suggest</Button>
+                                          // if contition is met, show button that will display the modal/popup. 
+                                          // it doesn't modify the db yet, but only displays one modal with the form                            
+                                              :
+                                           null
+                            }                      
+                                        <Modal
+                                        isOpen={this.state.modalIsOpen}
+                                        onRequestClose={this.closeModal}
+                                        style={customStyles}
+                                        contentLabel="Example Modal"
+                                      >
+                                        
+                                        <div height="600">
+                                          <SuggestForm event={item} function={this.closeModal}/>
+                                          <button onClick={this.closeModal}>close</button>
+                                        </div>
+                                      </Modal>
                               {/* <Modal
                                     isOpen={this.state.modalIsOpen}
                                     onRequestClose={this.closeModal}
@@ -163,18 +179,6 @@ handleSubmit = (item,boolean) => {
                                       <button onClick={this.closeModal}>close</button>
                                     </div>
                                   </Modal> */}
-                              <Modal
-                                isOpen={this.state.modalIsOpen}
-                                onRequestClose={this.closeModal}
-                                style={customStyles}
-                                contentLabel="Example Modal"
-                              >
-                                
-                                <div height="600">
-                                  <Reviews users={users} />
-                                  <button onClick={this.closeModal}>close</button>
-                                </div>
-                              </Modal>
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Form, Button}  from 'react-bootstrap';
-import axios from 'axios';
-import localApi from "../../localApi";
+// import localApi from "../../localApi";
 
 
 class SuggestForm extends Component {
@@ -9,12 +8,13 @@ class SuggestForm extends Component {
   handleSubmit = (event) => {
     // if we get a route for suggest event that is not in db, 
     // sending PUT call to backend
-        localApi.put(`events/${event._id}`)
-        .then(res=>{
-            console.log(res.data)
-            
-        })
-    }
+    //     localApi.put(`/events/suggest/${event._id}`)
+    //     .then(res=>{
+    //         console.log(res.data)
+    //         this.props.closeModal()
+    //     })
+    };
+    
     render(){
       let {event} = this.props;
         return(

@@ -8,7 +8,10 @@ import {Col,Row,Container,Badge,Alert}  from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import CAEventsBox from '../Components/CarouselBox/CAEventsBox';
-import Moment from '../Components/events/Moment'
+import Moment from '../Components/events/Moment';
+import axios from 'axios';
+import localApi from "../localApi";
+// import { Calendar, momentLocalizer } from 'react-big-calendar';
 
 
 
@@ -42,8 +45,49 @@ align-content: flex-end;
 justify-content: flex-end;`
 
 export class Dashboard extends Component {
+
+
+    state = {
+        events: []
+    }
+   
+    componentDidMount() {
+        this.handleRerenderCalendar();
+    };
+    //function to re-render Calendar
+    // we get all the events that should be displayed in Calendar and pass them to Moment.js
+    handleRerenderCalendar = () => {      
+        let events = [];
+        axios.all([
+          localApi.get('get_user'),
+          localApi.get('events')
     
+        ])
+        .then(axios.spread((userResp, eventsResp) => {
+          // destructure data of user
+          const {data} = userResp;
+          // declare a variable for eventsData
+          const eventsData = eventsResp.data;
+          // we need to find those events the user is attending
+          // calculate the length of the loop
+          let eventsLength = eventsData.length;
+          // loop through all the events
+          for (let i = 0; i < eventsLength; i++) {
+            if (eventsData[i].hive_attendees.includes(data._id)) {
+              events.push({title: eventsData[i].name, start: new Date(`${eventsData[i].local_date}T${eventsData[i].local_time}`), end: new Date(`${eventsData[i].local_date}T${eventsData[i].local_time}`), desc: eventsData[i].description, time: eventsData[i].local_time, date: eventsData[i].local_date, photo: eventsData[i].photo_link});
+            }
+          }
+          console.log(events);
+          this.setState({events});
+        }))
+        .catch(error => {
+          console.log(error);
+        })
+    };
+
+
     render() {  
+        let {events} = this.state;
         return (
             <div>
                 <Container>
@@ -51,7 +95,7 @@ export class Dashboard extends Component {
                     <Col>
                         <Calendar>
                             <Calendar_style>
-                            <Moment />
+                            <Moment events={events} />
                             </Calendar_style>
                         </Calendar>
                     </Col>   
@@ -66,7 +110,7 @@ export class Dashboard extends Component {
                                 <Col><Link to="/events"><Badge size="sm" variant="outline-secondary" >See more</Badge></Link></Col>
                                 </SeeMore>
                             </Row>
-                            <CAEventsBox/>
+                            <CAEventsBox handleRerenderCalendar={this.handleRerenderCalendar} />
                         </Container>
                     </Wrapper>
                     {/* <END> */}
@@ -80,7 +124,7 @@ export class Dashboard extends Component {
                                 <Col><Link to="/events"><Badge size="sm" variant="outline-secondary" >See more</Badge></Link></Col>
                                 </SeeMore>
                             </Row>
-                            <StudentsBox/>
+                            <StudentsBox handleRerenderCalendar={this.handleRerenderCalendar} />
                         </Container>
                     </Wrapper>
                     {/* <END> */}

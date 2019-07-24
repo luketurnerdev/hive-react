@@ -6,7 +6,6 @@ import axios from 'axios';
 import localApi from "../../localApi";
 import Modal from 'react-modal';
 // import customStyles from "../../styles/PopUpStyle";
-import SuggestForm from "../forms/SuggestForm";
 
 
 Modal.setAppElement('#root');
@@ -46,7 +45,6 @@ class CAEventsBox extends Component {
     ])
     .then(axios.spread((eventsResp, userResp) => {
       const {data} = eventsResp;
-      console.log(data);
       const userData = userResp.data;
       // set length of loop
       let eventsLength = data.length;
@@ -61,12 +59,20 @@ class CAEventsBox extends Component {
           };
       };
       // we just show three events in the box
-      for(let i = 0;i<2;i++){
-      array.push(cAEvents[i]);
-
+      let loopLength;
+      // if the length of cAEvent array is less than 3, we put all the events inside the array in the box
+      if (cAEvents.length < 3){
+        loopLength = cAEvents.length;
+        for(let i = 0;i<loopLength;i++){
+          array.push(cAEvents[i]);
+         }
+      // if the length of cAEvent array is more than 3, we put only 3 events in the box
+      } else {
+        for(let i = 0;i<3;i++){
+          array.push(cAEvents[i]);
+         }
       }
       this.setState({events:cAEvents, ids:cAEventsId, array_:array, user: userData});
-      console.log(this.state.array_)
     }))
     .catch(error => {
       console.log(error);
@@ -88,8 +94,8 @@ class CAEventsBox extends Component {
       // sending DELETE call to backend 
           localApi.put(`events/attend/${eventId}`)
           .then(res=>{
-              console.log(res.data)
               this.componentDidMount()
+              this.props.handleRerenderCalendar()
           })
       }
   // END ATTEND (PUT) API
@@ -118,7 +124,7 @@ class CAEventsBox extends Component {
 
 // START RESPONSE CAROUSEL
   render() {
-    const {users, user, array_} = this.state;
+    const {user, array_} = this.state;
 
     return (
         <div>  
@@ -147,26 +153,11 @@ class CAEventsBox extends Component {
                             {user.admin === true?                                                 
                               <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                               :null
-                             }
-                             {/* Suggest button (it doesn't modify the db yet, but only displays one modal with the form) */}
+                             }                             
                              {!item.suggested.is_suggested?
                              <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>:
                               null
                             }
-
-                            <Modal
-                                isOpen={this.state.modalIsOpen}
-                                onRequestClose={this.closeModal}
-                                style={customStyles}
-                                contentLabel="Example Modal"
-                              >
-                                
-                                <div height="600">
-                                  <SuggestForm event={item}/>
-                                  <button onClick={this.closeModal}>close</button>
-                                </div>
-                              </Modal>
-                            
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">
