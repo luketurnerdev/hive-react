@@ -28,7 +28,6 @@ class HomePage extends Component {
                         <Button size="sm" variant="primary">Login</Button>
                         </a>
                         <Link to="/users/request">
-
                         <Button size="sm" variant="link">RequestAccess</Button>
                         </Link>
                     </div>
