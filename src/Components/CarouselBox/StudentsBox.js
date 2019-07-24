@@ -130,12 +130,12 @@ handleSubmit = (item,boolean) => {
                               </Button>                      
                             
                             {/* If current user is admin, show Save Button (No need of more conditions as any of the events in StudentBox has been saved yet) */}
-                            {(user.admin === false)?                                                 
+                            {(user.admin === true)?                                                 
                                            <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
                                            :null
-                                           }      
+                            }      
                             {/* If current user is normal user (not admin), and the specific event has not been suggested yet, show Suggest Button, which is actually a Modal */}
-                            {(user.admin === true)?
+                            {(user.admin === false) && (!item.suggested.is_suggested)?
                             <Button size="sm" variant="info" onClick={this.openModal}>Suggest</Button>
                                           // if contition is met, show button that will display the modal/popup. 
                                           // it doesn't modify the db yet, but only displays one modal with the form                            

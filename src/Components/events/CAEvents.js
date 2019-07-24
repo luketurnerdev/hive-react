@@ -70,6 +70,7 @@ class CAEvents extends Component {
         // sending PUT call to backend 
             localApi.put(`events/attend/${eventId}`)
             .then(res=>{
+                this.componentDidMount();
             })
         }
 // END ATTEND (PUT) API
@@ -93,11 +94,14 @@ class CAEvents extends Component {
                                             </Col>
                                              {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                                             <Col>
+                                            <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}> {!(item.hive_attendees.includes(user._id))?
+                                                <>Attend</>:
+                                                <>Unattend</>}
+                                            </Button>
                                             {user.admin === true?                                                 
                                                 <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                                                 :null
-                                                }
-                                            <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}>Attend</Button>
+                                                }                                    
                                             </Col>
                                             {/* END show DELETE button if is admin . otherwise show SUGGEST button */}
                                         </Row>

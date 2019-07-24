@@ -11,7 +11,7 @@ class SuggestForm extends Component {
         localApi.put(`/events/suggest/${event.meetup_id}`)
         .then(res=>{
             console.log(res);
-        })
+        })        
     };
     
     render(){
