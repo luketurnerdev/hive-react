@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import localApi from "../../localApi";
 import StarRatingComponent from 'react-star-rating-component';
-import {Alert}  from 'react-bootstrap';
+import {Alert,Row,Container,Col}  from 'react-bootstrap';
 
 class AverageRates extends Component {
   // set state
@@ -92,8 +92,10 @@ class AverageRates extends Component {
     const {food, drinks, talk, vibe} = this.state.averageRatings;
     return(
       <div>
-       <Alert variant="light">
-       Average rates </Alert>
+        <Container>
+       <Alert variant="light"> Average rates </Alert>
+       <Row>
+         <Col>
         Food:
         <StarRatingComponent 
                 name="food"
@@ -102,6 +104,8 @@ class AverageRates extends Component {
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
+                </Col>
+                <Col>
         Drinks:
         <StarRatingComponent 
                 name="food"
@@ -110,6 +114,9 @@ class AverageRates extends Component {
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
+                </Col>
+                <Col>
+
         Talk:
         <StarRatingComponent 
                 name="food"
@@ -118,6 +125,8 @@ class AverageRates extends Component {
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
+                </Col>
+                <Col>
         Vibe:
         <StarRatingComponent 
                 name="food"
@@ -126,6 +135,10 @@ class AverageRates extends Component {
                 // onStarClick={this.onStarClick.bind(this)}
                 editing={false}
                 />
+                </Col>
+                </Row>
+                </Container>
+                
       </div>
     )
   }

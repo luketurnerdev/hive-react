@@ -60,12 +60,12 @@ export class DbEvents extends Component {
 
                     location==="caEvents"?
                         <Alert variant= "light">
-                            <EventsTitle>Coder Acedemy List</EventsTitle>
+                            <EventsTitle>Coder Academy List</EventsTitle>
                             <hr />
                             <CAEvents/>
                         </Alert>:
                         <Alert variant= "light">
-                        <EventsTitle>Coder Acedemy List</EventsTitle>
+                        <EventsTitle>Coder Academy List</EventsTitle>
                         <hr />
                         <CAEvents/>
                     </Alert>

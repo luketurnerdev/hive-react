@@ -142,7 +142,6 @@ handleSubmit = (item,boolean) => {
                               <>Unattend</>}
                               </Button>
                          
-                              <button onClick={this.openModal}>Attendees</button>
                             
                             {/* If current user is admin, show Save Button (No need of more conditions as any of the events in StudentBox has been saved yet) */}
                             {(user.admin === false)?                                                 
@@ -169,23 +168,11 @@ handleSubmit = (item,boolean) => {
                                           <button onClick={this.closeModal}>close</button>
                                         </div>
                                       </Modal>
-                              {/* <Modal
-                                    isOpen={this.state.modalIsOpen}
-                                    onRequestClose={this.closeModal}
-                                    style={customStyles}
-                                    contentLabel="Example Modal"
-                                  >
-                                    
-                                    <div height="600">
-                                      <AttendeesPopUp attendees={item.hive_attendees} />
-                                      <button onClick={this.closeModal}>close</button>
-                                    </div>
-                                  </Modal> */}
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">
-                          {/* <Link to={`/events/${item._id}/attendees`}>Attendees</Link>  */}                          
-                          </footer>                          
+                          <Link to={`/events/${item._id}/attendees`}>Attendees</Link> 
+                          </footer>                        
                           </Card.Body>
                       </Card>
                     </div>
