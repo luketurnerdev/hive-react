@@ -132,7 +132,7 @@ handleSubmit = (item,boolean) => {
                                            :null
                                            }      
                             {/* If current user is normal user (not admin), and the specific event has not been suggested yet, show Suggest Button, which is actually a Modal */}
-                            {(user.admin === true)?
+                            {(user.admin === false)?
                             <Button size="sm" variant="info" onClick={this.openModal}>Suggest</Button>
                                           // if contition is met, show button that will display the modal/popup. 
                                           // it doesn't modify the db yet, but only displays one modal with the form                            
