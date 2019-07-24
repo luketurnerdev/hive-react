@@ -45,8 +45,6 @@ export class SingleEvent extends Component {
   render() {
     const {event} = this.state;    
     const {_id} = this.state.event;
-    console.log(this.props)
-
     return( 
             
         <div>     

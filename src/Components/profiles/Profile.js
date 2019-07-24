@@ -35,7 +35,6 @@ state={
       .then(res => {
         // modify the state according to the data in the API's response
         const {data} = res;
-          
         // add response of api call to users array
         this.setState({ users: data });
       })

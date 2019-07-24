@@ -96,6 +96,7 @@ export class Dashboard extends Component {
                 <Row>
                     <Col>
                         <Calendar>
+            
                             <Calendar_style>
                             <Moment events={events} />
                             </Calendar_style>
