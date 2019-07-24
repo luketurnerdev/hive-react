@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import localApi from "../../src/localApi";
 import AverageRates from '../Components/events/AverageRates'
 import StarReview from '../Components/events/StarReview'
-import {Card, Container}  from 'react-bootstrap';
+import {Card, Container,Tabs,Tab}  from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
@@ -41,7 +41,9 @@ export class SingleEvent extends Component {
     console.log(event._id);
     const {_id} = this.state.event;
     console.log(this.props)
+
         return( 
+            
             <div>     
                 <Container>
                 <Wrapper>
@@ -53,18 +55,34 @@ export class SingleEvent extends Component {
                     </Card.Title>
                     <Card.Text>{event.local_date}</Card.Text>
                     <Card.Text><Link to={`/events/${_id}/attendees`}>Attendees</Link></Card.Text>
-                    <Card.Text>
-                    {/* conditional rendering */}
-                    {event?
-                    <AverageRates id={_id}/> :
+                   
+                   
+                    
+                </Card.Body> 
+                </Card>
+                 {/* conditional rendering */}
+                 
+
+                 
+
+                 <Tabs id={_id} defaultActiveKey="average">
+                 {event?
+                    <Tab eventKey="average" title="average">
+                    <AverageRates id={_id}/>            
+                    </Tab>
+                    :
                     null}             
                     {event?
-                    <StarReview id={_id}/>:
-                    null}
+                
+                <Tab eventKey="all" title="all">
+                <StarReview id={_id}/>
+                </Tab>:
+                null}    
+                </Tabs>
+             
+                 
                     
-                    </Card.Text>
-                </Card.Body> 
-            </Card>
+
             </Wrapper>
             </Container>
             </div>

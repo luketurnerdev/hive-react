@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import localApi from "../../localApi";
 import StarRatingComponent from 'react-star-rating-component';
+import {Alert}  from 'react-bootstrap';
 
 class AverageRates extends Component {
   // set state
@@ -91,7 +92,8 @@ class AverageRates extends Component {
     const {food, drinks, talk, vibe} = this.state.averageRatings;
     return(
       <div>
-        <h3>Average rates</h3>
+       <Alert variant="light">
+       Average rates </Alert>
         Food:
         <StarRatingComponent 
                 name="food"
