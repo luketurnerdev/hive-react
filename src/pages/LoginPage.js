@@ -1,24 +1,48 @@
     
 import React, { Component } from "react";
+import {Row,Col,Container,Button}  from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import logo from './honeycomb-logo.svg';
+const WrapperLogin = styled.section`
+  padding: 2em;
+  background: white;
+  margin:6em;
+  display:flex;
+  align-items:center
+`;
 
-class HomePage extends Component {
+class LoginPage extends Component {
     render() {
         return (
             <div>
-                <h1>Welcome To The Hive!</h1>
-                <div>
-                    
-                    <Link to="/auth/meetup">
-                        <button>Login</button>
-                    </Link>
-                    <Link to="/request_access">
-                        <button>RequestAccess</button>
-                    </Link>
-                </div>
+                <Container>
+                    <Row>
+
+                    <WrapperLogin>
+                        <Col>
+        <img src={logo} className="App-logo" alt="logo" />
+        
+        </Col>
+
+                <Col>
+                 <h1>Welcome To The Hive!</h1>
+               
+                    <div>
+                        <a href={`${process.env.REACT_APP_BACKEND_API}/auth/meetup`}>
+                        <Button size="sm" variant="primary">Login</Button>
+                        </a>
+                        <Link to="/users/request">
+                        <Button size="sm" variant="link">RequestAccess</Button>
+                        </Link>
+                    </div>
+                </Col>
+                </WrapperLogin>
+                </Row>
+                </Container>
             </div>
         );
     }
 }
 
-export default HomePage;
+export default LoginPage;

@@ -2,62 +2,71 @@
 // Show profile of Single User.
 import React, {Component} from 'react';
 // import axios for sending requests to API
-import axios from 'axios';
-import {Col,Row,Container,Button,Card,Nav}  from 'react-bootstrap';
+import localApi from "../../localApi";
+import {Card,Container}  from 'react-bootstrap';
+import styled from 'styled-components';
+
+const Wrapper = styled.section`
+  padding: 2em;
+  background: white;
+  margin:10em;
+  font-size:0.8rem;
+  color: #555e64;
+  display:flex;
+  align-items:left;
+  justify-content:center;
+`;
+
 
 class Profile extends Component {
-//<<Profile>>
-// RENDERED : ProfilePage
-// meetup_uid: Number,
-// email: String,
-// firstName: String,
-// lastName: String,
-// city: String,
-// avatar: String,
-// created_at: Date
-
 state={
-  user:[]
+  users:""
 }
 
 // just after rendering the user's info, call to the API
   componentDidMount(){
-    axios
-      .get('/users/show')
-     
+    // let Users = []
+ 
+// Extracted userId from the Route params.    
+    const { id } = this.props.match.params
+
+    localApi
+      .get("get_user")
       .then(res => {
-          console.log(res.data)
-          // modify the state according to the data in the API's response
-        const persons = res.data;
-        this.setState({ persons });
+        // modify the state according to the data in the API's response
+        const {data} = res;
+        // add response of api call to users array
+        this.setState({ users: data });
       })
       .catch(err => {
           console.log(err);
       });  
-    
+      
+     
   };
 
   render(){
-    console.log(this.state.user)
-    const {user} = this.state
+   
+    const {users} = this.state
+    console.log(users)
     return( 
       <div>
-        { user.map(user => <li>{user.name}</li>)}
-         <h2>PROFILE</h2>
+        <Container>
+                <Wrapper>
+        
+        
         <Card border="light" style={{ width: '18rem' }}>
-          <Card.Img variant="top" href={user.photo} />
+          
           <Card.Body>
-            <Card.Title>{user.meetup_uid}</Card.Title>
-            <Card.Text>{user.created_at}</Card.Text>
+          <Card.Title><h1>{users.name}</h1></Card.Title>
+          <hr/>
+            <Card.Text><p5>city: </p5>{users.city}</Card.Text>
+            <Card.Text><p5>e-mail: </p5> {users.email}</Card.Text>
+            <Card.Text><p5>created at: </p5>{users.created_at}</Card.Text>
           </Card.Body>
         </Card>
-
-        <p>{user.email}</p>
-        <p>{user.first_name}</p>
-        <p>{user.last_name}</p>
-      
-        <p></p>
-       
+        </Wrapper>
+        </Container>
       </div>
    );
 

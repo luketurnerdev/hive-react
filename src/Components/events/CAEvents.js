@@ -1,39 +1,37 @@
 
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
-import {Col,Row,Container,Button,Card,Nav}  from 'react-bootstrap';
+import {Col,Row,Button,Card}  from 'react-bootstrap';
+import localApi from "../../localApi";
 
-
-// import axios for sending requests to API
-import axios from 'axios';
 
 class CAEvents extends Component {
     state = {
         events: [],
         ids: [],
         suggested: "",
+        user: "",
+        singleEvent: ""
     };
-// START GET API 
+// START GET EVENT API 
     // just after rendering the Events, call to the API
     componentDidMount() {
     let CAEvents = [];
     let CAEventsId = [];
-    axios
-    // request call to the db
-        .get('/events')
+
+    // START GET EVENTS DATA
+    localApi.get('/events')
         .then(res => {
             // destructure data from response
             const {data} = res;
-            console.log(data)
             // set length of loop
             let eventsLength = data.length;
             // for loop through all the events
             for (let i = 0; i < eventsLength; i++) {
-                console.log(data[i]);
+               
                 // Ony if the event has been recommended by CA
                 if (data[i].ca_recommended === true) {
                     // mark it as CA event (event recommended by CA)
-                    console.log(data[i])
                     CAEvents.push(data[i]);
                     CAEventsId.push(data[i]._id);
                 }
@@ -45,81 +43,82 @@ class CAEvents extends Component {
         .catch(error => {
             console.log(error);
         });  
+        // END GET EVENTS DATA
+
+        // START CALL USER DATA
+        localApi.get("get_user")
+        .then(resp =>{
+            const userData = resp.data;
+            this.setState({user : userData})
+        })
+        // END CALL USER DATA
     };
 // END GET API 
 
-// START PUT API 
-    handleChange = event => {
-        console.log(event.target)
-        this.setState({ suggested: event.target.value });
-      }
-    
-      handleSubmit = event => {
-        event.preventDefault();
-    
-        const event_value = {
-          suggested: this.state.suggested
-        };
-      
-        axios.put(`/events/${this.state.id}`, {stu:event_value})
-          .then(res => {
-            console.log(res);
-            console.log(res.data);
-           {/* HOW TO CHANGE THE value!!!! if is student_suggested and not ca_recommended,click SAVE and the boolean false should update to true AND how to put this to different component*/}
-          })
-          .catch(err => console.log(err));
-      }
-      
-// END PUT API      
+// START DELETE API 
+    // setting in the singleEvent state the value of the button DELETE which is the event._id
+    handleChange = (eventId) => {
+    // sending DELETE call to backend 
+        localApi.delete(`events/${eventId}`)
+        .then(res=>{
+        })
+    }
+// END DELETE API
 
-// RESPONSE
+// START ATTEND (PUT) API
+    handleAttend = (eventId) => {
+        // sending PUT call to backend 
+            localApi.put(`events/attend/${eventId}`)
+            .then(res=>{
+                this.componentDidMount();
+            })
+        }
+// END ATTEND (PUT) API
+
+// START RESPONSE
     render() {
-        console.log(this.state.suggested)
+        const {user} = this.state;
         const {events, ids} = this.state
         return( 
             <div>
                     {events.map((item, index) => {
-                        console.log(ids)
-                        return (
-                            
-                                <div key={item.id}>
-                                    
-                                        <Card border="light" >
-                                        <Card.Body>
-                                        <Card.Header> <Link to={`/events/${ids[index]}`}>{item.name}</Link></Card.Header>
-                                        <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
-                                        <Nav.Item> 
-                                        <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                        <Button size="sm" variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                        </Nav.Item>
+                
+                        return (   
+                            <div key={item._id}>
+                                <Card border="light">
+                                    <Card.Body>
+                                        <Card.Text> <Link to={`/events/${item._id}`}>{item.name}</Link></Card.Text>
+                                        <Row>
+                                            <Col>
+                                                <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
+                                            </Col>
+                                             {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
+                                            <Col>
+                                            <Button size="sm" variant="primary" value={item._id} onClick={() => this.handleAttend(item._id)}> {!(item.hive_attendees.includes(user._id))?
+                                                <>Attend</>:
+                                                <>Unattend</>}
+                                            </Button>
+                                            {user.admin === true?                                                 
+                                                <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
+                                                :null
+                                                }                                    
+                                            </Col>
+                                            {/* END show DELETE button if is admin . otherwise show SUGGEST button */}
+                                        </Row>
                                         <footer className="blockquote-footer">
-                                        <Link to={`/events/${ids[index]}/attendees`}>Attendees</Link> 
+                                            <Link to={`/events/${ids[index]}/attendees`}>Attendees</Link> 
                                         </footer>
-                                        {
-                                            ((item.student_suggeted===true) && (item.ca_recommended === false))?
-                                            <di><h2>TEST</h2>
-                                                <Button variant="primary" value={item.student_suggested} onClick={this.handleChange}>Save</Button>
-                                            </di>: null
-                                        }
-                                            </Card.Body>
-                                        </Card>
-                    
-                                        
-                                        
+            
 
-                                                                
+                                        </Card.Body>
+                                    </Card>                               
                                 </div>
                         )
-                    })}
-                
-                
-                
-                
-            </div>
-          
-    )
-}
-
+                    })}  
+            </div> 
+        )
+    }
+// END RESPONSE    
 }
 
 export default CAEvents;

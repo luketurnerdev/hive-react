@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import localApi from "../../localApi";
 
 class TodayEvents extends Component {
   state = {
-    events = []
+    events: []
   }
 
   componentDidMount() {
@@ -12,13 +13,12 @@ class TodayEvents extends Component {
   let todayEvents = [];
   // we need two request calls to the db (one for events, one for users)
     axios.all([
-      axios.get('/events'),
-      axios.get('/users/3')
+      localApi.get('/events'),
+      localApi.get('/users/3')
     ])
     .then(axios.spread((eventsResp, usersResp) => {
         // destructure data from response
         const {data} = eventsResp;
-        console.log(data);
         const usersData = usersData.data;
         // state today's date in ISO 8601 (as in Meetup API) without time
         let today = new Date();
@@ -40,13 +40,12 @@ class TodayEvents extends Component {
           }
         this.setState({events:todayEvents});
       
-    })
+    }))
         .catch(error => {
             console.log(error);
-        }))};
+        })};
         
   render(){
-    console.log(this.state.events);
     const {events} = this.state;
     return(
       
@@ -60,3 +59,5 @@ class TodayEvents extends Component {
     )
   }
 }
+
+export default TodayEvents;

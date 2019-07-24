@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
-import axios from 'axios';
+import localApi from "../../localApi";
 
 
 class Statistic extends Component {
@@ -17,17 +17,17 @@ class Statistic extends Component {
     let approved = [];
     let numberComments = 0;
 
-    axios.all([
-      axios.get(`/users/${this.props.match.params.id}`),
-      axios.get('/events/'),
-      axios.get('/ratings')
+    localApi.all([
+      localApi.get(`/users/${this.props.match.params.id}`),
+      localApi.get('/events/'),
+      lop.get('/ratings')
     ])
-    .then(axios.spread((userResp, eventsResp, ratingsResp) => {
+    .then(localApi.spread((userResp, eventsResp, reviewsResp) => {
       // destructure data from response of user
       const {data} = userResp;
       // declare variables for events and ratings data
       const eventsData = eventsResp.data;
-      const ratingsData = ratingsResp.data;
+      const reviewsData = reviewsResp.data;
       // which events has the user attended so far
       // calculate the length of the events data
       let eventsLength = eventsData.length;
@@ -38,47 +38,38 @@ class Statistic extends Component {
       for (let i = 0; i < eventsLength; i++) {
         if ((eventsData[i].local_date < date) && (eventsData[i].hive_attendees.includes(data.id))) {
           attended.push(eventsData[i])
-        }
-      }
-      console.log(attended);
-      // for suggested events, we need to check which events's suggested_by property includes the user id.
+        };
+      };
+      // for suggested events, we need to check which events's suggested_by property matches the user id.
       for (let y = 0; y < eventsLength; y++) {
-        // console.log(eventsData)
-        // console.log(eventsData[y])
-        // console.log(eventsData[y].suggested)
-        // console.log(eventsData[y].suggested.suggested_by)
-        // console.log(eventsData[y].suggested.suggested_by.includes(data))
-        // console.log(eventsData[y].suggested.suggested_by.includes(data.id))
-        if (eventsData[y].suggested.suggested_by.includes(data.id)) {
+        if (eventsData[y].suggested.suggested_by === data.id) {
           // we push into the suggested events the message of
           suggested.push(eventsData[y]);
           // suggested.push(eventsData[i].suggested.message[message.findIndex(data.id)])
-        }
-      }
+        };
+      };
       // for approved events, we need to check which of the events suggested by the user have been approved by CA.
       // calculate the length of the suggested events data
       let suggestedLength = suggested.length;
       for (let w = 0; w < suggestedLength; w++) {
-        if (suggested[w].suggested.suggested_by.includes(data.id) && suggested[w].ca_recommended === true) {
+        if (suggested[w].ca_recommended === true) {
           approved.push(eventsData[w]);
-        }
-      }
+        };
+      };
       // for number of comments, we just need the comments of the ratings which user is the user
       // calculate length of ratingsData
-      let ratingsLength = ratingsData.length;
-      for (let x = 0; x < ratingsLength; x++) {
-        if (ratingsData[x].user.id === data.id) {
+      let reviewsLength = reviewsData.length;
+      for (let x = 0; x < reviewsLength; x++) {
+        if (reviewsData[x].user.id === data.id) {
           numberComments += 1;
-        }
-      }
-      console.log(numberComments);
-      console.log(attended);
-      console.log(suggested);
-      console.log(approved);
-
+        };
+      };
       // update the state
       this.setState({attended, numberComments, suggested, approved});
     }))
+    .catch(error => {
+      console.log(error);
+    })
   }
 
   render() {

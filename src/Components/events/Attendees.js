@@ -1,7 +1,8 @@
-
+// Dispaly The Hive attendees for SingleEvent => name and photo ( pop up page)
 import React, {Component} from 'react';
 // import axios for sending requests to API
 import axios from 'axios';
+import localApi from "../../localApi";
 
 class Attendees extends Component {
 // define the state
@@ -16,8 +17,8 @@ class Attendees extends Component {
   let users = [];
   // make the request calls
   axios.all([
-    axios.get(`/events/${this.props.match.params.id}`),
-    axios.get('/users/')
+    localApi.get(`/events/${this.props.match.params.id}`),
+    localApi.get('/users/')
   ])
   .then(axios.spread((eventResp, usersResp) => {
       // destructure data from response
@@ -37,7 +38,6 @@ class Attendees extends Component {
         }
       }
       this.setState({users});
-      console.log(users);
     }))
     .catch(error => {
       console.log(error);
@@ -46,7 +46,6 @@ class Attendees extends Component {
   
 
   render(){
-    console.log(this.state.users);
     const {users} = this.state;
 
     return(
@@ -54,7 +53,7 @@ class Attendees extends Component {
         <h1>
           {users.map((user)=>(
             <div key={user.id} >
-            {user.avatar}
+            {user.photo}
             {user.name}
             </div>))}
             {/* {users[0].first_name} */}

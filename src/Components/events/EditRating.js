@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import axios for sending requests to API
-import axios from 'axios';
+
 
 class EditRating extends Component {
 
@@ -25,8 +25,6 @@ class EditRating extends Component {
 
 
 componentDidMount(){
-    console.log(this);
-    console.log(this.props.params)
 }
 
 handleChange(event) {

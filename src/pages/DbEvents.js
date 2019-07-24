@@ -4,7 +4,7 @@
 import React, { Component } from 'react'
 import CAEvents from '../Components/events/CAEvents'
 import StudentsEvents from '../Components/events/StudentsEvents.js'
-import {Col,Row,Container,Dropdown,DropdownButton}  from 'react-bootstrap';
+import {Col,Row,Container,Dropdown,DropdownButton,Alert}  from 'react-bootstrap';
 import styled from 'styled-components';
 
 
@@ -14,6 +14,10 @@ const Wrapper = styled.section`
   background: white;
   margin:2em;
 `;
+const EventsTitle = styled.p`
+display:flex;
+justify-content: flex-end;
+`
 
 export class DbEvents extends Component {
     state = { location: " "}
@@ -22,42 +26,55 @@ export class DbEvents extends Component {
     onSubmit=(event)=> this.setState({location: event.target.value})
 
     render() {
-        console.log(this.state)
         // Set the object "location" as state
         const {location} = this.state;
         
         return (
-        // Click the Dropdown Button and save to the object location. Render the selected components.
-            <div>
-                <Container>
+// Click the Dropdown Button and save to the object location. Render the selected components.
+//   {/*<FILTER DROPDOWN BUTTON START> */}
+           <div>
+            <Container>
                 <Wrapper>
                     <Row>  
-                    <Col><h1>Events</h1></Col>
-                        {/*<FILTER DROPDOWN BUTTON START> */}
-                        <DropdownButton variant="secondary" title="Filter" onClick={this.onSubmit}>
-                        <Dropdown.Item as="button" value="caEvents" >CoderAcademyEvents</Dropdown.Item>
-                        <Dropdown.Item as="button" value="studentEvents" >StudentsEvents</Dropdown.Item>
-                        <Dropdown.Item as="button" value="allEvents" >All</Dropdown.Item>
+                        <Col><Alert><h1>Events</h1></Alert></Col>
+                        <DropdownButton variant="light" title="Filter" onClick={this.onSubmit}>
+                        <Dropdown.Item as="button" value="caEvents" >CoderAcademy List</Dropdown.Item>
+                        <Dropdown.Item as="button" value="studentEvents" >Students List</Dropdown.Item>
+                        <Dropdown.Item as="button" value="allEvents" >See All</Dropdown.Item>
                         </DropdownButton>
                     </Row> 
 
-                    <Row>
-                        {location==="allEvents"?
-                        <div><h1>All Events<h1></h1><CAEvents/><StudentsEvents/></h1></div>:
-                        location==="studentEvents"?
-                        <div><h1>Students EVENT</h1><StudentsEvents/></div>:
-                        location==="caEvents"?
-                        <div><h1>CoderAcedemy EVENT</h1><CAEvents/></div>:
-                        null}
-                        {/* </FILTER DROPDOWN END> */}
-                       
-                    </Row>
+                    {location==="allEvents"?
+                        <Alert variant= "light">
+                            <EventsTitle>All List</EventsTitle>
+                            <hr />
+                            <CAEvents/><StudentsEvents/>
+                        </Alert> :
+
+                    location==="studentEvents"?
+                        <Alert variant= "light">
+                            <EventsTitle>Students List</EventsTitle>
+                            <hr />
+                            <StudentsEvents/>
+                        </Alert> :
+
+                    location==="caEvents"?
+                        <Alert variant= "light">
+                            <EventsTitle>Coder Academy List</EventsTitle>
+                            <hr />
+                            <CAEvents/>
+                        </Alert>:
+                        <Alert variant= "light">
+                        <EventsTitle>Coder Academy List</EventsTitle>
+                        <hr />
+                        <CAEvents/>
+                    </Alert>
+                }
                 </Wrapper>
-                </Container>
+            </Container>
             </div>
-          
-
-
+// {/* </FILTER DROPDOWN END> */}   
+                  
         )
     }
 }

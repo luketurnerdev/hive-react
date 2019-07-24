@@ -20,12 +20,10 @@ export class Delete extends Component {
 
     axios.delete(`/events/${this.state.name}`)
         .then(res => {
-        console.log(res);
-        console.log(res.data);
         })
     }
 
-    rrender() {
+    render() {
     return (
       <div>
            <form onSubmit={this.handleSubmit}>
