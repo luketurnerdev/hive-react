@@ -71,7 +71,6 @@ export class NotDbEvents extends Component {
                                 <Card.Body>
             { eventsData && eventsData.map((event) => {
                     return (
-<<<<<<< HEAD
                         <div>
                             <NotDbStyle>
                                 {console.log(event)}
@@ -90,23 +89,6 @@ export class NotDbEvents extends Component {
                                     </Row>
                                     </NotDbStyle>
                         </div>
-=======
-                        
-                        
-                        <>
-                        {console.log(event.id)}
-                        <h5>{event.name}</h5>
-                        <li 
-                        key={event.id}>{event.local_date} at {event.local_time}
-        
-
-                        <Button size="sm" variant="primary" onClick={()=>this.handleAttend(event.id, event.group.urlname)}>
-                              
-                                Attend
-                              </Button>                   
-                         </li>
-                        </>
->>>>>>> origin/luke-testing
                     )
                 })
             }
