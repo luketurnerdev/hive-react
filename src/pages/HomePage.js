@@ -25,7 +25,7 @@ class HomePage extends Component {
         <WrapperLogin>
         <Col>
             <div>
-                <a href={`${process.env.REACT_APP_BACKEND_API}/auth/meetup`}>
+                <a href={`${process.env.REACT_APP_EXPRESS_API}/auth/meetup`}>
                 <Button size="sm" variant="primary">Login</Button>
                 </a>
                 <Link to="/users/request">
