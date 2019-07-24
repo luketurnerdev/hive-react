@@ -56,7 +56,6 @@ onInputChange = (_id) => {
     render() {
         const {users} = this.state 
         const {_id} = this.tate
-        console.log(users)
         return (
             <div>
                 <Container>

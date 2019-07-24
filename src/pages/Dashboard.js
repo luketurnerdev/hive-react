@@ -77,7 +77,6 @@ export class Dashboard extends Component {
               events.push({title: eventsData[i].name, start: new Date(`${eventsData[i].local_date}T${eventsData[i].local_time}`), end: new Date(`${eventsData[i].local_date}T${eventsData[i].local_time}`), desc: eventsData[i].description, time: eventsData[i].local_time, date: eventsData[i].local_date, photo: eventsData[i].photo_link});
             }
           }
-          console.log(events);
           this.setState({events});
         }))
         .catch(error => {

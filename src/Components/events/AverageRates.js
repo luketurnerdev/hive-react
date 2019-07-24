@@ -19,7 +19,6 @@ class AverageRates extends Component {
     let eventTalk = [];
     let eventVibe= [];
     // two request calls (one for event info, one for ratings)
-    console.log(this.props);
     axios.all([
       localApi.get(`/events/${this.props.id}`),
       localApi.get('/ratings')
@@ -31,7 +30,6 @@ class AverageRates extends Component {
       const reviewsData = reviewsResp.data;
       // calculate length for loop
       let reviewsLength = reviewsData.length;
-      console.log(reviewsLength);
       // for every rating
         for (let x = 0; x < reviewsLength; x++) {
           // if the ratings belong to the specific event

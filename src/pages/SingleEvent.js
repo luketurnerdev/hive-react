@@ -26,9 +26,7 @@ export class SingleEvent extends Component {
         .then(resp => {
             // destructure data from response
             const {data} = resp;
-            console.log(data);
            this.setState({event:data}); 
-           console.log(data);
         })
         .catch(error => {
             console.log(error);
@@ -37,10 +35,7 @@ export class SingleEvent extends Component {
   
   render() {
     const {event} = this.state;    
-    console.log(event);
-    console.log(event._id);
     const {_id} = this.state.event;
-    console.log(this.props)
         return( 
             <div>     
                 <Container>

@@ -28,7 +28,6 @@ class UsersRequest extends Component {
                 // push the data to array so we can map and pull out the key that we want
                 array.push(data)
                 this.setState({request: array});
-                console.log(array)
             })
             .catch(error => {
                 console.log(error);
@@ -48,7 +47,6 @@ class UsersRequest extends Component {
 
             const user = this.state.request
             const id = user.map(single=>single._id)
-            console.log(id)
             const request_message = {
                 message: this.state.message
                 };
@@ -56,8 +54,6 @@ class UsersRequest extends Component {
 // !!!! HAVE TO SEND HE USER_ID and REQUEST MESSAGE
                 axios.put(`/users/request`, { id,request_message })
                 .then(res => {
-                  console.log(res);
-                  console.log(res.data);
                 })
             }
 // END PUT API 

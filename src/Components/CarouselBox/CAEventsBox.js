@@ -5,22 +5,10 @@ import {Button,Card,Row,Col}  from 'react-bootstrap';
 import axios from 'axios';
 import localApi from "../../localApi";
 import Modal from 'react-modal';
-// import customStyles from "../../styles/PopUpStyle";
+import customStyles from "../../styles/PopUpStyle";
 
 
 Modal.setAppElement('#root');
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
-
 
 class CAEventsBox extends Component {
   
@@ -116,7 +104,6 @@ class CAEventsBox extends Component {
       // sending DELETE call to backend 
           localApi.delete(`events/${eventId}`)
           .then(res=>{
-              console.log(res.data)
           })
       }
   // END DELETE API
