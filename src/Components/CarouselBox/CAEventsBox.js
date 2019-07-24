@@ -28,8 +28,8 @@ class CAEventsBox extends Component {
     
     // START GET EVENTS DATA
     axios.all([
-      localApi.get('events'),
-      localApi.get('get_user')
+      localApi.get('/events'),
+      localApi.get('/get_user')
     ])
     .then(axios.spread((eventsResp, userResp) => {
       const {data} = eventsResp;
@@ -125,16 +125,14 @@ class CAEventsBox extends Component {
                           <Row>
                             <Col>
                               <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
-                            </Col>
-                          {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
+                            </Col>                          
                             <Col>
-
                             <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>
                               {!(item.hive_attendees.includes(user._id))?
                               <>Attend</>:
                               <>Unattend</>}
-                              </Button>
-
+                            </Button>
+                          {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                             {user.admin === true?                                                 
                               <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                               :null

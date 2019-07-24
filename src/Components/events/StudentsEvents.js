@@ -92,17 +92,17 @@ handleAttend = (eventId) => {
                                             <Col>
                                                 <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                                             </Col>
+                                            <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>
+                                                {!(item.hive_attendees.includes(user._id))?
+                                                <>Attend</>:
+                                                <>Unattend</>}
+                                            </Button>
                                         {/* show SAVE button if is admin . otherwise show SUGGEST button */}
                                             <Col>
                                            {(user.admin === true)?                                                 
                                            <Button size="sm" variant="info" onClick={()=>this.handleSubmit(item,true)}>Save</Button>
                                            :null
-                                           }
-                                             <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>
-                                                {!(item.hive_attendees.includes(user._id))?
-                                                <>Attend</>:
-                                                <>Unattend</>}
-                                            </Button>
+                                           }                                            
                                             </Col>
                                         </Row>
                                         <footer className="blockquote-footer">
