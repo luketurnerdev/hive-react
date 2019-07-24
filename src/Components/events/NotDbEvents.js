@@ -1,8 +1,20 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import axios from "axios";
 import localApi from '../../localApi';
 import {Button}  from 'react-bootstrap';
+=======
+import React, { Component } from 'react'
+import LocalAPI from '../../localApi';
+import {Col,Row,Button,Card}  from 'react-bootstrap';
+import localApi from "../../localApi";
+import styled from 'styled-components';
+>>>>>>> 3c3adfc01bfd28f529d37948343650749249c005
 
+const NotDbStyle = styled.section`
+  padding: 2em;
+
+`;
 
 export class NotDbEvents extends Component {
 
@@ -62,19 +74,22 @@ export class NotDbEvents extends Component {
 
     render() {
 
+<<<<<<< HEAD
         const {eventsData, userData, currentEvents} = this.state;
         console.log(eventsData);
         console.log(userData);
+=======
+        const eventsData = this.state.eventsData;
+        console.log(this.state.eventsData);
+>>>>>>> 3c3adfc01bfd28f529d37948343650749249c005
 
         return (
             <div> 
-            <h1>Events from Meetup.com</h1> 
-            {
-
-                
-
-                eventsData && eventsData.map((event) => {
+            <Card border="light">
+                                <Card.Body>
+            { eventsData && eventsData.map((event) => {
                     return (
+<<<<<<< HEAD
                         
                         
                         <>
@@ -91,10 +106,33 @@ export class NotDbEvents extends Component {
                          </li>
                         </>
                     )                    
+=======
+                        <div>
+                            <NotDbStyle>
+                                {console.log(event)}
+                                    <Row>
+                                    <Col sm><Card.Text key={event.id}>{event.name}</Card.Text></Col>
+                                    <br/>
+                                    <hr/>
+                                    </Row>
+                                    <Row>
+                                    <Col>
+                                    <Card.Text key={event.id}><small>{event.local_date} at {event.local_time} </small> </Card.Text>
+                                    </Col>
+                                    <Col>
+                                    <Button size="sm" variant="primary" onClick={()=>this.handleAttend(event.id, event.group.urlname)}>
+                                    Attend </Button>  </Col>  
+                                    </Row>
+                                    </NotDbStyle>
+                        </div>
+                    )
+>>>>>>> 3c3adfc01bfd28f529d37948343650749249c005
                 })
-
-                
             }
+              </Card.Body>
+                            </Card>  
+                            
+
                 
                 
             </div>

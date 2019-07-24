@@ -157,8 +157,8 @@ handleSubmit = (item,boolean) => {
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">
-                          {/* <Link to={`/events/${item._id}/attendees`}>Attendees</Link>  */}                          
-                          </footer>                          
+                          <Link to={`/events/${item._id}/attendees`}>Attendees</Link> 
+                          </footer>                        
                           </Card.Body>
                       </Card>
                     </div>
