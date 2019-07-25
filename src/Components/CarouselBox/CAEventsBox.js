@@ -111,8 +111,6 @@ class CAEventsBox extends Component {
 // START RESPONSE CAROUSEL
   render() {
     const {user, array_} = this.state;
-
-
     return (
         <div>  
           <Carousel >
@@ -128,17 +126,20 @@ class CAEventsBox extends Component {
                             <Col>
                               <Card.Text className="mb-2 text-muted"><small>{item.local_date}</small></Card.Text>
                             </Col>                          
-                            <Col>                                                   
+
+                            <Col>                            
                             <Button size="sm" variant="primary" onClick={()=>this.handleAttend(item._id)}>
                               {!(item.hive_attendees.includes(user._id))?
                               <>Attend</>:
                               <>Unattend</>}
                             </Button>
+
                             {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                             {user.admin === true?                                                 
                               <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                               :null
                              }                                    
+
                             </Col>
                           </Row>
                           <footer className="blockquote-footer">

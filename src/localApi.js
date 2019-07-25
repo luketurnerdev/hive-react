@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const LocalAPI = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_API,
+    baseURL: process.env.REACT_APP_EXPRESS_API,
     withCredentials: true
 });
 

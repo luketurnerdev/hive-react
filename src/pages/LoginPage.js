@@ -29,7 +29,7 @@ class LoginPage extends Component {
                  <h1>Welcome To The Hive!</h1>
                
                     <div>
-                        <a href={`${process.env.REACT_APP_BACKEND_API}/auth/meetup`}>
+                        <a href={`${process.env.REACT_APP_EXPRESS_API}/auth/meetup`}>
                         <Button size="sm" variant="primary">Login</Button>
                         </a>
                         <Link to="/users/request">

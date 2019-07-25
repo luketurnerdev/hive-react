@@ -5,6 +5,7 @@ import localApi from "../localApi";
 import {Col,Row,Container,Button,Card,Alert}  from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
+import localApi from '../localApi';
 
 const Wrapper = styled.section`
   padding: 2em;
@@ -30,6 +31,19 @@ export class Reviews extends Component {
             })
     }
 
+    // START PUT API     
+// click SAVE and the boolean ca_recommended=false should update to true 
+// with submit it gets the event and the true value
+handleSubmit = (item,boolean) => {
+    item.ca_recommended=boolean 
+   localApi.put(`/events/recommend/${item._id}`, item)
+    .then((res) => {
+            this.getUpdatedEvents()
+        })
+        .catch(err => console.log(err));
+    }
+  // END PUT API    
+
     render() {
         const {events} = this.state 
             return (
@@ -50,7 +64,7 @@ export class Reviews extends Component {
                                                 <Card.Text className="mb-2 text-muted"><small>{item.suggested.message}</small></Card.Text>
                                             </Col>
                                             <Col>
-                                                <Button size="sm" variant="info" >Save</Button>
+                                                <Button size="sm" variant="info" onClick={this.handleSubmit(item, true)}>Save</Button>
                                                 <Button size="sm" variant="primary" >Delete</Button>
                                             </Col>
                                         </Row>   

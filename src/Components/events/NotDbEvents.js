@@ -20,7 +20,6 @@ export class NotDbEvents extends Component {
             eventDates: [],
             eventsData: null,
             userData: "",
-            currentEvents: []
 
         }
         
@@ -58,7 +57,7 @@ export class NotDbEvents extends Component {
                 eventDates.push(eventsData[i].local_date);
                 eventTimes.push(eventsData[i].local_time);
             }
-            this.setState({eventNames:eventNames, userData, currentEvents: data});   
+            this.setState({eventNames:eventNames, userData});   
             console.log(data);     
         }))
         .catch(err =>{
@@ -67,10 +66,7 @@ export class NotDbEvents extends Component {
     }
 
     render() {
-
-        const {eventsData, userData, currentEvents} = this.state;
-        console.log(eventsData);
-        console.log(userData);
+        const {eventsData} = this.state;
 
         return (
             <div> 
