@@ -136,11 +136,9 @@ export class Dashboard extends Component {
 
                     {/* <NON DB MEETUP LIST */}
                     <Wrapper>
-
                         <Col><Alert><h1>Meetup List</h1></Alert></Col>
                         
-                        <NotDbEvents handleRerenderCalendar={this.handleRerenderCalendar}/>
-                        
+                        <NotDbEvents handleRerenderCalendar={this.handleRerenderCalendar}/>                       
                     </Wrapper>
                     {/* <END> */}
                     

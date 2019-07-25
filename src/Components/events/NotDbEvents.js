@@ -1,10 +1,9 @@
-
 import React, { Component } from 'react'
 import LocalAPI from '../../localApi';
 import {Col,Row,Button,Card}  from 'react-bootstrap';
+import axios from "axios";
 import localApi from "../../localApi";
 import styled from 'styled-components';
-import axios from "axios";
 
 const NotDbStyle = styled.section`
   padding: 2em;
@@ -21,7 +20,6 @@ export class NotDbEvents extends Component {
             eventDates: [],
             eventsData: null,
             userData: "",
-            currentEvents: []
 
         }
         
@@ -59,7 +57,7 @@ export class NotDbEvents extends Component {
                 eventDates.push(eventsData[i].local_date);
                 eventTimes.push(eventsData[i].local_time);
             }
-            this.setState({eventNames:eventNames, userData, currentEvents: data});   
+            this.setState({eventNames:eventNames, userData});   
             console.log(data);     
         }))
         .catch(err =>{
@@ -68,9 +66,7 @@ export class NotDbEvents extends Component {
     }
 
     render() {
-
-        const eventsData = this.state.eventsData;
-        console.log(this.state.eventsData);
+        const {eventsData} = this.state;
 
         return (
             <div> 

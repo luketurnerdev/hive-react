@@ -46,7 +46,7 @@ class MyCalendar extends Component {
           isOpen={this.state.event && true}
           onRequestClose={this.closeModal}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Event Info"
         >
           
           <div height="600">

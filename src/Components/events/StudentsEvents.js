@@ -3,11 +3,15 @@ import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import {Col,Row,Button,Card}  from 'react-bootstrap';
 import localApi from "../../localApi";
+import SuggestForm from '../forms/SuggestForm';
+import Modal from 'react-modal';
+import customStyles from "../../styles/PopUpStyle";
 
 class StudentsEvents extends Component {
     state = {
         events: [],
-        user:""
+        user:"",
+        modalIsOpen: false,
     };
 
     componentDidMount() { 
@@ -51,6 +55,16 @@ class StudentsEvents extends Component {
 // END CALL USER DATA
 };
 // END GET API 
+
+// to "open" poo up with suggestion form.
+openModal = (event) => {
+    this.setState({modalIsOpen: true});
+  }
+
+  // to "close" the pop up
+  closeModal = () => {
+    this.setState({modalIsOpen: false});
+  }
 
 // START PUT API     
 // click SAVE and the boolean ca_recommended=false should update to true 
@@ -104,6 +118,26 @@ handleAttend = (eventId) => {
                                            :null
                                            }                                            
                                             </Col>
+                                            {(user.admin === false) && (!item.suggested.is_suggested)?
+                            <Button size="sm" variant="info" onClick={this.openModal}>Suggest</Button>
+                                          // if contition is met, show button that will display the modal/popup. 
+                                          // it doesn't modify the db yet, but only displays one modal with the form                            
+                                              :
+                                           null
+                            }                      
+                                        <Modal
+                                        isOpen={this.state.modalIsOpen}
+                                        onRequestClose={this.closeModal}
+                                        style={customStyles}
+                                        contentLabel="Suggest Form"
+                                      >
+                                        
+                                        <div height="600">
+                                          <SuggestForm event={item} />
+                                          <button onClick={this.closeModal}>close</button>
+                                        </div>
+                                      </Modal>
+
                                         </Row>
                                         <footer className="blockquote-footer">
                                         <Link to={`/events/${item._id}/attendees`}>Attendees</Link> 

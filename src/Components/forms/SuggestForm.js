@@ -22,7 +22,7 @@ class SuggestForm extends Component {
             <Form.Group controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Please confirm you want to suggest this event to Coder Academy</Form.Label>
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={this.handleSubmit(event)}>
+            <Button variant="primary" type="submit" onClick={this.handleSubmit(event)} >
                 Submit
             </Button>
             </Form>

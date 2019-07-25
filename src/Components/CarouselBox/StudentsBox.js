@@ -146,11 +146,11 @@ handleSubmit = (item,boolean) => {
                                         isOpen={this.state.modalIsOpen}
                                         onRequestClose={this.closeModal}
                                         style={customStyles}
-                                        contentLabel="Example Modal"
+                                        contentLabel="Suggest Form"
                                       >
                                         
                                         <div height="600">
-                                          <SuggestForm event={item} function={this.closeModal}/>
+                                          <SuggestForm event={item}/>
                                           <button onClick={this.closeModal}>close</button>
                                         </div>
                                       </Modal>
