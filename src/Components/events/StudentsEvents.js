@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import {Col,Row,Button,Card}  from 'react-bootstrap';
 import localApi from "../../localApi";
 import SuggestForm from '../forms/SuggestForm';
+import Modal from 'react-modal';
+import customStyles from "../../styles/PopUpStyle";
 
 class StudentsEvents extends Component {
     state = {
