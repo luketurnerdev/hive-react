@@ -9,7 +9,6 @@ import styled from 'styled-components';
 const Wrapper = styled.section`
   padding: 2em;
   background: white;
-  margin:10em;
   font-size:0.8rem;
   color: #555e64;
   display:flex;

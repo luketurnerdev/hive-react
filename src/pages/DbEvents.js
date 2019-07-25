@@ -34,7 +34,7 @@ export class DbEvents extends Component {
 //   {/*<FILTER DROPDOWN BUTTON START> */}
            <div>
             <Container>
-                <Wrapper>
+ 
                     <Row>  
                         <Col><Alert><h1>Events</h1></Alert></Col>
                         <DropdownButton variant="light" title="Filter" onClick={this.onSubmit}>
@@ -70,7 +70,7 @@ export class DbEvents extends Component {
                         <CAEvents/>
                     </Alert>
                 }
-                </Wrapper>
+        
             </Container>
             </div>
 // {/* </FILTER DROPDOWN END> */}   

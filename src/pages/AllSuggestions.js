@@ -6,11 +6,6 @@ import {Col,Row,Container,Button,Card,Alert}  from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
-const Wrapper = styled.section`
-  padding: 2em;
-  background: white;
-  margin:2em;
-`;
 const EventsTitle = styled.p`
     display:flex;
     justify-content: flex-end;
@@ -35,8 +30,7 @@ export class Reviews extends Component {
             return (
                 <div>
                 <Container>
-                    <Wrapper>
-                        <Col><Alert><h2>Suggestions</h2></Alert></Col>
+                        <Col><Alert><h1>Suggestions</h1></Alert></Col>
                             <Alert variant= "light">
                                 <EventsTitle>Students list</EventsTitle>
                                 <hr />
@@ -61,7 +55,6 @@ export class Reviews extends Component {
                             </Card>
                             )}
                         </Alert>   
-                    </Wrapper>
                 </Container>
                
                 </div>

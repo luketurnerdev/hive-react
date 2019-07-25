@@ -7,7 +7,7 @@ import logo from './honeycomb-logo.svg';
 const WrapperLogin = styled.section`
   padding: 2em;
   background: white;
-  margin:6em;
+  margin:4em 0;
   display:flex;
   align-items:center
 `;
@@ -17,17 +17,10 @@ class LoginPage extends Component {
         return (
             <div>
                 <Container>
-                    <Row>
-
                     <WrapperLogin>
                         <Col>
-        <img src={logo} className="App-logo" alt="logo" />
-        
-        </Col>
-
-                <Col>
+                <img src={logo} className="App-logo" alt="logo" />      
                  <h1>Welcome To The Hive!</h1>
-               
                     <div>
                         <a href={`${process.env.REACT_APP_BACKEND_API}/auth/meetup`}>
                         <Button size="sm" variant="primary">Login</Button>
@@ -38,7 +31,6 @@ class LoginPage extends Component {
                     </div>
                 </Col>
                 </WrapperLogin>
-                </Row>
                 </Container>
             </div>
         );

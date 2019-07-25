@@ -95,7 +95,7 @@ handleSubmit = (item,boolean) => {
   item.ca_recommended=boolean 
  localApi.put(`/events/recommend/${item._id}`, item)
   .then((res) => {
-          this.getUpdatedEvents()
+    this.componentDidMount();
       })
       .catch(err => console.log(err));
   }

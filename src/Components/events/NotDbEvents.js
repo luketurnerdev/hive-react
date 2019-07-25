@@ -1,18 +1,11 @@
-<<<<<<< HEAD
-import React, { Component } from 'react';
-import axios from "axios";
-import localApi from '../../localApi';
-import {Button}  from 'react-bootstrap';
-=======
 import React, { Component } from 'react'
-import LocalAPI from '../../localApi';
+import axios from 'axios';
 import {Col,Row,Button,Card}  from 'react-bootstrap';
 import localApi from "../../localApi";
 import styled from 'styled-components';
->>>>>>> 3c3adfc01bfd28f529d37948343650749249c005
 
 const NotDbStyle = styled.section`
-  padding: 2em;
+  padding: 0.5em;
 
 `;
 
@@ -74,14 +67,8 @@ export class NotDbEvents extends Component {
 
     render() {
 
-<<<<<<< HEAD
-        const {eventsData, userData, currentEvents} = this.state;
-        console.log(eventsData);
-        console.log(userData);
-=======
         const eventsData = this.state.eventsData;
         console.log(this.state.eventsData);
->>>>>>> 3c3adfc01bfd28f529d37948343650749249c005
 
         return (
             <div> 
@@ -89,24 +76,6 @@ export class NotDbEvents extends Component {
                                 <Card.Body>
             { eventsData && eventsData.map((event) => {
                     return (
-<<<<<<< HEAD
-                        
-                        
-                        <>
-                        {console.log(event.id)}
-                        <h5>{event.name}</h5>
-                        <li 
-                        key={event.id}>{event.local_date} at {event.local_time}
-        
-                        <Button size="sm" variant="primary" onClick={()=>this.handleAttend(event.id, event.group.urlname)}>
-                            {((event.hive_attendees !== undefined))?
-                                <>Unattend</>:
-                                <>Attend</>}
-                        </Button>                   
-                         </li>
-                        </>
-                    )                    
-=======
                         <div>
                             <NotDbStyle>
                                 {console.log(event)}
@@ -126,7 +95,6 @@ export class NotDbEvents extends Component {
                                     </NotDbStyle>
                         </div>
                     )
->>>>>>> 3c3adfc01bfd28f529d37948343650749249c005
                 })
             }
               </Card.Body>

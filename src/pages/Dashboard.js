@@ -27,9 +27,8 @@ const Calendar_style = styled.h3`
 `;
 // Style a Wrapper component with a <section> tag
 const Wrapper = styled.section`
-  padding: 2em;
-  background: #f8f9fa;
-  margin:1em 0 0 0;
+  background: #f9fdfd;
+  margin:0.5em;
   
 `;
 // Style a Calendar component with a <section> tag
@@ -136,14 +135,9 @@ export class Dashboard extends Component {
 
                     {/* <NON DB MEETUP LIST */}
                     <Wrapper>
-<<<<<<< HEAD
-                        
-                        <NotDbEvents handleRerenderCalendar={this.handleRerenderCalendar}/>
-=======
                     <Col><Alert><h1>Meetups</h1></Alert></Col>
 
                         <NotDbEvents/>
->>>>>>> 3c3adfc01bfd28f529d37948343650749249c005
                         
                     </Wrapper>
                     {/* <END> */}

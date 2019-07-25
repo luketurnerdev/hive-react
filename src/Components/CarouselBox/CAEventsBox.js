@@ -102,7 +102,8 @@ class CAEventsBox extends Component {
     handleChange = (eventId) => {
       // sending DELETE call to backend 
           localApi.delete(`events/${eventId}`)
-          .then(res=>{
+          .then((res)=>{
+            this.componentDidMount();
           })
       }
   // END DELETE API

@@ -13,8 +13,6 @@ class CAEvents extends Component {
         user: "",
         singleEvent: ""
     };
-
-
 // START GET EVENT API 
     // just after rendering the Events, call to the API
     componentDidMount() {
