@@ -133,7 +133,7 @@ handleAttend = (eventId) => {
                                       >
                                         
                                         <div height="600">
-                                          <SuggestForm event={item} function={this.closeModal}/>
+                                          <SuggestForm event={item} />
                                           <button onClick={this.closeModal}>close</button>
                                         </div>
                                       </Modal>
