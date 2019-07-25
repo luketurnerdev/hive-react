@@ -132,15 +132,15 @@ class CAEventsBox extends Component {
                               <>Attend</>:
                               <>Unattend</>}
                             </Button>
-                            </Col>
+                            
                           {/* START show DELETE button if is admin . otherwise show SUGGEST button */}
                             {/* {user.admin === true?                                                 
                               <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>
                               :null
                              }   
                                                         */}
-                            <Col>
-                             {!item.suggested.is_suggested?
+                            
+                             {user.admin?
                              <Button size="sm" variant="info" value={item._id} onClick={() => this.handleChange(item._id)}>Delete</Button>:
                               null
                             }
